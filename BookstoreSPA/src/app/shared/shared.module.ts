@@ -7,26 +7,61 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule,
+  MatCardModule,
+  MatSnackBarModule,
+  MatProgressSpinnerModule,
+  MatTooltipModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatProgressBarModule
+} from '@angular/material';
+import { AllertMessageComponent } from './UI/allert-message/allert-message.component';
+import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 const angularMaterialModules = [
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatListModule
+    MatButtonModule,
+    MatInputModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatProgressBarModule
 ];
 
 @NgModule({
-  declarations: [MainNavComponent],
+  declarations: [MainNavComponent, UploadDialogComponent],
   imports: [
     CommonModule,
-    ...angularMaterialModules
+    ...angularMaterialModules,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
     ...angularMaterialModules,
-    MainNavComponent
+    MainNavComponent,
+    UploadDialogComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

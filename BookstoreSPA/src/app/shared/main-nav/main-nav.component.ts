@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from 'src/app/core/services/user.service';
+import { SnackBarInfo } from 'src/app/core/services/snackbar-info.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -16,11 +18,19 @@ export class MainNavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  isLoggedIn$ = this.userService.isLoggedIn$;
 
-  isLoggedIn$ = of(true);
+  constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private snackBarInfo: SnackBarInfo) {}
 
-  logout(){
+  logout() {
+    this.userService.logout().subscribe(
+      ok => {
+        this.snackBarInfo.formOk('User logged out sucessfully.');
+      },
+      error => {
+        this.snackBarInfo.formError(error);
+      }
+    );
   }
 
 }
