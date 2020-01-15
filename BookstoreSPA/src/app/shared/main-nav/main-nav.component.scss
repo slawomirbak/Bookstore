@@ -1,3 +1,6 @@
+@import '~@angular/../../../../settings.scss';
+@import '~@angular/../../../../utilities.scss';
+
 .sidenav-container {
   height: 100%;
 }
@@ -15,28 +18,17 @@
   top: 0;
   z-index: 1;
 }
-.spacer{
-  display:flex;
-  flex-grow: 1;
+
+mat-toolbar {
+  height: $main-toolbar-height;
 }
 
-.hidden{
-  display: none
-}
-mat-toolbar .hidden{
-  display: none;
-}
-.top-menu-items{
+.top-menu-items {
   a {
     display: inline-block;
-    color: white;
+    color: $main-white;
     margin:0 10px;
     text-decoration: none;
   }
 }
 
-a {
-  display: inline-block;
-  color: white;
-  text-decoration: none;
-}

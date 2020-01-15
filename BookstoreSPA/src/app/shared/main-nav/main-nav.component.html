@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav 
-      #drawer 
+  <mat-sidenav
+      #drawer
       class="sidenav"
-      [ngClass]="{hidden: (isHandset$| async) === false}"
+      [ngClass]="{'is-not-display': (isHandset$| async) === false}"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
@@ -35,14 +35,14 @@
       <span class="spacer"></span>
       <div *ngIf="isLoggedIn$ | async"
         class="top-menu-items"
-        [ngClass]="{hidden: (isHandset$| async)}"
+        [ngClass]="{'is-not-display': (isHandset$| async)}"
       >
         <a mat-list-item >Dashboard</a>
         <a mat-list-item (click)="logout()" >Logout</a>
       </div>
       <div *ngIf="!(isLoggedIn$ | async)"
         class="top-menu-items"
-        [ngClass]="{hidden: (isHandset$| async)}"
+        [ngClass]="{'is-not-display': (isHandset$| async)}"
       >
         <a mat-list-item >Log in</a>
       </div>

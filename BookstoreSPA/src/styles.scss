@@ -2,3 +2,14 @@
 @import '~@angular/../settings.scss';
 @import '~@angular/../utilities.scss';
 
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  display: inline-block;
+  color: $main-white;
+  text-decoration: none;
+}
+
