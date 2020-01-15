@@ -28,6 +28,7 @@ namespace BookstoreAPI
         public void ConfigureServices(IServiceCollection services)
         {
             ServicesRegistrator.AddDatabase(services, Configuration);
+            ServicesRegistrator.RegisterServices(services);
 
             services.AddSwaggerGen(c =>
             {

@@ -11,7 +11,9 @@ namespace Bookstore.DataLogic
         public DefaultContext(DbContextOptions<DefaultContext> options): base(options)
         {
         }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -22,6 +24,10 @@ namespace Bookstore.DataLogic
                 .Property(u => u.Email)
                 .IsRequired()
                 .HasMaxLength(60);
+
+            modelBuilder.Entity<RefreshToken>()
+                .HasOne(rt => rt.User);
+
         }
     }
 }

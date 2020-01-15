@@ -1,4 +1,6 @@
 ﻿using Bookstore.DataLogic;
+using Bookstore.DataLogic.Repository.UnitOfWork;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,12 @@ namespace Bookstore.Resolver
 {
     public class ServicesRegistrator
     {
+        public static void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
         public static void AddDatabase(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextPool<DefaultContext>(options =>
