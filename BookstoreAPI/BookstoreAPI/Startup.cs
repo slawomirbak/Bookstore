@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace BookstoreAPI
 {
@@ -28,6 +29,12 @@ namespace BookstoreAPI
         {
             ServicesRegistrator.AddDatabase(services, Configuration);
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "Bookstore" });
+            });
+
+
             services.AddControllers();
             services.AddCors();
         }
@@ -41,6 +48,14 @@ namespace BookstoreAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
