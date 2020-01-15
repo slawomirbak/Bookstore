@@ -29,6 +29,7 @@ namespace BookstoreAPI
         {
             ServicesRegistrator.AddDatabase(services, Configuration);
             ServicesRegistrator.RegisterServices(services);
+            ServicesRegistrator.AddMapper(services);
 
             services.AddSwaggerGen(c =>
             {

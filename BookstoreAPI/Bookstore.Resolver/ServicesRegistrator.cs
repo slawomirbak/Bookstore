@@ -1,6 +1,8 @@
-﻿using Bookstore.Abstract.IServices;
+﻿using AutoMapper;
+using Bookstore.Abstract.IServices;
 using Bookstore.DataLogic;
 using Bookstore.DataLogic.Repository.UnitOfWork;
+using Bookstore.Services.Mapper;
 using Bookstore.Services.UserService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,16 @@ namespace Bookstore.Resolver
             {
                 options.UseSqlServer(configuration.GetConnectionString("DbDefault"));
             });
+        }
+        public static void AddMapper(IServiceCollection services)
+        {
+            var config = new MapperConfiguration(c =>
+            {
+                c.AddProfile(new ApplicationProfile());
+            });
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
