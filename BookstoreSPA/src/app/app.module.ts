@@ -12,7 +12,7 @@ import { AllertMessageComponent } from './shared/UI/allert-message/allert-messag
 @NgModule({
   declarations: [
     AppComponent,
-    AllertMessageComponent
+    AllertMessageComponent,
   ],
   imports: [
     BrowserModule,

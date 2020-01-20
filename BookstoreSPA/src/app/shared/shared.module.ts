@@ -20,7 +20,7 @@ import {
   MatDialogModule,
   MatProgressBarModule
 } from '@angular/material';
-import { AllertMessageComponent } from './UI/allert-message/allert-message.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -42,7 +42,8 @@ const angularMaterialModules = [
     MatTooltipModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatGridListModule
 ];
 
 @NgModule({

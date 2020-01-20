@@ -1,0 +1,15 @@
+@import '../../../../settings.scss';
+
+.banner {
+  background: url('/assets/images/banner/book.jpg');
+  .banner-text {
+    flex-direction: column;
+    h1 {
+      margin: 3rem;
+      color: $main-white;
+    }
+    button {
+      padding: 0.5rem;
+    }
+  }
+}
