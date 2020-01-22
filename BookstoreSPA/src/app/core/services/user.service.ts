@@ -18,6 +18,9 @@ export class UserService  extends AbstractRepositoryService {
    private readonly JWT_TOKEN = 'JWT_TOKEN';
    private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
    private loggedUser$ = new BehaviorSubject(this.getRefreshToken());
+   private userSubject$ = new BehaviorSubject(null);
+   user$ = this.userSubject$.asObservable();
+
 
    isLoggedIn$ = this.loggedUser$.pipe(
     map(userName => !!userName)
@@ -50,13 +53,17 @@ export class UserService  extends AbstractRepositoryService {
   isLoggedIn(): boolean {
     return !!this.loggedUser$.value;
   }
+
   private doLoginUser(username: string, tokens: IToken) {
+    console.log(tokens)
     this.loggedUser$.next(username);
+    this.userSubject$.next(tokens.user);
     this.storeTokens(tokens);
   }
 
   private doLogoutUser() {
     this.loggedUser$.next(null);
+    this.userSubject$.next(null);
     this.removeTokens();
   }
 

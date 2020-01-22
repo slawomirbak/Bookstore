@@ -8,5 +8,6 @@ namespace Bookstore.Abstract.Contracts
     {
         public string Jwt { get; set; }
         public string refreshToken { get; set; }
+        public UserInfoDto user { get; set; }
     }
 }

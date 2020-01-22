@@ -8,14 +8,32 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list *ngIf="isLoggedIn$ | async">
-      <a mat-list-item [routerLink]="['/dashboard']">
+      <a mat-list-item [routerLink]="['/bookshelf']">
+        <mat-icon>stars</mat-icon>
+        My bookshelf
+      </a>
+      <a mat-list-item [routerLink]="['/search']">
+        <mat-icon>search</mat-icon>
+        Search book
+      </a>
+      <a mat-list-item [routerLink]="['/basket']">
+        <mat-icon>shopping_basket</mat-icon>
+        Basket
+      </a>
+      <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$| async) && (isAdmin$| async).role ==='admin'">
         <mat-icon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item (click)="logout()" [routerLink]="['/home']">Logout</a>
+      <a mat-list-item (click)="logout()" [routerLink]="['/home']">
+        <mat-icon>home</mat-icon>
+        Logout
+      </a>
     </mat-nav-list>
     <mat-nav-list *ngIf="!(isLoggedIn$ | async)">
-      <a mat-list-item [routerLink]="['/user', 'login']">Log in</a>
+      <a mat-list-item [routerLink]="['/user', 'login']">
+        <mat-icon>account_box</mat-icon>
+        Log in
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -37,7 +55,10 @@
         class="top-menu-items"
         [ngClass]="{'is-not-display': (isHandset$| async)}"
       >
-        <a mat-list-item [routerLink]="['/dashboard']">Dashboard</a>
+        <a mat-list-item [routerLink]="['/bookshelf']">My bookshelf</a>
+        <a mat-list-item [routerLink]="['/search']">Search book</a>
+        <a mat-list-item [routerLink]="['/basket']">Basket</a>
+        <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$| async) && (isAdmin$| async).role ==='admin'">Dashboard</a>
         <a mat-list-item (click)="logout()" [routerLink]="['/home']">Logout</a>
       </div>
       <div *ngIf="!(isLoggedIn$ | async)"

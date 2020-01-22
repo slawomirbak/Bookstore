@@ -66,6 +66,24 @@ export class HomeBestsellerComponent implements OnInit {
       newPrice: 16.51,
       oldPrice: 9.57
     },
+    {
+      title: 'The Likely Resolutions of Oliver Clock',
+      img: 'https://images-na.ssl-images-amazon.com/images/I/41%2Bm0LRG%2B2L.jpg',
+      authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
+      author: 'Jane Riley',
+      shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      newPrice: 5.24,
+      oldPrice: 0
+    },
+    {
+      title: 'Profiles in Corruption: Abuse of Power by America\'s Progressive Elite',
+      img: 'https://images-na.ssl-images-amazon.com/images/I/51mVFMYSFtL._SX327_BO1,204,203,200_.jpg',
+      authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
+      author: 'Peter Schweizer',
+      shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      newPrice: 20.87,
+      oldPrice: 29.99
+    }
   ];
 
   ngOnInit() {

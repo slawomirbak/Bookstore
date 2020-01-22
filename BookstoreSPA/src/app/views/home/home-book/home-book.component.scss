@@ -1,4 +1,5 @@
-@import '../../../../settings.scss';
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
 .book-wrapper {
   margin-bottom: 1rem;
   .book-card {

@@ -61,7 +61,11 @@ namespace Bookstore.Services.UserService
                 loginResponse.Data = new TokensDto
                 {
                     Jwt = jwtToke,
-                    refreshToken = await GenerateRefreshToken(user, jwtToke)
+                    refreshToken = await GenerateRefreshToken(user, jwtToke),
+                    user = new UserInfoDto
+                    {
+                        Role = user.Role
+                    }
                 };
                 return loginResponse;
             }

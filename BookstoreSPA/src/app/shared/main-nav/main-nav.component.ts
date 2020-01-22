@@ -19,6 +19,7 @@ export class MainNavComponent {
     );
 
   isLoggedIn$ = this.userService.isLoggedIn$;
+  isAdmin$ = this.userService.user$;
 
   constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private snackBarInfo: SnackBarInfo) {}
 

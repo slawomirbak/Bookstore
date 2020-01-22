@@ -9,10 +9,12 @@ namespace Bookstore.Services.Mapper
         public ApplicationProfile()
         {
             CreateMap<UserDto, User>()
+                .ForMember(s => s.Role,opt => opt.Ignore())
                 .ForMember(s => s.PasswordSalt, opt => opt.Ignore())
                 .ForMember(s => s.Password, opt => opt.Ignore());
 
             CreateMap<User, UserDto>();
+                
 
             CreateMap<AddressDto, Address>();
         }
