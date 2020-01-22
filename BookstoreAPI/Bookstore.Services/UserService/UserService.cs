@@ -27,6 +27,7 @@ namespace Bookstore.Services.UserService
         {
             var plainResponse = new BasePlainResponse();
             var user = _mapper.Map<User>(userDto);
+            user.Role = "user";
             var doesUserExist = await _unitOfWork.userRepository.IsEmailExist(user.Email);
 
             if (doesUserExist)
