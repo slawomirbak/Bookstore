@@ -2,9 +2,20 @@
 @import 'src/styles/utilities.scss';
 .book-wrapper {
   margin-bottom: 1rem;
+  a {
+    color: $dark;
+    &:hover{
+      color: $primary;
+    }
+  }
   .book-card {
     max-width: 400px;
     text-align: left;
+    mat-card-subtitle {
+      a {
+        color: $gray;
+      }
+    }
   }
   .header-image {
     background-size: cover;

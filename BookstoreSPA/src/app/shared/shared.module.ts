@@ -8,6 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import {
   MatFormFieldModule,
   MatInputModule,
@@ -18,7 +19,7 @@ import {
   MatTooltipModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatProgressBarModule
+  MatProgressBarModule,
 } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.component';
@@ -43,7 +44,8 @@ const angularMaterialModules = [
     MatCheckboxModule,
     MatDialogModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule
 ];
 
 @NgModule({

@@ -1,0 +1,81 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+
+:host{
+  max-width: 1650px;
+  margin: auto;
+  display: block;
+}
+.title {
+  color: $primary;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+.comments-container{
+  display: flex;
+  flex-direction: column;
+  .comments-wrapper{
+    .comment-box{
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 2rem;
+      .comment-header{
+        display: flex;
+        flex-direction: column;
+        img{
+          width: 140px;
+          height: 140px;
+          border:1px solid $gray;
+          margin-bottom: 1rem;
+          margin-right: 1rem;
+        }
+        a {
+          color: $primary;
+          font-size: 1.5rem;
+        }
+      }
+      .comment-body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        header {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 1rem;
+          .comment-date{
+            color: $primary;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+          }
+          .comment-vote{
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            .comment-likes{
+              color: $green;
+            }
+            .comment-dislikes{
+              color: $red;
+            }
+          }
+        }
+        section {
+          background-color: $main-white;
+          padding: 1rem;
+          border: 1px solid $gray;
+        }
+      }
+    }
+  }
+  .add-opinion{
+    margin-top: 64px;
+    margin-bottom: 64px;
+    button{
+      padding: 1rem 2rem;
+      span{
+        display: flex;
+      }
+    }
+
+  }
+}
