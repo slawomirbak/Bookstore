@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Opinion } from 'src/app/core/models/Opinion';
-import { forkJoin} from 'rxjs';
-import {of } from 'rxjs'
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-book-comments',
   templateUrl: './book-comments.component.html',

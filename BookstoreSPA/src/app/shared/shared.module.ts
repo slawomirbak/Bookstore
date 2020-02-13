@@ -9,18 +9,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatTabsModule,
-  MatCardModule,
-  MatSnackBarModule,
-  MatProgressSpinnerModule,
-  MatTooltipModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatProgressBarModule,
-} from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';

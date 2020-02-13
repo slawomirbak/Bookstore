@@ -32,7 +32,7 @@ export class BookDetailsComponent implements OnInit {
         oldPrice: 0,
     }
 
-    onVersionSelected(value: BookVersion) {
-        this.selectedVersion = value;
+    onVersionSelected(value: string) {
+        this.selectedVersion = BookVersion[value];
     }
 }

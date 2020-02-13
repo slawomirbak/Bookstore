@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
 import { AllertMessageComponent } from 'src/app/shared/UI/allert-message/allert-message.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Injectable({

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { forkJoin } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-upload-dialog',
@@ -8,7 +9,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./upload-dialog.component.sass']
 })
 export class UploadDialogComponent implements OnInit {
-  @ViewChild('file', {static: false} ) file;
+  @ViewChild('file') file;
   public files: Set<File> = new Set();
 
   progress;

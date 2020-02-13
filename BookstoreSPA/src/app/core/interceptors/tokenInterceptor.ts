@@ -2,7 +2,9 @@ import { HttpInterceptor, HttpRequest, HttpEvent, HttpErrorResponse, HttpHandler
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { catchError, switchMap, filter, take } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
