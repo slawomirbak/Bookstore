@@ -9,10 +9,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/tokenInterceptor';
 import { AllertMessageComponent } from './shared/UI/allert-message/allert-message.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    AllertMessageComponent,
+    AllertMessageComponent
   ],
   imports: [
     BrowserModule,

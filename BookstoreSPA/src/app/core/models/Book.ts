@@ -1,3 +1,5 @@
+import { BookFormat } from './BookFormat';
+
 export class Book {
   id: string;
   authorId: string;
@@ -5,7 +7,8 @@ export class Book {
   authorAvatar: string;
   img: string;
   author: string;
-  newPrice: number;
-  oldPrice: number;
+  price: number;
+  discount: number;
   shortDescription: string;
+  format: BookFormat;
 }

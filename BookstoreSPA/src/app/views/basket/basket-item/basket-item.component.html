@@ -1,0 +1,26 @@
+<div>
+  <img [src]="basketItem.book.img" />
+  <div>
+    <h4>{{basketItem.book.title}}</h4>
+    <div>
+      <img [src]="basketItem.book.authorAvatar" />
+      <p>{{basketItem.book.author}}</p>
+    </div>
+    <div>
+      {{basketItem.book.format | bookFormat}}
+    </div>
+    <div>
+      <button mat-button>-</button>
+      {{basketItem.amount}}
+      <button mat-button>+</button>
+    </div>
+  </div>
+  <div>
+    {{basketItem.totalPrice}}
+  </div>
+  <div>
+    <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </div>
+</div>

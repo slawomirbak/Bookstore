@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/core/models/Book';
+import { BookFormat } from 'src/app/core/models/BookFormat';
 
 @Component({
   selector: 'app-home-bestseller',
@@ -20,8 +21,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Dean Koontz',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 2.09,
-      oldPrice: 0
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -31,8 +33,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Brian Freeman',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 5.24,
-      oldPrice: 24.29
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -42,8 +45,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Jane Riley',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 5.24,
-      oldPrice: 0
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -53,8 +57,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Peter Schweizer',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 20.87,
-      oldPrice: 29.99
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -64,8 +69,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Wizards RPG Team',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 29.97,
-      oldPrice: 49.95
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -75,8 +81,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Jane Riley',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 16.51,
-      oldPrice: 9.57
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -86,8 +93,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Jane Riley',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 5.24,
-      oldPrice: 0
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     },
     {
       id: '1',
@@ -97,8 +105,9 @@ export class HomeBestsellerComponent implements OnInit {
       authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
       author: 'Peter Schweizer',
       shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      newPrice: 20.87,
-      oldPrice: 29.99
+      price: 2.09,
+      discount: 10,
+      format: BookFormat.SoftCover
     }
   ];
 
