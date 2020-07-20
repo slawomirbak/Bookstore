@@ -1,19 +1,20 @@
-<div>
+<div class="container">
   <img [src]="basketItem.book.img" />
-  <div>
+  <div class="basketItem">
     <h4>{{basketItem.book.title}}</h4>
-    <div>
+    <div class="title">
       <img [src]="basketItem.book.authorAvatar" />
       <p>{{basketItem.book.author}}</p>
     </div>
-    <div>
-      {{basketItem.book.format | bookFormat}}
-    </div>
-    <div>
-      <button mat-button>-</button>
-      {{basketItem.amount}}
-      <button mat-button>+</button>
-    </div>
+  </div>
+  <div class="spacer"></div>
+  <div>
+    {{basketItem.book.format | bookFormat}}
+  </div>
+  <div>
+    <button mat-button>-</button>
+    {{basketItem.amount}}
+    <button mat-button>+</button>
   </div>
   <div>
     {{basketItem.totalPrice}}
