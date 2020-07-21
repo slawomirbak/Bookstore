@@ -2,4 +2,22 @@
 <app-basket-item *ngFor="let basketItem of basket.basketItems" [basketItem]=basketItem></app-basket-item>
 
 <div class="container">
+  <h5> Delivery method</h5>
+  <form class="delivery-form">
+    <label>
+      <input type="radio" name="delivery" value="post"> <p>Post</p>
+    </label>
+    <label>
+      <input type="radio" name="delivery" value="courier"><p>Courier</p>
+    </label>
+    <label>
+      <input type="radio" name="delivery" value="parcelLocker"><p>Parcel Locker</p>
+    </label>
+  </form>
+  <div class="total-amount">Total amount: {{totalAmunt$ |async| currency}}
+    <button mat-flat-button color="primary">
+      Pay and Order
+    </button>
+  </div>
+
 </div>
