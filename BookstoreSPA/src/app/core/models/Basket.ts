@@ -1,7 +1,7 @@
 import { BasketItem } from './BasketItem';
 
 export class Basket {
-  basketItem: BasketItem[] = [];
+  basketItems: BasketItem[] = [];
   totalPrice: number;
   delivery: string;
 }

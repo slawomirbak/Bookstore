@@ -34,7 +34,8 @@ export class BasketManagerComponent implements OnInit {
     const basketItem = new BasketItem();
     basketItem.book = book;
     basketItem.amount = 1;
-    this.basket.basketItem.push(basketItem);
-
+    basketItem.totalPrice = basketItem.book.price * basketItem.amount;
+    this.basket.basketItems.push(basketItem);
+    this.basket.totalPrice = this.basket.basketItems.reduce((acc, item) => acc += item.totalPrice, 0);
   }
 }

@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="spacer"></div>
-  <div>
+  <div class="u-font-bold">
     {{basketItem.book.format | bookFormat}}
   </div>
   <div>
@@ -16,10 +16,10 @@
     {{basketItem.amount}}
     <button mat-button>+</button>
   </div>
-  <div>
-    {{basketItem.totalPrice}}
+  <div class="u-font-bold">
+    {{basketItem.totalPrice |currency}}
   </div>
-  <div>
+  <div class="u-font-bold">
     <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
       <mat-icon>delete_forever</mat-icon>
     </button>
