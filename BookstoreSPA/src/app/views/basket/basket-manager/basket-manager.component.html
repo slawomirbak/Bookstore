@@ -14,6 +14,18 @@
       <input type="radio" name="delivery" value="parcelLocker"><p>Parcel Locker</p>
     </label>
   </form>
+  <h5> Payment method</h5>
+  <form class="delivery-form">
+    <label>
+      <input type="radio" name="payment" value="transfer"> <p>Transfer</p>
+    </label>
+    <label>
+      <input type="radio" name="payment" value="card"><p>Card</p>
+    </label>
+    <label>
+      <input type="radio" name="payment" value="blik"><p>Blik</p>
+    </label>
+  </form>
   <div class="total-amount">Total amount: {{totalAmunt$ |async| currency}}
     <button mat-flat-button color="primary">
       Pay and Order
