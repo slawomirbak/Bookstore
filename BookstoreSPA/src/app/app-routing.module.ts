@@ -25,6 +25,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/bookshelf/bookshelf.module').then( m => m.BookshelfModule)
   },
   {
+    path: 'booksearch',
+    loadChildren: () => import('./views/booksearch/booksearch.module').then(m => m.BooksearchModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
