@@ -1,4 +1,5 @@
-﻿using Bookstore.DataLogic.Repository.UserRepository;
+﻿using Bookstore.DataLogic.Repository.BookRepository;
+using Bookstore.DataLogic.Repository.UserRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,9 @@ namespace Bookstore.DataLogic.Repository.UnitOfWork
 
         private IUserRepository _userRepository;
         public IUserRepository userRepository => _userRepository ?? (_userRepository = new UserRepository.UserRepository(_context));
+
+        private IBookRepository _bookRepository;
+        public IBookRepository bookRepository => _bookRepository ?? (_bookRepository = new BookRepository.BookRepository(_context));
 
         public async Task Save()
         {
