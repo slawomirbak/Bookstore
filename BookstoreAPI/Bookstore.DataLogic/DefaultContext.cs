@@ -14,6 +14,7 @@ namespace Bookstore.DataLogic
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Book> Books { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
