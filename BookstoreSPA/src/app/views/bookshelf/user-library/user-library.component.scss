@@ -1,0 +1,41 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+
+.title {
+  margin: 2rem;
+  text-align: center;
+}
+.my-bookshelf {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  .book-wrapper {
+    width: 350px;
+  }
+}
+a {
+  color: $dark;
+  &:hover{
+    color: $primary;
+  }
+}
+.book-card {
+  max-width: 300px;
+  text-align: left;
+  mat-card-subtitle {
+    a {
+      color: $gray;
+    }
+  }
+}
+.header-image {
+  background-size: cover;
+  img{
+    max-width: 45px;
+    border-radius: 50%;
+  }
+}
+
+mat-card-actions .material-icons{
+  color: $red;
+}

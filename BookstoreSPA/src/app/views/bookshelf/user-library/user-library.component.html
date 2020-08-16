@@ -1,2 +1,26 @@
-<p>user-library works!</p>
-<div class="lasa">Lorem, ipsum.</div>
+<h4 class="title">My books</h4>
+<div class="my-bookshelf">
+  <div class="book-wrapper" *ngFor="let book of books">
+    <mat-card class="book-card">
+      <mat-card-header>
+        <div mat-card-avatar class="header-image">
+          <img [src]="book.authorAvatar"/>
+        </div>
+        <mat-card-title><a [routerLink]="['/books', book.id]">{{book.title}}</a></mat-card-title>
+        <mat-card-subtitle><a [routerLink]="['/author', book.authorId]">{{book.author}}</a></mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="book.img" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          {{book.shortDescription}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <span class="material-icons" >
+          favorite
+        </span> Test completed
+        <button mat-raised-button [routerLink]="['/books', book.id]">View details</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

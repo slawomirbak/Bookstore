@@ -2,8 +2,8 @@ import { BookFormat } from './BookFormat';
 
 export class Book {
   id: string;
-  authorId: string;
   title: string;
+  authorId: string;
   authorAvatar: string;
   img: string;
   author: string;
