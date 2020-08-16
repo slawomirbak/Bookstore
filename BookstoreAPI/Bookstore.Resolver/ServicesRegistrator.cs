@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Bookstore.Abstract.IService;
 using Bookstore.Abstract.IServices;
 using Bookstore.DataLogic;
 using Bookstore.DataLogic.Repository.UnitOfWork;
+using Bookstore.Services.AuthorSerice;
 using Bookstore.Services.BookService;
 using Bookstore.Services.Mapper;
 using Bookstore.Services.UserService;
@@ -22,6 +24,7 @@ namespace Bookstore.Resolver
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IAuthorService, AuthorService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         public static void AddDatabase(IServiceCollection services, IConfiguration configuration)

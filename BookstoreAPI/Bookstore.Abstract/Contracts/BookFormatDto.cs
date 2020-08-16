@@ -7,6 +7,7 @@ namespace Bookstore.Abstract.Contracts
 {
     public class BookFormatDto
     {
+        public int Id { get; set; }
         public int Quantity { get; set; }
         public string Format { get; set; }
         [Column(TypeName = "decimal(18,2)")]

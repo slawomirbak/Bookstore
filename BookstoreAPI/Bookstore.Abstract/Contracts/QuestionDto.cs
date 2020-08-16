@@ -6,6 +6,7 @@ namespace Bookstore.Abstract.Contracts
 {
     public class QuestionDto
     {
+        public int Id { get; set; }
         public string Sentence { get; set; }
         public string A { get; set; }
         public string B { get; set; }
