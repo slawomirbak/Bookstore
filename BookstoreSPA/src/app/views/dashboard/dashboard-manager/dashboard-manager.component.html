@@ -1,8 +1,13 @@
 <h3>My dashboard</h3>
 <div class="dashboard">
-  <div class="add-book">
+  <div class="dashboard-button">
     <button mat-flat-button color="primary">
       <a [routerLink]="['/dashboard/add-book']">Add book</a>
+    </button>
+  </div>
+  <div class="dashboard-button">
+    <button mat-flat-button color="primary">
+      <a [routerLink]="['/dashboard/add-author']">Add author</a>
     </button>
   </div>
 </div>
