@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./views/booksearch/booksearch.module').then(m => m.BooksearchModule)
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

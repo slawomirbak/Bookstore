@@ -58,7 +58,7 @@
         <a mat-list-item [routerLink]="['/bookshelf']">My bookshelf</a>
         <a mat-list-item [routerLink]="['/booksearch']">Search book</a>
         <a mat-list-item [routerLink]="['/basket']">Basket</a>
-        <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$| async) && (isAdmin$| async).role ==='admin'">Dashboard</a>
+        <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$ | async) && (isAdmin$| async).role ==='admin'">Dashboard</a>
         <a mat-list-item (click)="logout()" [routerLink]="['/home']">Logout</a>
       </div>
       <div *ngIf="!(isLoggedIn$ | async)"
