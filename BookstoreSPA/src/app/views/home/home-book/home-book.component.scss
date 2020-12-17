@@ -24,4 +24,15 @@
       border-radius: 50%;
     }
   }
+  mat-card-actions {
+    button {
+      text-align: right;
+    }
+    mat-icon {
+      color: $green;
+      font-size: 1.75rem;
+      vertical-align: middle;
+      float: right;
+    }
+  }
 }
