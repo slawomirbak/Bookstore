@@ -18,7 +18,7 @@ namespace Bookstore.DataLogic.Entities
         public float AverageRating { get; set; }
         public Author Author { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
+        public ICollection<Genre> Genre { get; set; }
         public ICollection<BookFormat> BookFormats { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<BookRating> BookRatings { get; set; }

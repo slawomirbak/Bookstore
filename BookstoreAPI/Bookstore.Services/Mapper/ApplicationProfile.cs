@@ -37,6 +37,9 @@ namespace Bookstore.Services.Mapper
 
             CreateMap<BookRating, BookRatingDto>();
             CreateMap<BookRatingDto, BookRating>();
+
+            CreateMap<Genre, GenreDto>();
+            CreateMap<GenreDto, Genre>();
         }
     }
 }
