@@ -30,6 +30,7 @@ namespace BookstoreAPI
             ServicesRegistrator.AddDatabase(services, Configuration);
             ServicesRegistrator.RegisterServices(services);
             ServicesRegistrator.AddMapper(services);
+            ServicesRegistrator.AddJWTAuthentication(services, Configuration);
 
             services.AddSwaggerGen(c =>
             {

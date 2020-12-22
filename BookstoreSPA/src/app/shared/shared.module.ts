@@ -23,6 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {MatStepperModule} from '@angular/material/stepper';
 
 const angularMaterialModules = [
     LayoutModule,
@@ -43,7 +44,8 @@ const angularMaterialModules = [
     MatDialogModule,
     MatProgressBarModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatStepperModule
 ];
 
 @NgModule({

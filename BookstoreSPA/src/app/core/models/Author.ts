@@ -1,6 +1,9 @@
+import { Book } from "./Book";
+
 export class Author {
-  public Id: number;
-  public Name: string;
-  public Surname: string;
-  public AuthorAvatar: string;
+  public id: number;
+  public name: string;
+  public surname: string;
+  public authorAvatar: string;
+  public books: Book[] = [];
 }

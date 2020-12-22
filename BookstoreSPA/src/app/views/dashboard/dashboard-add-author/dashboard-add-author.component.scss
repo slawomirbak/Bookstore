@@ -1,0 +1,13 @@
+:host {
+  h2 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  form {
+    mat-form-field {
+      flex-direction: column;
+      display: flex;
+      max-width: 500px;
+    }
+  }
+}

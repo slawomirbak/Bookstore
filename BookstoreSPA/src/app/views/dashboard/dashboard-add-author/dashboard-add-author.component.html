@@ -1,1 +1,31 @@
-<p>dashboard-add-author works!</p>
+<h2>Add author</h2>
+<mat-horizontal-stepper #stepper [linear]="isLinear">
+  <mat-step [stepControl]="authorForm">
+    <form [formGroup]="authorForm">
+      <ng-template matStepLabel>Author details</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Author First Name" formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Author Last Name" formControlName="surname" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext (click)="authorFormSave()">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="authorForm">
+    <form [formGroup]="authorForm">
+      <ng-template matStepLabel>Author images</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Author First name" formControlName="name" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+
+

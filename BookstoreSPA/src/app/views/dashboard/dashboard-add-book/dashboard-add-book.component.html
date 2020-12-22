@@ -1,1 +1,40 @@
-<p>dashboard-add-book works!</p>
+<h2>Add book</h2>
+<mat-horizontal-stepper #stepper [linear]="isLinear">
+  <mat-step [stepControl]="bookForm">
+    <form [formGroup]="bookForm">
+      <ng-template matStepLabel>Author details</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Author First name" formControlName="name" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext >Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="bookForm">
+    <form [formGroup]="bookForm">
+      <ng-template matStepLabel>Author details</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Author First name" formControlName="name" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button matStepperNext >Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="bookForm">
+    <form [formGroup]="bookForm">
+      <ng-template matStepLabel>Author details</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Author First name" formControlName="name" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
+
+

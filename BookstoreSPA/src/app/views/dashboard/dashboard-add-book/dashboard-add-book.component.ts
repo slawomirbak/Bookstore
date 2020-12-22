@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-add-book',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardAddBookComponent implements OnInit {
 
-  constructor() { }
+  isLinear = true;
+  bookForm : FormGroup
+  constructor(private _formBuilder: FormBuilder) { }
+
 
   ngOnInit(): void {
+    this.bookForm = this._formBuilder.group({
+      name: ["", Validators.required]
+    });
   }
 
 }

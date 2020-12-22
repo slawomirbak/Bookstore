@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Bookstore.DataLogic.Repository.AuthorRepository
 {
@@ -9,6 +10,11 @@ namespace Bookstore.DataLogic.Repository.AuthorRepository
     {
         public AuthorRepository(DefaultContext context) : base(context)
         {
+        }
+
+        public async Task Create(Author author)
+        {
+            await _context.Authors.AddAsync(author);
         }
     }
 }

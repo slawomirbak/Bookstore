@@ -84,6 +84,22 @@ export class AbstractRepositoryService {
       );
   }
 
+  create(data: any) {
+    return this.http
+    .post<IBackendPlainResponse>(`${environment.apiBasePath}/${this.baseEndpoint}`, data)
+    .pipe(
+      map((res: IBackendPlainResponse) => {
+        if (!res.isSuccessful) {
+          throw new Error(res.errorMessage);
+        }
+        if (res.data) {
+          return res.data;
+        }
+      }),
+      catchError(this.errorHandler)
+    );
+  }
+
   put(data: any, path: string = '') {
     return this.http
       .put<IBackendPlainResponse>(`${environment.apiBasePath}/${this.baseEndpoint}/${path}`, data)
@@ -115,6 +131,7 @@ export class AbstractRepositoryService {
         catchError(this.errorHandler)
       );
   }
+
   upload(files: Set<File>, path: string): { [key: string]: {progress: Observable<number>}} {
     const status: { [key: string]: { progress: Observable<number> } } = {};
 
@@ -147,6 +164,7 @@ export class AbstractRepositoryService {
   }
 
   private errorHandler(error: any) {
+    console.error(error);
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
