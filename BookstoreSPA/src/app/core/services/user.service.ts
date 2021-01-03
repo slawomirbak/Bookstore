@@ -55,7 +55,6 @@ export class UserService  extends AbstractRepositoryService {
   }
 
   private doLoginUser(username: string, tokens: IToken) {
-    console.log(tokens)
     this.loggedUser$.next(username);
     this.userSubject$.next(tokens.user);
     this.storeTokens(tokens);

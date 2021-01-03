@@ -10,6 +10,7 @@
         <input matInput placeholder="Author Last Name" formControlName="surname" required>
       </mat-form-field>
       <div>
+        <button mat-button (click)="stepper.reset()">New</button>
         <button mat-button matStepperNext (click)="authorFormSave()">Next</button>
       </div>
     </form>
