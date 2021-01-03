@@ -16,9 +16,6 @@ export class Author {
   books: Book[] = [];
 
   isEquil(author: Author) : boolean{
-    if (this.id !== 0) {
-      return false;
-    }
     if(this.name !== author.name || this.surname !== author.surname){
       return false;
     }

@@ -3,7 +3,7 @@
   #file
   style="display: none"
   (change)="onFilesAdded()"
-  multiple
+  [multiple]="!data.onlyOneFile"
 />
 <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
     <h1 mat-dialog-title>Upload Files</h1>
@@ -18,7 +18,7 @@
         Add Files
       </button>
     </div>
-  
+
     <!-- This is the content of the dialog, containing a list of the files to upload -->
     <mat-dialog-content fxFlex>
       <mat-list>
@@ -32,7 +32,7 @@
         </mat-list-item>
       </mat-list>
     </mat-dialog-content>
-  
+
     <!-- This are the actions of the dialog, containing the primary and the cancel button-->
     <mat-dialog-actions class="actions">
       <button *ngIf="showCancelButton" mat-button mat-dialog-close>Cancel</button>

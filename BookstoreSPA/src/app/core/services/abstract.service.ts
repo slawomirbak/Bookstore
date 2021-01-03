@@ -100,7 +100,7 @@ export class AbstractRepositoryService {
     );
   }
 
-  put(data: any, path: string = '') {
+  put(path: string = "", data: any) {
     return this.http
       .put<IBackendPlainResponse>(`${environment.apiBasePath}/${this.baseEndpoint}/${path}`, data)
       .pipe(

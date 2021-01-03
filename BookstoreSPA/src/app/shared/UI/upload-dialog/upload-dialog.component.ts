@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-
 import { forkJoin } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -48,10 +47,9 @@ export class UploadDialogComponent implements OnInit {
     }
 
     this.uploading = true;
-    //this.progress = this.dashboardService.upload(this.files, this.data.checklistId);
+    this.progress = this.data.service.upload(this.files, this.data.itemId);
 
     const allProgressObservables = [];
-    // tslint:disable-next-line: forin
     for (const key in this.progress) {
       allProgressObservables.push(this.progress[key].progress);
     }
@@ -63,6 +61,7 @@ export class UploadDialogComponent implements OnInit {
     this.showCancelButton = false;
 
     forkJoin(allProgressObservables).subscribe(end => {
+      console.log("forkAllobservable")
       this.canBeClosed = true;
       this.dialogRef.disableClose = false;
       this.uploadSuccessful = true;

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Author } from 'src/app/core/models/Author';
 import { AuthorService } from 'src/app/core/services/author.service';
+import { UploadDialogComponent } from 'src/app/shared/UI/upload-dialog/upload-dialog.component';
 
 @Component({
   selector: 'app-dashboard-add-author',
@@ -13,8 +15,7 @@ export class DashboardAddAuthorComponent implements OnInit {
   authorForm : FormGroup;
   currentAuthor : Author = new Author(null);
   authorAvatar: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService) { }
-
+  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService,   public dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.authorForm = this._formBuilder.group({
@@ -24,21 +25,32 @@ export class DashboardAddAuthorComponent implements OnInit {
   }
 
   authorFormSave(): void {
-    console.log(this.currentAuthor)
-    console.log(this.authorForm.value)
     if(this.currentAuthor.isEquil(this.authorForm.value)){
-      console.log('object is the same')
       return;
     }
     if(this.currentAuthor.id === 0){
-      this.authorService.create(this.authorForm.value).subscribe((author) => {
-        this.currentAuthor = new Author(author);
-      });
-
+      this.authorService.create(this.authorForm.value).subscribe((author) => this.currentAuthor = new Author(author));
     } else {
-      //todo: create put method
-      console.log('should be put method')
-      //this.authorService.put(this.authorForm.value).subscribe(author => this.currentAuthor = author);
+      this.authorService.put(this.currentAuthor.id.toString(), this.currentAuthor).subscribe((author) => this.currentAuthor = new Author(author))
     }
+  }
+
+  resetForm() {
+    console.log("reset form");
+    this.currentAuthor = new Author(null);
+    this.ngOnInit();
+  }
+
+  openUploadDialog() {
+    console.log(this.currentAuthor.id);
+    const dialogRef = this.dialog.open(UploadDialogComponent, {
+      width: '50%',
+      height: '50%',
+      data: {
+        service: this.authorService,
+        onlyOneFile: true,
+        itemId: this.currentAuthor.id
+      }
+    });
   }
 }
