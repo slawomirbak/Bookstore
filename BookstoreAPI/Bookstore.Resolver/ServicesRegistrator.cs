@@ -6,6 +6,7 @@ using Bookstore.DataLogic.Repository.UnitOfWork;
 using Bookstore.Services.AuthorSerice;
 using Bookstore.Services.BookService;
 using Bookstore.Services.Mapper;
+using Bookstore.Services.UploadFileService;
 using Bookstore.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,7 @@ namespace Bookstore.Resolver
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IUploadService, UploadService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         public static void AddDatabase(IServiceCollection services, IConfiguration configuration)

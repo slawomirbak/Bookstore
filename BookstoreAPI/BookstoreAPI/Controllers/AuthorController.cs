@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bookstore.Abstract.Contracts;
 using Bookstore.Abstract.IService;
+using Bookstore.Abstract.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,28 @@ namespace BookstoreAPI.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorService _authorService;
-        public AuthorsController(IAuthorService authorService)
+
+        private readonly IUploadService _uploadService;
+        public AuthorsController(IAuthorService authorService, IUploadService uploadService)
         {
             _authorService = authorService;
+            _uploadService = uploadService;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit([FromBody] AuthorDto authorDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _authorService.Edit(authorDto);
+                if (response.IsSuccessful)
+                {
+                    return new OkObjectResult(response);
+                }
+                return new BadRequestObjectResult(response);
+
+            }
+            return BadRequest();
         }
 
         [HttpPost("")]
@@ -34,5 +54,32 @@ namespace BookstoreAPI.Controllers
             return BadRequest();
         }
 
+        [HttpPost("upload/{id}")]
+        public async Task<IActionResult> Upload(int id)
+        {
+            var file = Request.Form.Files[0];
+            if (!file.ContentType.Contains("image") || id == 0)
+            {
+                return BadRequest();
+            }
+            
+            var uploadReponse = await _uploadService.UploadFile(file);
+
+            if(uploadReponse.IsSuccessful)
+            {
+                var fileName = uploadReponse.fileName;
+
+                var response = await _authorService.EditProperty(id, "AuthorAvatar", fileName);
+
+                if (response.IsSuccessful)
+                {
+                    return new OkObjectResult(response);
+                }
+                return new BadRequestObjectResult(response);
+            }
+
+
+            return BadRequest();
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Bookstore.Abstract.IService
 {
     public interface IAuthorService
     {
-        public Task<ItemPlainResponse<AuthorDto>> Add(AuthorDto author);
+        Task<ItemPlainResponse<AuthorDto>> Add(AuthorDto author);
+        Task<ItemPlainResponse<AuthorDto>> Edit(AuthorDto author);
+        Task<ItemPlainResponse<AuthorDto>> EditProperty(int itemId, string propertyName, string propertyValue);
     }
 }
