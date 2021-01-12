@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
 import { Author } from 'src/app/core/models/Author';
 import { AuthorService } from 'src/app/core/services/author.service';
 import { UploadDialogComponent } from 'src/app/shared/UI/upload-dialog/upload-dialog.component';
@@ -14,7 +15,7 @@ export class DashboardAddAuthorComponent implements OnInit {
   isLinear = true;
   authorForm : FormGroup;
   currentAuthor : Author = new Author(null);
-  authorAvatar: FormGroup;
+  savedAuthor$: BehaviorSubject<Author>;
   constructor(private _formBuilder: FormBuilder, private authorService: AuthorService,   public dialog: MatDialog,) { }
 
   ngOnInit(): void {
@@ -22,12 +23,16 @@ export class DashboardAddAuthorComponent implements OnInit {
       name: ["", Validators.required],
       surname: ["", Validators.required]
     });
+
+    this.savedAuthor$ = this.authorService.currentAuthor$;
   }
 
   authorFormSave(): void {
     if(this.currentAuthor.isEquil(this.authorForm.value)){
       return;
     }
+    this.savedAuthor$.next(this.authorForm.value);
+
     if(this.currentAuthor.id === 0){
       this.authorService.create(this.authorForm.value).subscribe((author) => this.currentAuthor = new Author(author));
     } else {
@@ -38,11 +43,14 @@ export class DashboardAddAuthorComponent implements OnInit {
   resetForm() {
     console.log("reset form");
     this.currentAuthor = new Author(null);
+    this.savedAuthor$.next(null);
     this.ngOnInit();
   }
 
   openUploadDialog() {
-    console.log(this.currentAuthor.id);
+    if(this.currentAuthor.id === 0){
+      return;
+    }
     const dialogRef = this.dialog.open(UploadDialogComponent, {
       width: '50%',
       height: '50%',

@@ -21,7 +21,6 @@ export class UploadDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<UploadDialogComponent>,
-    //public dashboardService: DashboardService,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
 
@@ -61,12 +60,11 @@ export class UploadDialogComponent implements OnInit {
     this.showCancelButton = false;
 
     forkJoin(allProgressObservables).subscribe(end => {
-      console.log("forkAllobservable")
       this.canBeClosed = true;
       this.dialogRef.disableClose = false;
       this.uploadSuccessful = true;
       this.uploading = false;
-      //this.dashboardService.currentUserChecklist$.subscribe();
+      this.data.service.updateCurrentObj$(this.data.itemId).subscribe();
     });
   }
 
