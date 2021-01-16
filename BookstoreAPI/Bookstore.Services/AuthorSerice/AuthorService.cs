@@ -17,6 +17,12 @@ namespace Bookstore.Services.AuthorSerice
         {
         }
 
+        public async Task<ItemPlainResponse<AuthorDto>> GetById(int itemID)
+        {
+            Author author = await _unitOfWork.authorRepository.GetById(itemID);
+            return new ItemPlainResponse<AuthorDto>(_mapper.Map<AuthorDto>(author));
+        }
+
         public async Task<ItemPlainResponse<AuthorDto>> EditProperty(int itemId, string propertyName, string propertyValue)
         {
             Author author = await _unitOfWork.authorRepository.GetById(itemId);

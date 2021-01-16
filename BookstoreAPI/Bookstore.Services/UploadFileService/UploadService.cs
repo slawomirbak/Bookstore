@@ -35,7 +35,6 @@ namespace Bookstore.Services.UploadFileService
             {
                 var request = new PutObjectRequest
                 {
-                    //TODO get thisinformation from configuration
                     BucketName = _configuration.GetSection("AmazonS3:bucket").Value,
                     Key = fileName,
                     InputStream = stream,
@@ -47,7 +46,7 @@ namespace Bookstore.Services.UploadFileService
 
                 if (putObjectResponse.HttpStatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    uploadPlainResponse.fileName = _configuration.GetSection("AmazonS3:rootUrl").Value + fileName;
+                    uploadPlainResponse.fileName = fileName;
                 }
                 else
                 {
@@ -56,6 +55,18 @@ namespace Bookstore.Services.UploadFileService
                 }
                 return uploadPlainResponse;
             }
+        }
+
+        public async Task DeleteImage(string imageName)
+        {
+            var client = new AmazonS3Client(_configuration.GetSection("AmazonS3:accessKey").Value, _configuration.GetSection("AmazonS3:accessSecret").Value, Amazon.RegionEndpoint.EUCentral1);
+
+            var request = new DeleteObjectRequest
+            {
+                BucketName = _configuration.GetSection("AmazonS3:bucket").Value,
+                Key = imageName
+            };
+            await client.DeleteObjectAsync(request);
         }
     }
 }

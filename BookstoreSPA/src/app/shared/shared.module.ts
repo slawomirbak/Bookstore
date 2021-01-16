@@ -24,10 +24,12 @@ import { UploadDialogComponent } from './UI/upload-dialog/upload-dialog.componen
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 const angularMaterialModules = [
     LayoutModule,
     MatFormFieldModule,
+    MatSelectModule ,
     MatIconModule,
     MatButtonModule,
     MatInputModule,

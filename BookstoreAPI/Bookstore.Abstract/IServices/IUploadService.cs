@@ -10,5 +10,6 @@ namespace Bookstore.Abstract.IServices
     public interface IUploadService
     {
         Task<UploadPlainResponse> UploadFile(IFormFile formFile);
+        Task DeleteImage(string imageName);
     }
 }

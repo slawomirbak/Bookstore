@@ -12,5 +12,6 @@ namespace Bookstore.Abstract.IService
         Task<ItemPlainResponse<AuthorDto>> Add(AuthorDto author);
         Task<ItemPlainResponse<AuthorDto>> Edit(AuthorDto author);
         Task<ItemPlainResponse<AuthorDto>> EditProperty(int itemId, string propertyName, string propertyValue);
+        Task<ItemPlainResponse<AuthorDto>> GetById(int itemID);
     }
 }

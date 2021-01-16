@@ -15,10 +15,30 @@ export class Author {
   authorAvatar: string = "";
   books: Book[] = [];
 
-  isEquil(author: Author) : boolean{
-    if(this.name !== author.name || this.surname !== author.surname){
-      return false;
+  isEquil = (author: Author) : boolean => {
+    let response: boolean = true;
+    for (let property in author) {
+      response = this.checkIfTheSame(this[property], author[property]);
+      if(!response){
+        return response;
+      }
     }
-    return true;
+    return response;
   };
+
+  private checkIfTheSame = (propertyOne, propertyTwo): boolean => {
+    console.log(propertyOne)
+    console.log(propertyTwo)
+    let response = true;
+    if(typeof propertyOne === "object" && typeof propertyTwo === "object"){
+      for (let property in propertyOne){
+        response = this.checkIfTheSame(propertyOne[property], propertyTwo[property]);
+      }
+    }
+    if(propertyOne != propertyTwo) {
+      response = false;
+      return response;
+    }
+    return response;
+  }
 }

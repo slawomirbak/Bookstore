@@ -32,6 +32,6 @@
 
 <mat-card *ngIf="savedAuthor$ | async as savedAuthor" class="author-card-wrapper">
   <mat-card-title>{{savedAuthor.name}} {{savedAuthor.surname}}</mat-card-title>
-  <img mat-card-image *ngIf="savedAuthor.authorAvatar " [src]=savedAuthor.authorAvatar >
+  <img mat-card-image *ngIf="savedAuthor.authorAvatar " [src]="imgRootUrl + savedAuthor.authorAvatar" >
 </mat-card>
 

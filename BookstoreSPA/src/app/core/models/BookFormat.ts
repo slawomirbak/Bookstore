@@ -1,5 +1,6 @@
-export enum BookFormat {
-  SoftCover,
-  HardCover,
-  Electronic
+export class BookFormat {
+  quantity: number;
+  format: string;
+  price: number;
+  discount: number;
 }

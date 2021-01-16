@@ -2,39 +2,61 @@
 <mat-horizontal-stepper #stepper [linear]="isLinear">
   <mat-step [stepControl]="bookForm">
     <form [formGroup]="bookForm">
-      <ng-template matStepLabel>Author details</ng-template>
+      <ng-template matStepLabel>Book basic information</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Author First name" formControlName="name" required>
+        <input matInput placeholder="Title" formControlName="title" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Author Last Name" formControlName="surname" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext >Next</button>
+        <button mat-button (click)="stepper.reset()" (click)="resetForm()">New</button>
+        <button mat-button matStepperNext (click)="bookFormSave()">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="bookForm">
     <form [formGroup]="bookForm">
-      <ng-template matStepLabel>Author details</ng-template>
+      <ng-template matStepLabel>Book additional information</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Author First name" formControlName="name" required>
+        <input matInput placeholder="ISBN" formControlName="ISBN" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Number of pages" formControlName="numberOfPages" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Short description" formControlName="shortDescription" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Select</mat-label>
+          <mat-select>
+            <mat-option value="SoftCover">SoftCover</mat-option>
+            <mat-option value="SoftCover">HardCover</mat-option>
+            <mat-option value="SoftCover">Electronic</mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-form-field>
       <div>
-        <button mat-button matStepperPrevious >Back</button>
-        <button mat-button matStepperNext >Next</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext (click)="bookFormSave()">Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="bookForm">
     <form [formGroup]="bookForm">
-      <ng-template matStepLabel>Author details</ng-template>
-      <mat-form-field>
+      <ng-template matStepLabel>Book images</ng-template>
+      <!-- <mat-form-field>
         <input matInput placeholder="Author First name" formControlName="name" required>
-      </mat-form-field>
+      </mat-form-field> -->
       <div>
         <button mat-button matStepperPrevious >Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-raised-button (click)="openUploadDialog()">Upload image</button>
+        <button mat-button (click)="stepper.reset()" (click)="resetForm()">Reset</button>
       </div>
     </form>
   </mat-step>
 </mat-horizontal-stepper>
+
 
 

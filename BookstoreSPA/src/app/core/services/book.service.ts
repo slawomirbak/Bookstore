@@ -1,24 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AbstractRepositoryService } from './abstract.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorService extends AbstractRepositoryService {
-  baseEndpoint = 'api/authors'
+export class BookService extends AbstractRepositoryService {
+  baseEndpoint = 'api/books'
   constructor(http: HttpClient) {
     super(http);
   }
 
-  currentAuthor$ = new BehaviorSubject(null);
+  currentBook$ = new BehaviorSubject(null);
 
-  updateCurrentObj$ = (itemId):Observable<any> => {
+  updateCurrentObj$ = (itemId) => {
     console.log(itemId);
     return this.getOne(itemId).pipe(tap(data => {
-      this.currentAuthor$.next(data);
+      this.currentBook$.next(data);
     }));
   }
 }

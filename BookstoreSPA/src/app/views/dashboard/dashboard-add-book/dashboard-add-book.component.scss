@@ -3,4 +3,17 @@
     text-align: center;
     margin: 2rem 0;
   }
+  form {
+    mat-form-field {
+      flex-direction: column;
+      display: flex;
+      max-width: 500px;
+    }
+  }
+
+  .author-card-wrapper {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    max-width: 400px;
+  }
 }

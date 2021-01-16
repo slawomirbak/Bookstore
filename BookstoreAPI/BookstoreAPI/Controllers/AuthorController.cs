@@ -23,6 +23,18 @@ namespace BookstoreAPI.Controllers
             _uploadService = uploadService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _authorService.GetById(id);
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+            return new BadRequestObjectResult(response);
+
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromBody] AuthorDto authorDto)
         {
@@ -64,11 +76,15 @@ namespace BookstoreAPI.Controllers
             }
             
             var uploadReponse = await _uploadService.UploadFile(file);
-
+           
             if(uploadReponse.IsSuccessful)
             {
                 var fileName = uploadReponse.fileName;
-
+                var currentFileName = await _authorService.GetById(id);
+                if(!String.IsNullOrWhiteSpace(currentFileName.Data.AuthorAvatar))
+                {
+                    await _uploadService.DeleteImage(currentFileName.Data.AuthorAvatar);
+                }
                 var response = await _authorService.EditProperty(id, "AuthorAvatar", fileName);
 
                 if (response.IsSuccessful)
