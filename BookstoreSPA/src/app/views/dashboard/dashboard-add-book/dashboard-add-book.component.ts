@@ -13,7 +13,7 @@ import { UploadDialogComponent } from 'src/app/shared/UI/upload-dialog/upload-di
 })
 export class DashboardAddBookComponent implements OnInit {
 
-  isLinear = true;
+  isLinear = false;
   bookForm : FormGroup;
   currentBook : Book = new Book(null);
   savedBook$: BehaviorSubject<Book>;
@@ -21,8 +21,10 @@ export class DashboardAddBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookForm = this._formBuilder.group({
-      name: ["", Validators.required],
-      surname: ["", Validators.required]
+      title: ["", Validators.required],
+      ISBN: ["", Validators.required],
+      numberOfPages: ["", Validators.required],
+      shortDescription: ["", Validators.required]
     });
 
     this.savedBook$ = this.bookService.currentBook$;
