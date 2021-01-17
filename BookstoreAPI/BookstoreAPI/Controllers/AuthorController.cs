@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookstoreAPI.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorService _authorService;
@@ -21,6 +21,17 @@ namespace BookstoreAPI.Controllers
         {
             _authorService = authorService;
             _uploadService = uploadService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Getall()
+        {
+            var response = await _authorService.GetList();
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+            return new BadRequestObjectResult(response);
         }
 
         [HttpGet("{id}")]

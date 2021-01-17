@@ -53,5 +53,15 @@ namespace Bookstore.Services.AuthorSerice
             await _unitOfWork.Save();
             return new ItemPlainResponse<AuthorDto>(_mapper.Map<AuthorDto>(author));
         }
+
+        public async Task<ItemPlainResponse<List<AuthorDto>>> GetList()
+        {
+            var authorList =  await _unitOfWork.authorRepository.GetAll();
+            var authorListDto = _mapper.Map<List<AuthorDto>>(authorList);
+            var reposne = new ItemPlainResponse<List<AuthorDto>>(authorListDto);
+
+            return reposne;
+
+        }
     }
 }

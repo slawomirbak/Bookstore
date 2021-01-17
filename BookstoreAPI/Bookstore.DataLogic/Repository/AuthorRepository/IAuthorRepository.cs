@@ -11,5 +11,6 @@ namespace Bookstore.DataLogic.Repository.AuthorRepository
         Task Create(Author author);
         void Edit(Author author);
         Task<Author> GetById(int id);
+        Task<List<Author>> GetAll();
     }
 }

@@ -6,13 +6,14 @@ export class Book {
   title: string = "";
   img: string = "";
   author: Author =  new Author(null);
-  price: number = 0;
-  discount: number = 0
-  shortDescription: string  = ""
-  bookFormat: BookFormat[]  = [];
-  ISBN: string = ""
+  shortDescription: string  = "";
+  bookFormats: BookFormat[]  = [];
+  ISBN: string = "";
   averageRating: number = 0;
   numberOfPages: number = 0;
+  publishingHouse: string = "";
+  releaseDate: Date = new Date();
+  genre: string = ""
 
   constructor(book: Book) {
     for(let property in book){

@@ -30,5 +30,10 @@ namespace Bookstore.DataLogic.Repository.AuthorRepository
             return await _context.Authors.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<List<Author>> GetAll()
+        {
+            return await _context.Authors.ToListAsync();
+        }
+
     }
 }
