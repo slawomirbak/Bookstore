@@ -4,18 +4,20 @@ using Bookstore.DataLogic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Bookstore.DataLogic.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    partial class DefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20210117173008_BookAuthorManyToMany")]
+    partial class BookAuthorManyToMany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -53,6 +55,9 @@ namespace Bookstore.DataLogic.Migrations
                     b.Property<string>("AuthorAvatar")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -60,6 +65,8 @@ namespace Bookstore.DataLogic.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.ToTable("Authors");
                 });
@@ -70,6 +77,9 @@ namespace Bookstore.DataLogic.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<float>("AverageRating")
                         .HasColumnType("real");
@@ -109,31 +119,11 @@ namespace Bookstore.DataLogic.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("Bookstore.DataLogic.Entities.BookAuthor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BookAuthor");
                 });
 
             modelBuilder.Entity("Bookstore.DataLogic.Entities.BookFormat", b =>
@@ -362,26 +352,22 @@ namespace Bookstore.DataLogic.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Bookstore.DataLogic.Entities.Author", b =>
+                {
+                    b.HasOne("Bookstore.DataLogic.Entities.Book", null)
+                        .WithMany("Author")
+                        .HasForeignKey("BookId");
+                });
+
             modelBuilder.Entity("Bookstore.DataLogic.Entities.Book", b =>
                 {
+                    b.HasOne("Bookstore.DataLogic.Entities.Author", null)
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Bookstore.DataLogic.Entities.User", null)
                         .WithMany("ReadBooks")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Bookstore.DataLogic.Entities.BookAuthor", b =>
-                {
-                    b.HasOne("Bookstore.DataLogic.Entities.Author", "Author")
-                        .WithMany("Book")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Bookstore.DataLogic.Entities.Book", "Book")
-                        .WithMany("Author")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Bookstore.DataLogic.Entities.BookFormat", b =>

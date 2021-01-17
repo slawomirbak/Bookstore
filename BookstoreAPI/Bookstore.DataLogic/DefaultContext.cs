@@ -36,8 +36,17 @@ namespace Bookstore.DataLogic
                 .HasOne(rt => rt.User);
 
             modelBuilder.Entity<Book>()
-                .HasOne(b => b.Author)
-                .WithMany(a => a.Books);
+                .HasMany(b => b.Author);
+
+            modelBuilder.Entity<BookAuthor>()
+                .HasOne(pt => pt.Author)
+                .WithMany(p => p.Book)
+                .HasForeignKey(pt => pt.AuthorId);
+
+            modelBuilder.Entity<BookAuthor>()
+                .HasOne(pt => pt.Book)
+                .WithMany(t => t.Author)
+                .HasForeignKey(pt => pt.BookId);
 
             modelBuilder.Entity<Book>()
                 .HasMany(b => b.BookFormats)
