@@ -17,9 +17,9 @@ namespace Bookstore.Abstract.Contracts
         public string ISBN { get; set; }
         public int NumberOfPages { get; set; }
         public float AverageRating { get; set; }
+        public string Genre { get; set; }
         public AuthorDto Author { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public ICollection<GenreDto> Genre { get; set; }
         public ICollection<BookFormatDto> BookFormats { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
         public ICollection<BookRatingDto> BookRatings { get; set; }

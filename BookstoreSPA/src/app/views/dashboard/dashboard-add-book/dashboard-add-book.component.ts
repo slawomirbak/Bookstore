@@ -23,8 +23,16 @@ export class DashboardAddBookComponent implements OnInit {
     this.bookForm = this._formBuilder.group({
       title: ["", Validators.required],
       ISBN: ["", Validators.required],
-      numberOfPages: ["", Validators.required],
-      shortDescription: ["", Validators.required]
+      numberOfPages: [0, Validators.required],
+      shortDescription: ["", Validators.required],
+      img: ["", Validators.required],
+      publishingHouse: ["", Validators.required],
+      language: ["", Validators.required],
+      author: ["", Validators.required],
+      releaseDate: ["", Validators.required],
+      // tableofContents: ["", Validators.required],
+      genre: ["", Validators.required],
+      bookFormats: ["", Validators.required],
     });
 
     this.savedBook$ = this.bookService.currentBook$;

@@ -51,6 +51,7 @@ namespace Bookstore.DataLogic
                 .HasMany(b => b.Comments)
                 .WithOne(c => c.Book);
 
+
             modelBuilder.Entity<Book>()
                 .HasMany(b => b.Tests)
                 .WithOne(t => t.Book);
@@ -58,6 +59,7 @@ namespace Bookstore.DataLogic
             modelBuilder.Entity<Test>()
                 .HasMany(t => t.Questions)
                 .WithOne(q => q.Test);   
+
         }
     }
 }
