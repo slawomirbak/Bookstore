@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookstoreAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorService _authorService;

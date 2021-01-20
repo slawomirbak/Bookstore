@@ -109,6 +109,7 @@ export class HomeBestsellerComponent implements OnInit {
     //   discount: 10,
     //   format: BookFormat.SoftCover
     // }
+
   ];
 
   ngOnInit() {

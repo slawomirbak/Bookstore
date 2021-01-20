@@ -25,6 +25,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const angularMaterialModules = [
     LayoutModule,
@@ -47,7 +48,8 @@ const angularMaterialModules = [
     MatProgressBarModule,
     MatGridListModule,
     MatPaginatorModule,
-    MatStepperModule
+    MatStepperModule,
+    MatAutocompleteModule
 ];
 
 @NgModule({

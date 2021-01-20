@@ -9,9 +9,28 @@
       <mat-form-field>
         <input matInput placeholder="Language" formControlName="language" required>
       </mat-form-field>
-      <!-- <mat-form-field>
-        <input matInput placeholder="Author Last Name" formControlName="surname" required>
-      </mat-form-field> -->
+      <mat-form-field class="author-search">
+        <input type="text" placeholder="Select Author/s" aria-label="Select Users" matInput [matAutocomplete]="auto" formControlName="author">
+        <mat-hint>Enter text to find author by name</mat-hint>
+      </mat-form-field>
+      <div class="user-list-wrapper">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let author of filteredAuhtors | async" [value]="selectedAuthors">
+            <div (click)="optionClicked($event, author)">
+              <mat-checkbox [checked]="author.selected" (change)="toggleSelection(author)" (click)="$event.stopPropagation()">
+                {{ author.name }} {{ author.surname }}
+              </mat-checkbox>
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+        <label>Selected Authors:</label>
+        <mat-list dense>
+          <mat-list-item *ngIf="selectedAuthors?.length === 0">(None)</mat-list-item>
+          <mat-list-item *ngFor="let author of selectedAuthors">
+            {{ author.name }} {{ author.surname }}
+          </mat-list-item>
+        </mat-list>
+      </div>
       <div>
         <button mat-button (click)="stepper.reset()" (click)="resetForm()">New</button>
         <button mat-button matStepperNext >Next</button>

@@ -14,6 +14,7 @@ export class Author {
   surname: string= "";
   authorAvatar: string = "";
   books: Book[] = [];
+  selected: boolean = false;
 
   isEquil = (author: Author) : boolean => {
     let response: boolean = true;
@@ -42,3 +43,4 @@ export class Author {
     return response;
   }
 }
+
