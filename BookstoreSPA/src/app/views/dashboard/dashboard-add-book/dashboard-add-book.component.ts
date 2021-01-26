@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { type, userInfo } from 'os';
-import { element } from 'protractor';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Author } from 'src/app/core/models/Author';
@@ -20,6 +18,7 @@ export class DashboardAddBookComponent implements OnInit {
 
   isLinear = false;
   bookForm : FormGroup;
+  bookFormat: FormGroup;
   currentBook : Book = new Book(null);
   savedBook$: BehaviorSubject<Book>;
   availableAuthors: Author[] = [];
@@ -27,26 +26,29 @@ export class DashboardAddBookComponent implements OnInit {
   filteredAuhtors: Observable<Author[]>;
   lastFilter: string = '';
 
+  get formats(): FormArray{
+    return <FormArray>this.bookForm.get('bookFormats');
+  }
+
   constructor(private _formBuilder: FormBuilder,private authorService: AuthorService, private bookService: BookService,   public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-
     this.bookForm = this._formBuilder.group({
       title: ["", Validators.required],
       language: ["", Validators.required],
       author: [[], Validators.required],
-
-
-      ISBN: ["", Validators.required],
+      isbn: ["", Validators.required],
       numberOfPages: [0, Validators.required],
       shortDescription: ["", Validators.required],
-      img: ["", Validators.required],
       publishingHouse: ["", Validators.required],
-
-      releaseDate: ["", Validators.required],
+      releaseDate: [new Date(), Validators.required],
       genre: ["", Validators.required],
-      bookFormats: ["", Validators.required],
+      bookFormats: this._formBuilder.array([]),
+
+      img: ["", Validators.required],
     });
+
+    this.bookFormat = this.buildFormat();
 
     this.authorService.getList().subscribe(authors => {
       this.availableAuthors = authors;
@@ -61,6 +63,31 @@ export class DashboardAddBookComponent implements OnInit {
     this.savedBook$ = this.bookService.currentBook$;
   }
 
+  buildFormat(bookFormat = null) :FormGroup {
+    if(!bookFormat){
+      return this._formBuilder.group({
+        quantity: 0,
+        format:'SoftCover',
+        price: 0,
+        discount: 0,
+      })
+    }
+    return this._formBuilder.group({
+      quantity: bookFormat.get("quantity").value,
+      format: bookFormat.get("format").value,
+      price: bookFormat.get("price").value,
+      discount: bookFormat.get("discount").value,
+    });
+  }
+
+  addBookFormat() {
+    this.formats.push(this.buildFormat(this.bookFormat));
+  }
+
+  deleteFormat(index: number){
+    this.formats.removeAt(index);
+  }
+
   filter(filter: string): Author[] {
     this.lastFilter = filter;
     if(filter){
@@ -72,21 +99,20 @@ export class DashboardAddBookComponent implements OnInit {
       return this.availableAuthors.slice();
     }
   }
-  // bookFormSave(): void {
-  //   if(this.currentAuthor.isEquil(this.authorForm.value)){
-  //     return;
-  //   }
-  //   this.savedAuthor$.next(this.authorForm.value);
-
-  //   if(this.currentBook.id === 0){
-  //     this.authorService.create(this.authorForm.value).subscribe((author) => this.currentAuthor = new Author(author));
-  //   } else {
-  //     this.authorService.put(this.currentBook.id.toString(), this.currentBook).subscribe((author) => this.currentAuthor = new Author(author))
-  //   }
-  // }
 
   bookFormSave(): void {
+    console.log(this.bookForm.value)
+    if(this.currentBook.isEquil(this.bookForm.value)){
+      return;
+    }
 
+    this.savedBook$.next(this.bookForm.value);
+
+    if(this.currentBook.id === 0){
+      this.bookService.create(this.bookForm.value).subscribe((book) => this.currentBook = new Book(book));
+    } else {
+      this.bookService.put(this.currentBook.id.toString(), this.currentBook).subscribe((book) => this.currentBook = new Book(book))
+    }
   }
 
   resetForm() {
@@ -143,6 +169,4 @@ export class DashboardAddBookComponent implements OnInit {
       }
     });
   }
-
-
 }

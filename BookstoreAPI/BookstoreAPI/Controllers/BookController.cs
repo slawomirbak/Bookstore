@@ -24,6 +24,28 @@ namespace BookstoreAPI.Controllers
         {
             if (ModelState.IsValid)
             {
+                var response = await _bookService.Add(bookDto);
+                if (response.IsSuccessful)
+                {
+                    return new OkObjectResult(response);
+                }
+                return new BadRequestObjectResult(response);
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit([FromBody] BookDto bookDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _bookService.Edit(bookDto);
+                if (response.IsSuccessful)
+                {
+                    return new OkObjectResult(response);
+                }
+                return new BadRequestObjectResult(response);
+
             }
             return BadRequest();
         }

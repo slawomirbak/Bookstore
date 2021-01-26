@@ -1,3 +1,6 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+
 :host {
   h2 {
     text-align: center;
@@ -18,5 +21,27 @@
   }
   .user-list-wrapper {
     margin: 2rem 0;
+  }
+  .format-wrapper-outer{
+    margin:2rem 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .format-wrapper-inner{
+      position: relative;
+      margin-right: 1rem;
+      width: 7em;
+      height: 5em;
+      p{
+        margin-bottom: 0.5em;
+      }
+      .icon{
+        position: absolute;
+        top:0;
+        right: 0;
+        color: $red;
+        cursor: pointer;
+      }
+    }
   }
 }

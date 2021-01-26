@@ -8,12 +8,17 @@ export class Book {
   author: Author =  new Author(null);
   shortDescription: string  = "";
   bookFormats: BookFormat[]  = [];
-  ISBN: string = "";
+  isbn: string = "";
   averageRating: number = 0;
   numberOfPages: number = 0;
   publishingHouse: string = "";
   releaseDate: Date = new Date();
-  genre: string = ""
+  genre: string = "";
+  language: string = "";
+  tableofContents: string = "";
+  tests = [];
+  comments = [];
+  bookRatings = [];
 
   constructor(book: Book) {
     for(let property in book){

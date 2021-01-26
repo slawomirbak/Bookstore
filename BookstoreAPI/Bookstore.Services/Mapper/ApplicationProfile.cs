@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bookstore.Abstract.Contracts;
 using Bookstore.DataLogic.Entities;
+using System.Linq;
 
 namespace Bookstore.Services.Mapper
 {
@@ -17,8 +18,12 @@ namespace Bookstore.Services.Mapper
 
             CreateMap<AddressDto, Address>();
 
-            CreateMap<Book, BookDto>();
-            CreateMap<BookDto, Book>();
+            CreateMap<Book, BookDto>()
+                .ForMember(b => b.Author, opt => opt.MapFrom(x => x.Author.Select(a => a.Author)));
+
+            CreateMap<BookDto, Book>()
+                .ForMember(b => b.Author, opt => opt.MapFrom(x => x.Author.Select(a => new BookAuthor {})));
+
 
             CreateMap<Question, QuestionDto>();
             CreateMap<QuestionDto, Question>();

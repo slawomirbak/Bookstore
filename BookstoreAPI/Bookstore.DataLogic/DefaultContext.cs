@@ -21,6 +21,7 @@ namespace Bookstore.DataLogic
         public DbSet<BookRating> BookRatings { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<BookAuthor> BookAuthor { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

@@ -41,23 +41,35 @@
     <form [formGroup]="bookForm">
       <ng-template matStepLabel>Book additional information</ng-template>
       <mat-form-field>
-        <input matInput placeholder="ISBN" formControlName="ISBN" required>
+        <input matInput placeholder="isbn" formControlName="isbn" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Number of pages" formControlName="numberOfPages" required>
+        <input matInput type="number" placeholder="Number of pages (Paper edition)" formControlName="numberOfPages" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Short description" formControlName="shortDescription" required>
+        <input matInput placeholder="Publishing house" formControlName="publishingHouse" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Release date</mat-label>
+        <input matInput [matDatepicker]="releasePicker" formControlName="releaseDate">
+        <mat-datepicker-toggle matSuffix [for]="releasePicker"></mat-datepicker-toggle>
+        <mat-datepicker #releasePicker></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>Select</mat-label>
-          <mat-select>
-            <mat-option value="SoftCover">SoftCover</mat-option>
-            <mat-option value="SoftCover">HardCover</mat-option>
-            <mat-option value="SoftCover">Electronic</mat-option>
+          <mat-label>Genre</mat-label>
+          <mat-select formControlName="genre">
+            <mat-option value="comedy">comedy</mat-option>
+            <mat-option value="drama">drama</mat-option>
+            <mat-option value="fantasy">fantasy</mat-option>
+            <mat-option value="novel">novel</mat-option>
+            <mat-option value="science-fiction">science-fiction</mat-option>
           </mat-select>
         </mat-form-field>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Short description" [cdkTextareaAutosize]="true" [cdkAutosizeMaxRows]="10" [cdkAutosizeMinRows]="5" formControlName="shortDescription" required> </textarea>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -65,12 +77,50 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="bookFormat">
+    <form [formGroup]="bookFormat">
+      <ng-template matStepLabel>Format</ng-template>
+       <mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Select</mat-label>
+          <mat-select formControlName="format">
+            <mat-option value="SoftCover">SoftCover</mat-option>
+            <mat-option value="HardCover">HardCover</mat-option>
+            <mat-option value="Electronic">Electronic</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Quantity" formControlName="quantity" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Price" formControlName="price" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Discount" formControlName="discount" required>
+      </mat-form-field>
+      <h4>Book version format</h4>
+      <div class="format-wrapper-outer">
+        <div class="format-wrapper-inner" *ngFor="let format of bookForm.get('bookFormats').value; index as i">
+          <div class="icon" (click)="deleteFormat(i)">
+            <mat-icon>delete</mat-icon>
+          </div>
+          <p>{{format.format}}</p>
+          <p>Quantity: {{format.quantity}}</p>
+          <p>Price: {{format.price}}</p>
+          <p>Discount: {{format.discount}}</p>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="addBookFormat()">Add</button>
+        <button mat-button matStepperNext (click)="bookFormSave()">Next</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="bookForm">
     <form [formGroup]="bookForm">
       <ng-template matStepLabel>Book images</ng-template>
-      <!-- <mat-form-field>
-        <input matInput placeholder="Author First name" formControlName="name" required>
-      </mat-form-field> -->
       <div>
         <button mat-button matStepperPrevious >Back</button>
         <button mat-raised-button (click)="openUploadDialog()">Upload image</button>
@@ -79,6 +129,3 @@
     </form>
   </mat-step>
 </mat-horizontal-stepper>
-
-
-

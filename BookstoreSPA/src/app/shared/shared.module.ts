@@ -26,6 +26,9 @@ import { RouterModule } from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 const angularMaterialModules = [
     LayoutModule,
@@ -49,7 +52,9 @@ const angularMaterialModules = [
     MatGridListModule,
     MatPaginatorModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 ];
 
 @NgModule({
