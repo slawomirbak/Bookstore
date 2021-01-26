@@ -27,9 +27,13 @@ namespace Bookstore.Services.BookService
 
             await _unitOfWork.bookRepository.Create(book);
 
+            await _unitOfWork.Save();
+
             foreach (var author in authors)
             {
-                var bookAuthor = new BookAuthor { Author = author, Book = book };
+                //Get author from dbo to have author with context
+                var authorDB = await _unitOfWork.authorRepository.GetById(author.Id);
+                var bookAuthor = new BookAuthor { Author = authorDB, Book = book };
                 await _unitOfWork.bookRepository.AddBookAuthor(bookAuthor);
             }
 

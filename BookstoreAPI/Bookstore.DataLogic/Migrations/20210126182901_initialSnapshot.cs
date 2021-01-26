@@ -3,77 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Bookstore.DataLogic.Migrations
 {
-    public partial class extendBookModel : Migration
+    public partial class initialSnapshot : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Author",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "AuthorAvatar",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "Discount",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "Format",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "Price",
-                table: "Books");
-
-            migrationBuilder.AddColumn<int>(
-                name: "AuthorId",
-                table: "Books",
-                nullable: true);
-
-            migrationBuilder.AddColumn<float>(
-                name: "AverageRating",
-                table: "Books",
-                nullable: false,
-                defaultValue: 0f);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Genre",
-                table: "Books",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ISBN",
-                table: "Books",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Language",
-                table: "Books",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "NumberOfPages",
-                table: "Books",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "PublishingHouse",
-                table: "Books",
-                nullable: true);
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "ReleaseDate",
-                table: "Books",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-            migrationBuilder.AddColumn<string>(
-                name: "TableofContents",
-                table: "Books",
-                nullable: true);
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Country = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    StreetAddress = table.Column<string>(nullable: true),
+                    PostCode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Authors",
@@ -88,6 +36,112 @@ namespace Bookstore.DataLogic.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Authors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(maxLength: 60, nullable: false),
+                    Password = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
+                    AddressId = table.Column<int>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Img = table.Column<string>(nullable: true),
+                    PublishingHouse = table.Column<string>(nullable: true),
+                    TableofContents = table.Column<string>(nullable: true),
+                    ShortDescription = table.Column<string>(nullable: true),
+                    Language = table.Column<string>(nullable: true),
+                    ISBN = table.Column<string>(nullable: true),
+                    NumberOfPages = table.Column<int>(nullable: false),
+                    AverageRating = table.Column<float>(nullable: false),
+                    Genre = table.Column<string>(nullable: true),
+                    ReleaseDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RefreshTokens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    ExpiryDate = table.Column<DateTime>(nullable: false),
+                    Token = table.Column<string>(nullable: true),
+                    JwtToken = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: true),
+                    Used = table.Column<bool>(nullable: false),
+                    Invalidated = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RefreshTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RefreshTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookAuthor",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookAuthor", x => new { x.AuthorId, x.BookId });
+                    table.ForeignKey(
+                        name: "FK_BookAuthor_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookAuthor_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,9 +262,9 @@ namespace Bookstore.DataLogic.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_AuthorId",
-                table: "Books",
-                column: "AuthorId");
+                name: "IX_BookAuthor_BookId",
+                table: "BookAuthor",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookFormats_BookId",
@@ -223,6 +277,11 @@ namespace Bookstore.DataLogic.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Books_UserId",
+                table: "Books",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Comments_BookId",
                 table: "Comments",
                 column: "BookId");
@@ -233,27 +292,25 @@ namespace Bookstore.DataLogic.Migrations
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RefreshTokens_UserId",
+                table: "RefreshTokens",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tests_BookId",
                 table: "Tests",
                 column: "BookId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Books_Authors_AuthorId",
-                table: "Books",
-                column: "AuthorId",
-                principalTable: "Authors",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_AddressId",
+                table: "Users",
+                column: "AddressId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Books_Authors_AuthorId",
-                table: "Books");
-
             migrationBuilder.DropTable(
-                name: "Authors");
+                name: "BookAuthor");
 
             migrationBuilder.DropTable(
                 name: "BookFormats");
@@ -268,80 +325,22 @@ namespace Bookstore.DataLogic.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
+                name: "RefreshTokens");
+
+            migrationBuilder.DropTable(
+                name: "Authors");
+
+            migrationBuilder.DropTable(
                 name: "Tests");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Books_AuthorId",
-                table: "Books");
+            migrationBuilder.DropTable(
+                name: "Books");
 
-            migrationBuilder.DropColumn(
-                name: "AuthorId",
-                table: "Books");
+            migrationBuilder.DropTable(
+                name: "Users");
 
-            migrationBuilder.DropColumn(
-                name: "AverageRating",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "Genre",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "ISBN",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "Language",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "NumberOfPages",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "PublishingHouse",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "ReleaseDate",
-                table: "Books");
-
-            migrationBuilder.DropColumn(
-                name: "TableofContents",
-                table: "Books");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Author",
-                table: "Books",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "AuthorAvatar",
-                table: "Books",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<decimal>(
-                name: "Discount",
-                table: "Books",
-                type: "decimal(18,2)",
-                nullable: false,
-                defaultValue: 0m);
-
-            migrationBuilder.AddColumn<int>(
-                name: "Format",
-                table: "Books",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<decimal>(
-                name: "Price",
-                table: "Books",
-                type: "decimal(18,2)",
-                nullable: false,
-                defaultValue: 0m);
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }
