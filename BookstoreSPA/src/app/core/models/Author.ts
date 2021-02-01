@@ -28,8 +28,6 @@ export class Author {
   };
 
   private checkIfTheSame = (propertyOne, propertyTwo): boolean => {
-    console.log(propertyOne)
-    console.log(propertyTwo)
     let response = true;
     if(typeof propertyOne === "object" && typeof propertyTwo === "object"){
       for (let property in propertyOne){

@@ -33,7 +33,7 @@
       </div>
       <div>
         <button mat-button (click)="stepper.reset()" (click)="resetForm()">New</button>
-        <button mat-button matStepperNext >Next</button>
+        <button mat-button matStepperNext (click)="bookFormSave()">Next</button>
       </div>
     </form>
   </mat-step>

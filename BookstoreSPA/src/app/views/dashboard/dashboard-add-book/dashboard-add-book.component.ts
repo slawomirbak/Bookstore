@@ -138,7 +138,6 @@ export class DashboardAddBookComponent implements OnInit {
     this.bookForm.get("author").patchValue(this.selectedAuthors)
   }
 
-
   displayFn(value: Author[] | string): string | undefined{
     let dispalayValue: string;
     if (Array.isArray(value)) {

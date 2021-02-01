@@ -28,11 +28,28 @@ export class Book {
     }
   }
 
-  isEquil(book: Book) : boolean{
-    if(this.id !== 0){
-      return true;
+  isEquil = (book: Book) : boolean => {
+    let response: boolean = true;
+    for (let property in book) {
+      response = this.checkIfTheSame(this[property], book[property]);
+      if(!response){
+        return response;
+      }
     }
-
-    return false;
+    return response;
   };
+
+  private checkIfTheSame = (propertyOne, propertyTwo): boolean => {
+    let response = true;
+    if(typeof propertyOne === "object" && typeof propertyTwo === "object"){
+      for (let property in propertyOne){
+        response = this.checkIfTheSame(propertyOne[property], propertyTwo[property]);
+      }
+    }
+    if(propertyOne != propertyTwo) {
+      response = false;
+      return response;
+    }
+    return response;
+  }
 }
