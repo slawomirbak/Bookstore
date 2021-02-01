@@ -26,12 +26,17 @@ namespace Bookstore.DataLogic.Repository.BookRepository
 
         public async Task<Book> GetById(int id)
         {
-            return await _context.Books.Include(b => b.Author).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Books.Include(b => b.Author).ThenInclude(x => x.Author).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task AddBookAuthor(BookAuthor bookAuthor)
         {
             await _context.BookAuthor.AddAsync(bookAuthor);
+        }
+
+        public void RemoveBookAuthor(BookAuthor bookAuthor)
+        {
+            _context.BookAuthor.Remove(bookAuthor);
         }
     }
 }

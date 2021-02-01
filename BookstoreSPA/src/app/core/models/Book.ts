@@ -28,6 +28,14 @@ export class Book {
     }
   }
 
+  copyValue(book: Book){
+    for(let property in book){
+      if(this[property] != undefined){
+        this[property] = book[property];
+      }
+    }
+  }
+
   isEquil = (book: Book) : boolean => {
     let response: boolean = true;
     for (let property in book) {

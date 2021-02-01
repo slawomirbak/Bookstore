@@ -111,6 +111,8 @@ export class DashboardAddBookComponent implements OnInit {
     if(this.currentBook.id === 0){
       this.bookService.create(this.bookForm.value).subscribe((book) => this.currentBook = new Book(book));
     } else {
+      this.currentBook.copyValue(this.bookForm.value);
+      console.log(this.currentBook)
       this.bookService.put(this.currentBook.id.toString(), this.currentBook).subscribe((book) => this.currentBook = new Book(book))
     }
   }
