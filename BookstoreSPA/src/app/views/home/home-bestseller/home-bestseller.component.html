@@ -1,6 +1,6 @@
 <section  class="wrapper">
   <h1>Best sellers in Books</h1>
   <div class="wrapper-books">
-    <app-home-book *ngFor="let book of books" [book]="book"></app-home-book>
+    <app-home-book *ngFor="let book of  books$ | async " [book]="book"></app-home-book>
   </div>
 </section>

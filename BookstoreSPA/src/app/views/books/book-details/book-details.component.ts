@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core';
+import { imageRootUrl } from 'src/app/core/const/constUrl';
+import { Book } from 'src/app/core/models/Book';
+import { BookService } from 'src/app/core/services/book.service';
 
 enum BookVersion {
-    Paper = 'Paper',
+    HardCover = 'HardCover',
     Electronic = 'Electronic',
-    Mp3 = 'Mp3'
+    SoftCover = 'SoftCover'
 }
 
 @Component({
@@ -12,24 +15,15 @@ enum BookVersion {
     styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent implements OnInit {
-    constructor() {}
 
+    imgRootUrl: string = imageRootUrl.url;
     selectedVersion: BookVersion;
 
-    ngOnInit() {}
+    @Input() book: Book;
 
-    book = {
-        id: '1',
-        authorId: '1',
-        title: 'In the Heart of the Fire',
-        img: 'https://images-na.ssl-images-amazon.com/images/I/41GU9ufax6L.jpg',
-        authorAvatar:
-            'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
-        author: 'Dean Koontz',
-        shortDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        newPrice: 2.09,
-        oldPrice: 0,
+    constructor(private bookService: BookService) {}
+    ngOnInit() {
+      console.log(this.book)
     }
 
     onVersionSelected(value: string) {

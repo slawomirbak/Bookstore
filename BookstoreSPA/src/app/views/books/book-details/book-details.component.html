@@ -1,66 +1,48 @@
-<section class="img-wrapper">
+<section class="img-wrapper" *ngIf="book">
     <img
-        src="https://images-na.ssl-images-amazon.com/images/I/51EUR3xyueL.jpg"
+        [src]="imgRootUrl + book.img"
     />
     <div class="rating-wrapper">
-        <i class="material-icons">
-            star
-        </i>
-        <i class="material-icons">
-            star
-        </i>
-        <i class="material-icons">
-            star
-        </i>
-        <i class="material-icons">
-            star
-        </i>
-        <i class="material-icons">
-            star
-        </i>
+        <i class="material-icons"> star </i>
+        <i class="material-icons"> star </i>
+        <i class="material-icons"> star </i>
+        <i class="material-icons"> star </i>
+        <i class="material-icons"> star </i>
         <span> 503</span>
     </div>
 </section>
-<section class="details-wrappers">
-  <div class="title-wrapper">
-    <div>
-      <h2>{{ book.title }}</h2>
-      <div class="header-image">
-        <img [src]="book.authorAvatar" />
-        <span>{{ book.author }}</span>
-      </div>
+<section class="details-wrappers" *ngIf="book">
+    <div class="title-wrapper">
+        <div>
+            <h2>{{ book.title }}</h2>
+            <div class="header-image" *ngFor="let author of book.author">
+                <img [src]="imgRootUrl + author.authorAvatar" />
+                <span>{{author.name}} {{author.surname}} </span>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="button-wrapper">
+            <button mat-flat-button color="primary">Add to basket</button>
+        </div>
     </div>
-    <div class="spacer"></div>
-    <div class="button-wrapper">
-      <button mat-flat-button color="primary">Dodaj do koszyka</button>
+    <div class="line"></div>
+    <div class="book-version">
+        <div class="book-version_category">
+            <button *ngFor="let bookFormat of book.bookFormats"
+                mat-raised-button
+                [ngClass]="{ active: selectedVersion === bookFormat.format }"
+                (click)="onVersionSelected(bookFormat.format)"
+            >
+                <span>{{bookFormat.format}}</span>
+                <span>{{bookFormat.price  | currency}}</span>
+            </button>
+        </div>
+        <div class="spacer"></div>
     </div>
-  </div>
-  <div class="line"></div>
-  <div class="book-version">
-    <div class="book-version_category">
-      <button mat-raised-button [ngClass]='{active: selectedVersion === "Paper"}' (click)="onVersionSelected('Paper')">
-        <span>Wersja papierowa</span>
-        <span>35.26 zł <sup>49.23 zł</sup></span>
-      </button>
-      <button mat-raised-button [ngClass]='{active: selectedVersion === "Electronic"}' (click)="onVersionSelected('Electronic')">
-        <span>Wersja elektroniczna</span>
-        <span>35.26 zł</span>
-      </button>
-      <button mat-raised-button [ngClass]='{active: selectedVersion === "Mp3"}' (click)="onVersionSelected('Mp3')">
-        <span>Wersja mp3</span>
-        <span>35.26 zł</span>
-      </button>
+    <div class="description-wrapper">
+        <h3>Description</h3>
+        <p>
+          {{book.shortDescription}}
+        </p>
     </div>
-    <div class="spacer"></div>
-    <div class="table-of-content">
-      <button mat-flat-button color="primary">
-        Spis treści
-      </button>
-    </div>
-  </div>
-  <div class="description-wrapper">
-    <h3>Opis</h3>
-    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</p>
-    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</p>
-  </div>
 </section>

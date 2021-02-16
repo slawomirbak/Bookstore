@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { imageRootUrl } from 'src/app/core/const/constUrl';
 import { Author } from 'src/app/core/models/Author';
 import { Book } from 'src/app/core/models/Book';
 import { AuthorService } from 'src/app/core/services/author.service';
@@ -15,22 +16,22 @@ import { UploadDialogComponent } from 'src/app/shared/UI/upload-dialog/upload-di
   styleUrls: ['./dashboard-add-book.component.scss']
 })
 export class DashboardAddBookComponent implements OnInit {
-
+  imgRootUrl: string = imageRootUrl.url;
   isLinear = false;
-  bookForm : FormGroup;
+  bookForm: FormGroup;
   bookFormat: FormGroup;
-  currentBook : Book = new Book(null);
+  currentBook: Book = new Book(null);
   savedBook$: BehaviorSubject<Book>;
   availableAuthors: Author[] = [];
   selectedAuthors: Author[] = [];
   filteredAuhtors: Observable<Author[]>;
-  lastFilter: string = '';
+  lastFilter = '';
 
   get formats(): FormArray{
     return <FormArray>this.bookForm.get('bookFormats');
   }
 
-  constructor(private _formBuilder: FormBuilder,private authorService: AuthorService, private bookService: BookService,   public dialog: MatDialog,) { }
+  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService, private bookService: BookService,   public dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.bookForm = this._formBuilder.group({
@@ -44,7 +45,6 @@ export class DashboardAddBookComponent implements OnInit {
       releaseDate: [new Date(), Validators.required],
       genre: ["", Validators.required],
       bookFormats: this._formBuilder.array([]),
-
       img: ["", Validators.required],
     });
 
@@ -63,7 +63,7 @@ export class DashboardAddBookComponent implements OnInit {
     this.savedBook$ = this.bookService.currentBook$;
   }
 
-  buildFormat(bookFormat = null) :FormGroup {
+  buildFormat(bookFormat = null): FormGroup {
     if(!bookFormat){
       return this._formBuilder.group({
         quantity: 0,
@@ -101,7 +101,6 @@ export class DashboardAddBookComponent implements OnInit {
   }
 
   bookFormSave(): void {
-    console.log(this.bookForm.value)
     if(this.currentBook.isEquil(this.bookForm.value)){
       return;
     }
@@ -125,11 +124,11 @@ export class DashboardAddBookComponent implements OnInit {
 
   optionClicked(event: Event, author: Author) {
     event.stopPropagation();
-    this.toggleSelection(author)
+    this.toggleSelection(author);
   }
 
   toggleSelection(author: Author){
-    author.selected = !author.selected
+    author.selected = !author.selected;
     if(author.selected) {
       this.selectedAuthors.push(author);
     } else {
@@ -137,7 +136,7 @@ export class DashboardAddBookComponent implements OnInit {
       this.selectedAuthors.splice(i, 1);
     }
 
-    this.bookForm.get("author").patchValue(this.selectedAuthors)
+    this.bookForm.get("author").patchValue(this.selectedAuthors);
   }
 
   displayFn(value: Author[] | string): string | undefined{

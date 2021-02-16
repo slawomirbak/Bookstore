@@ -13,5 +13,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         Task<Book> GetById(int id);
         Task AddBookAuthor(BookAuthor bookAuthor);
         void RemoveBookAuthor(BookAuthor bookAuthor);
+        Task<List<Book>> GetList();
     }
 }

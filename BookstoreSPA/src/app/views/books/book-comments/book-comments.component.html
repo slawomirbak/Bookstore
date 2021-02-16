@@ -1,46 +1,58 @@
 <h2 class="title">Komentarze</h2>
 <div class="comments-container">
-  <div class="comments-wrapper">
-    <div class="comment-box" *ngFor="let opinion of opintions">
-      <div class="comment-header">
-        <img [src]="opinion.authorAvatar" />
-        <a [routerLink]="['/author',opinion.authorId]">{{opinion.authorFullName}}</a>
-      </div>
-      <div class="comment-body">
-        <header>
-          <div class="comment-date">
-            {{opinion.created}}
-          </div>
-          <div class="comment-vote">
-            <a href="#" class="comment-likes">
-              <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon>
-            </a>
-            {{opinion.likes}}
-          </div>
-          <div class="comment-vote">
-            <a href="#" class="comment-dislikes">
-              <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_down</mat-icon>
-            </a>
-            {{opinion.dislikes}}
-          </div>
-        </header>
-        <section>
-          {{opinion.description}}
-        </section>
-      </div>
+    <div class="comments-wrapper">
+        <div class="comment-box" *ngFor="let opinion of opintions">
+            <div class="comment-header">
+                <img [src]="opinion.authorAvatar" />
+                <a [routerLink]="['/author', opinion.authorId]">{{
+                    opinion.authorFullName
+                }}</a>
+            </div>
+            <div class="comment-body">
+                <header>
+                    <div class="comment-date">
+                        {{ opinion.created }}
+                    </div>
+                    <div class="comment-vote">
+                        <a href="#" class="comment-likes">
+                            <mat-icon
+                                aria-hidden="false"
+                                aria-label="Example home icon"
+                                >thumb_up</mat-icon
+                            >
+                        </a>
+                        {{ opinion.likes }}
+                    </div>
+                    <div class="comment-vote">
+                        <a href="#" class="comment-dislikes">
+                            <mat-icon
+                                aria-hidden="false"
+                                aria-label="Example home icon"
+                                >thumb_down</mat-icon
+                            >
+                        </a>
+                        {{ opinion.dislikes }}
+                    </div>
+                </header>
+                <section>
+                    {{ opinion.description }}
+                </section>
+            </div>
+        </div>
     </div>
-  </div>
-  <div>
-    <mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="onPage($event)">
-    </mat-paginator>
-  </div>
-  <div class="add-opinion">
-    <button mat-raised-button color="primary">
-      Dodaj swoją recenzje
-      <span>(aby odblokować zalicz jeden z testów)</span>
-    </button>
-  </div>
+    <div>
+        <mat-paginator
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="onPage($event)"
+        >
+        </mat-paginator>
+    </div>
+    <div class="add-opinion">
+        <button mat-raised-button color="primary">
+            Dodaj swoją recenzje
+            <span>(aby odblokować zalicz jeden z testów)</span>
+        </button>
+    </div>
 </div>

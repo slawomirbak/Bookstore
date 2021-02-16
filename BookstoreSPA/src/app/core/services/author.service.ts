@@ -15,7 +15,7 @@ export class AuthorService extends AbstractRepositoryService {
 
   currentAuthor$ = new BehaviorSubject(null);
 
-  updateCurrentObj$ = (itemId):Observable<any> => {
+  updateCurrentObj$ = (itemId): Observable<any> => {
     console.log(itemId);
     return this.getOne(itemId).pipe(tap(data => {
       this.currentAuthor$.next(data);

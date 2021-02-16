@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Opinion } from 'src/app/core/models/Opinion';
 import { PageEvent } from '@angular/material/paginator';
+import { Book } from 'src/app/core/models/Book';
 @Component({
   selector: 'app-book-comments',
   templateUrl: './book-comments.component.html',
@@ -8,6 +9,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class BookCommentsComponent implements OnInit {
 
+  @Input() book: Book;
   constructor() { }
 
   opintions: Opinion[] = [
@@ -42,6 +44,7 @@ export class BookCommentsComponent implements OnInit {
       likes: 25
     }
   ];
+
   // total lenght of items
   length = 137;
   //current items

@@ -8,7 +8,7 @@ import { AbstractRepositoryService } from './abstract.service';
   providedIn: 'root'
 })
 export class BookService extends AbstractRepositoryService {
-  baseEndpoint = 'api/books'
+  baseEndpoint = 'api/books';
   constructor(http: HttpClient) {
     super(http);
   }

@@ -13,10 +13,23 @@ namespace BookstoreAPI.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly IUploadService _uploadService;
 
-        public BooksController(IBookService bookService)
+        public BooksController(IBookService bookService, IUploadService uploadService)
         {
             _bookService = bookService;
+            _uploadService = uploadService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList()
+        {
+            var response = await _bookService.GetList();
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+            return new BadRequestObjectResult(response);
         }
 
         [HttpPost]
@@ -34,6 +47,18 @@ namespace BookstoreAPI.Controllers
             return BadRequest();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var response = await _bookService.GetById(id);
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+            return new BadRequestObjectResult(response);
+
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit([FromBody] BookDto bookDto)
         {
@@ -47,6 +72,37 @@ namespace BookstoreAPI.Controllers
                 return new BadRequestObjectResult(response);
 
             }
+            return BadRequest();
+        }
+
+        [HttpPost("upload/{id}")]
+        public async Task<IActionResult> Upload(int id)
+        {
+            var file = Request.Form.Files[0];
+            if (!file.ContentType.Contains("image") || id == 0)
+            {
+                return BadRequest();
+            }
+
+            var uploadReponse = await _uploadService.UploadFile(file);
+
+            if (uploadReponse.IsSuccessful)
+            {
+                var fileName = uploadReponse.fileName;
+                var currentFileName = await _bookService.GetById(id);
+                if (!String.IsNullOrWhiteSpace(currentFileName.Data.Img))
+                {
+                    await _uploadService.DeleteImage(currentFileName.Data.Img);
+                }
+                var response = await _bookService.EditProperty(id, "Img", fileName);
+
+                if (response.IsSuccessful)
+                {
+                    return new OkObjectResult(response);
+                }
+                return new BadRequestObjectResult(response);
+            }
+
             return BadRequest();
         }
     }

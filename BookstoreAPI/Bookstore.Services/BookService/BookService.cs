@@ -61,9 +61,9 @@ namespace Bookstore.Services.BookService
 
             foreach (var author in authors)
             {
-                if(currentBookAuthor.Author.Any(x => x.Author.Id == author.Id)){
+                if (currentBookAuthor.Author.Any(x => x.Author.Id == author.Id)) {
                     continue;
-                } 
+                }
                 else
                 {
                     var authorDB = await _unitOfWork.authorRepository.GetById(author.Id);
@@ -74,9 +74,9 @@ namespace Bookstore.Services.BookService
 
             Book bookAfterSavedAuthors = await _unitOfWork.bookRepository.GetById(book.Id);
 
-            foreach(var bookAuthor in bookAfterSavedAuthors.Author)
+            foreach (var bookAuthor in bookAfterSavedAuthors.Author)
             {
-                if(!authors.Any(x => x.Id == bookAuthor.Author.Id))
+                if (!authors.Any(x => x.Id == bookAuthor.Author.Id))
                 {
                     _unitOfWork.bookRepository.RemoveBookAuthor(bookAuthor);
                 }
@@ -85,6 +85,33 @@ namespace Bookstore.Services.BookService
             await _unitOfWork.Save();
 
             return new ItemPlainResponse<BookDto>(_mapper.Map<BookDto>(book));
+        }
+
+        public async Task<ItemPlainResponse<BookDto>> GetById(int itemID)
+        {
+            Book book = await _unitOfWork.bookRepository.GetById(itemID);
+            return new ItemPlainResponse<BookDto>(_mapper.Map<BookDto>(book));
+        }
+
+        public async Task<ItemPlainResponse<BookDto>> EditProperty(int itemId, string propertyName, string propertyValue)
+        {
+            Book book = await _unitOfWork.bookRepository.GetById(itemId);
+            book.GetType().GetProperty(propertyName).SetValue(book, propertyValue);
+            return await Edit(book);
+        }
+
+        private async Task<ItemPlainResponse<BookDto>> Edit(Book book)
+        {
+            _unitOfWork.bookRepository.Edit(book);
+            await _unitOfWork.Save();
+            return new ItemPlainResponse<BookDto>(_mapper.Map<BookDto>(book));
+        }
+
+        public async Task<ItemPlainResponse<List<BookDto>>> GetList()
+        {
+            List<Book> books = await _unitOfWork.bookRepository.GetList();
+            List<BookDto> booksDto = _mapper.Map<List<BookDto>>(books);
+            return new ItemPlainResponse<List<BookDto>>(booksDto);
         }
     }
 }

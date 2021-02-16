@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Book } from 'src/app/core/models/Book';
+import { BookService } from 'src/app/core/services/book.service';
 
 @Component({
   selector: 'app-book-manager',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bookService: BookService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-  }
+  book$ = this.bookService.getOne(+this.route.snapshot.paramMap.get('id'));
+
+  ngOnInit() {}
 
 }

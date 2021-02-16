@@ -121,6 +121,10 @@
   <mat-step [stepControl]="bookForm">
     <form [formGroup]="bookForm">
       <ng-template matStepLabel>Book images</ng-template>
+      <mat-card *ngIf="savedBook$ | async as savedBook" class="book-card-wrapper">
+        <mat-card-title>{{savedBook.title}}</mat-card-title>
+        <img mat-card-image *ngIf="savedBook.img " [src]="imgRootUrl + savedBook.img" >
+      </mat-card>
       <div>
         <button mat-button matStepperPrevious >Back</button>
         <button mat-raised-button (click)="openUploadDialog()">Upload image</button>
