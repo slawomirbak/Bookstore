@@ -21,22 +21,13 @@ export class BasketManagerComponent implements OnInit {
     //TODO: get all items from?
     //Provision data
     this.basket = new Basket();
-    const book: Book = {
-      id: '1',
-      authorId: '1',
-      title: 'The Likely Resolutions of Oliver Clock',
-      img: 'https://images-na.ssl-images-amazon.com/images/I/41%2Bm0LRG%2B2L.jpg',
-      authorAvatar: 'https://images-na.ssl-images-amazon.com/images/I/71neT7RtVqL._US230_.jpg',
-      author: 'Jane Riley',
-      shortDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      price: 2.09,
-      discount: 10,
-      format: BookFormat.SoftCover
+    const book: any = {
+
     };
     const basketItem = new BasketItem();
     basketItem.book = book;
     basketItem.amount = 1;
-    basketItem.totalPrice = basketItem.book.price * basketItem.amount;
+    //basketItem.totalPrice = basketItem.book.price * basketItem.amount;
     this.basket.basketItems.push(basketItem);
     this.basket.totalPrice = this.basket.basketItems.reduce((acc, item) => acc += item.totalPrice, 0);
   }

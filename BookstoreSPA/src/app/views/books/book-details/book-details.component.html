@@ -22,7 +22,7 @@
         </div>
         <div class="spacer"></div>
         <div class="button-wrapper">
-            <button mat-flat-button color="primary">Add to basket</button>
+            <button mat-flat-button color="primary" (click)="addToBasket()">Add to basket</button>
         </div>
     </div>
     <div class="line"></div>
@@ -34,7 +34,7 @@
                 (click)="onVersionSelected(bookFormat.format)"
             >
                 <span>{{bookFormat.format}}</span>
-                <span>{{bookFormat.price  | currency}}</span>
+                <span>{{bookFormat.price | currency}}</span>
             </button>
         </div>
         <div class="spacer"></div>
