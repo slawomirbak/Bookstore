@@ -2,6 +2,6 @@ import { BasketItem } from './BasketItem';
 
 export class Basket {
   basketItems: BasketItem[] = [];
-  totalPrice: number;
+  totalPrice = 0;
   delivery: string;
 }

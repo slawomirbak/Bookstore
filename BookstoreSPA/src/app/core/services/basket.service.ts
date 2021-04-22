@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Basket } from '../models/Basket';
+import { BasketItem } from '../models/BasketItem';
 import { Book, BookVersion } from '../models/Book';
+import { BookFormat } from '../models/BookFormat';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +10,13 @@ import { Book, BookVersion } from '../models/Book';
 export class BasketService {
 
   constructor() { }
-  baset: Basket[] = [];
+  basket: Basket = new Basket();
 
-  addToBasket(book: Book, bookVersion: BookVersion, quantity: number): boolean {
-    // console.log(book)
-    // console.log(bookVersion)
-    // console.log(quantity)
-    //basket item not Book
-    // TODO: create new basket item
-    // Extedn basket item to cover
-
-    //this.books.push(book);
+  addToBasket(book: Book, bookFormat: BookFormat, amount: number): boolean {
+    const basketItem = new BasketItem(book, amount, bookFormat);
+    this.basket.basketItems.push(basketItem);
+    this.basket.totalPrice += basketItem.totalPrice;
+    console.log(this.basket);
     return true;
   }
 }

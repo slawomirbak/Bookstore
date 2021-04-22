@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { imageRootUrl } from 'src/app/core/const/constUrl';
 import { Book, BookVersion } from 'src/app/core/models/Book';
+import { BookFormat } from 'src/app/core/models/BookFormat';
 import { BasketService } from 'src/app/core/services/basket.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { SnackBarInfo } from 'src/app/core/services/snackbar-info.service';
@@ -13,7 +14,7 @@ import { SnackBarInfo } from 'src/app/core/services/snackbar-info.service';
 export class BookDetailsComponent implements OnInit {
 
     imgRootUrl: string = imageRootUrl.url;
-    selectedVersion: BookVersion;
+    selectedBookFormat: BookFormat;
 
     @Input() book: Book;
 
@@ -22,18 +23,17 @@ export class BookDetailsComponent implements OnInit {
     ngOnInit() {
     }
 
-    onVersionSelected(value: string) {
-        this.selectedVersion = BookVersion[value];
+    onVersionSelected(bookFormat: BookFormat) {
+        this.selectedBookFormat = bookFormat;
     }
 
     addToBasket(){
-      if (!this.selectedVersion) {
+      if (!this.selectedBookFormat) {
         this.snackBarInfo.formError('Please select cover');
         return;
       }
 
-      const addEdToBasket = this.basketService.addToBasket(this.book, this.selectedVersion, 1);
-
+      const addEdToBasket = this.basketService.addToBasket(this.book, this.selectedBookFormat, 1);
       addEdToBasket ? this.snackBarInfo.formOk(`Book ${this.book.title} was added to basket`) : this.snackBarInfo.formError('Item was not added to basket');;
     }
 }

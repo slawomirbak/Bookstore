@@ -41,10 +41,10 @@ export class Book {
         for (let property in book) {
             response = this.checkIfTheSame(this[property], book[property])
             if (!response) {
-                return response
+                return response;
             }
         }
-        return response
+        return response;
     }
 
     private checkIfTheSame = (propertyOne, propertyTwo): boolean => {
@@ -62,9 +62,9 @@ export class Book {
         }
         if (propertyOne != propertyTwo) {
             response = false
-            return response
+            return response;
         }
-        return response
+        return response;
     }
 }
 

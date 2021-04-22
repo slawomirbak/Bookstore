@@ -30,8 +30,8 @@
         <div class="book-version_category">
             <button *ngFor="let bookFormat of book.bookFormats"
                 mat-raised-button
-                [ngClass]="{ active: selectedVersion === bookFormat.format }"
-                (click)="onVersionSelected(bookFormat.format)"
+                [ngClass]="{ active: selectedBookFormat === bookFormat }"
+                (click)="onVersionSelected(bookFormat)"
             >
                 <span>{{bookFormat.format}}</span>
                 <span>{{bookFormat.price | currency}}</span>
