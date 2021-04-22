@@ -1,15 +1,17 @@
-<div class="container">
-  <img [src]="basketItem.book.img" />
+<div class="container" *ngIf=basketItem>
+  <img [src]="imgRootUrl + basketItem.book.img" />
   <div class="basketItem">
     <h4>{{basketItem.book.title}}</h4>
-    <div class="title">
-      <img [src]="basketItem.book.authorAvatar" />
-      <p>{{basketItem.book.author}}</p>
+    <div class="authors">
+      <div class="title" *ngFor="let author of basketItem.book.author">
+        <img [src]="imgRootUrl + author.authorAvatar" />
+        <p>{{author.name}} {{author.surname}}</p>
+      </div>
     </div>
   </div>
   <div class="spacer"></div>
   <div class="u-font-bold">
-    {{basketItem.book.format | bookFormat}}
+    {{basketItem.bookFormat.format}}
   </div>
   <div>
     <button mat-button>-</button>
