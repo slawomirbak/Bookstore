@@ -18,7 +18,7 @@
       </a>
       <a mat-list-item [routerLink]="['/basket']">
         <mat-icon>shopping_basket</mat-icon>
-        Basket
+        <span *ngIf="currentBasket$ | async as currentBasket" [matBadge]="currentBasket?.basketItems?.length" matBadgeOverlap="false" matBadgeColor="accent">Basket</span>
       </a>
       <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$| async) && (isAdmin$| async).role ==='admin'">
         <mat-icon>dashboard</mat-icon>
@@ -57,7 +57,9 @@
       >
         <a mat-list-item [routerLink]="['/bookshelf']">My bookshelf</a>
         <a mat-list-item [routerLink]="['/booksearch']">Search book</a>
-        <a mat-list-item [routerLink]="['/basket']">Basket</a>
+        <a mat-list-item [routerLink]="['/basket']">
+          <span *ngIf="currentBasket$ | async as currentBasket" [matBadge]="currentBasket?.basketItems?.length" matBadgeOverlap="false" matBadgeColor="accent">Basket</span>
+        </a>
         <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$ | async) && (isAdmin$| async).role ==='admin'">Dashboard</a>
         <a mat-list-item (click)="logout()" [routerLink]="['/home']">Logout</a>
       </div>

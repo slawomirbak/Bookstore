@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
 import { SnackBarInfo } from 'src/app/core/services/snackbar-info.service';
+import { BasketService } from 'src/app/core/services/basket.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -18,10 +19,15 @@ export class MainNavComponent {
       shareReplay()
     );
 
+  currentBasket$ = this.basketService.currentBasket$;
   isLoggedIn$ = this.userService.isLoggedIn$;
   isAdmin$ = this.userService.user$;
 
-  constructor(private breakpointObserver: BreakpointObserver, private userService: UserService, private snackBarInfo: SnackBarInfo) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private userService: UserService,
+    private snackBarInfo: SnackBarInfo,
+    private basketService: BasketService) {}
 
   logout() {
     this.userService.logout().subscribe(
