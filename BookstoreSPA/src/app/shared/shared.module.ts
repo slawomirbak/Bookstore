@@ -29,6 +29,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatBadgeModule} from '@angular/material/badge';
+import { TestsQuestionComponent } from './UI/tests-question/tests-question.component';
 
 
 
@@ -61,7 +62,7 @@ const angularMaterialModules = [
 ];
 
 @NgModule({
-  declarations: [MainNavComponent, UploadDialogComponent],
+  declarations: [MainNavComponent, UploadDialogComponent,TestsQuestionComponent],
   imports: [
     CommonModule,
     ...angularMaterialModules,
@@ -76,7 +77,8 @@ const angularMaterialModules = [
     UploadDialogComponent,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    TestsQuestionComponent
   ]
 })
 export class SharedModule { }

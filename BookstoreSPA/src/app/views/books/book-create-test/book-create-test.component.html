@@ -1,0 +1,11 @@
+<section *ngIf="book$ | async as book" class="outer-wrapper">
+  <h3>Create test for book: {{book.title}}</h3>
+  <section class="question-lists">
+
+  </section>
+  <section class="button-wrapper">
+    <button mat-raised-button color="primary" (click)="addQuestion()">Add question</button>
+    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="warn" [routerLink]="['/books/', book.id]">Cancel</button>
+  </section>
+</section>

@@ -1,0 +1,20 @@
+<div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
+    <h1 mat-dialog-title>Create question</h1>
+    <mat-dialog-content>
+      <form [formGroup]="qustionForm">
+        <mat-form-field>
+          <input matInput formControlName="content" />
+        </mat-form-field>
+      </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveQuestion()"
+      >Save</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+
+    </mat-dialog-actions>
+  </div>

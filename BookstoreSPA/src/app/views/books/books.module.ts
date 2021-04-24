@@ -7,10 +7,11 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { BookKnowladgeComponent } from './book-knowladge/book-knowladge.component';
 import { BookCommentsComponent } from './book-comments/book-comments.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BookCreateTestComponent } from './book-create-test/book-create-test.component';
 
 
 @NgModule({
-  declarations: [BookManagerComponent, BookDetailsComponent, BookKnowladgeComponent, BookCommentsComponent],
+  declarations: [BookManagerComponent, BookDetailsComponent, BookKnowladgeComponent, BookCommentsComponent, BookCreateTestComponent],
   imports: [
     CommonModule,
     BooksRoutingModule,

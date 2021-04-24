@@ -18,7 +18,7 @@ export class DashboardAddAuthorComponent implements OnInit {
   authorForm : FormGroup;
   currentAuthor : Author = new Author(null);
   savedAuthor$: BehaviorSubject<Author>;
-  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService,   public dialog: MatDialog,) { }
+  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.authorForm = this._formBuilder.group({

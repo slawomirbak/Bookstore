@@ -1,0 +1,22 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+
+:host {
+  max-width: 1650px;
+  margin: auto;
+  padding-top: $main-toolbar-height;
+  padding: 2rem;
+  .outer-wrapper{
+    text-align: center;
+    h3 {
+      color: $primary;
+    }
+    .button-wrapper{
+      display: flex;
+      button {
+        margin: 1rem;
+      }
+    }
+  }
+}
+

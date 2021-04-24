@@ -67,5 +67,4 @@ export class UploadDialogComponent implements OnInit {
       this.data.service.updateCurrentObj$(this.data.itemId).subscribe();
     });
   }
-
 }
