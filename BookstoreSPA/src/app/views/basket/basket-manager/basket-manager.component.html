@@ -3,6 +3,9 @@
     <app-basket-item
         *ngFor="let basketItem of basket.basketItems"
         [basketItem]="basketItem"
+        (deleteBasketItemEvent)="deleteBasketItem($event)"
+        (addBasketItemEvent)="addBasketItem($event)"
+        (substractBasketItemEvent)="substractBasketItem($event)"
     ></app-basket-item>
 </div>
 <div class="container">

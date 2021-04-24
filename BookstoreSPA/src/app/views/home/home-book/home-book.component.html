@@ -1,11 +1,11 @@
-<div class="book-wrapper">
+<div class="book-wrapper" >
   <mat-card class="book-card">
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <img [src]="imgRootUrl + book.author[0].authorAvatar"/>
       </div>
       <mat-card-title><a [routerLink]="['/books', book.id]">{{book.title}}</a></mat-card-title>
-      <mat-card-subtitle><a [routerLink]="['/author', book.authorId]">{{book.author[0].name}} {{book.author[0].surname}}</a></mat-card-subtitle>
+      <mat-card-subtitle><a [routerLink]="['/author', book.author[0].id]">{{book.author[0].name}} {{book.author[0].surname}}</a></mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="imgRootUrl + book.img" alt="Photo of a Shiba Inu">
     <mat-card-content>

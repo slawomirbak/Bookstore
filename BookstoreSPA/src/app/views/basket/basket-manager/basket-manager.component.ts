@@ -20,4 +20,16 @@ export class BasketManagerComponent implements OnInit {
   ngOnInit(): void {
     this.currentBasket$ = this.basketService.currentBasket$;
   }
+
+  deleteBasketItem(basketItem: BasketItem){
+    this.basketService.deleteBasketItem(basketItem);
+  }
+
+  addBasketItem(basketItem: BasketItem){
+    this.basketService.addBasketItem(basketItem);
+  }
+
+  substractBasketItem(basketItem: BasketItem){
+    this.basketService.substractBasketItem(basketItem);
+  }
 }

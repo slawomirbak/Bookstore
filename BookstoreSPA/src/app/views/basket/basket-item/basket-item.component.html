@@ -14,16 +14,16 @@
     {{basketItem.bookFormat.format}}
   </div>
   <div>
-    <button mat-button>-</button>
+    <button mat-button (click)="substractBasketItem(basketItem)">-</button>
     {{basketItem.amount}}
-    <button mat-button>+</button>
+    <button mat-button (click)="addBasketItem(basketItem)">+</button>
   </div>
   <div class="u-font-bold">
     {{basketItem.totalPrice |currency}}
   </div>
   <div class="u-font-bold">
     <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-      <mat-icon>delete_forever</mat-icon>
+      <mat-icon (click)="deleteBasketItem(basketItem)">delete_forever</mat-icon>
     </button>
   </div>
 </div>
