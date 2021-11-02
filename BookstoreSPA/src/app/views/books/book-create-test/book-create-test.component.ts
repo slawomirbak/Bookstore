@@ -12,23 +12,41 @@ import { TestsQuestionComponent } from 'src/app/shared/UI/tests-question/tests-q
 })
 export class BookCreateTestComponent implements OnInit {
   book$ = this.bookService.getOne(+this.route.snapshot.paramMap.get('id'));
-  public questions: Question[] = [];
+  questions: Question[] = [];
 
   constructor(private bookService: BookService, private route: ActivatedRoute, private dialog: MatDialog) { }
-  ngOnInit() {}
+  ngOnInit() {
+    this.questions.push({
+      answerA: "Answer A",
+      answerB: "Answer B",
+      answerC: "Answer C",
+      answerD: "Answer D",
+      content: "This is a really good question!",
+      goodAnswer: "B",
+    })
+  }
 
   addQuestion = () => {
     const dialogRef =this.dialog.open(TestsQuestionComponent, {
       width: '50%',
       height: '50%',
-      data: {
-      }
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe((question: Question) => {
-      if(!!question){
+      if (!!question){
         this.questions.push(question);
       }
     });
+  }
+
+  deleteQuestion = (index: number) => {
+    this.questions.splice(index, 1);
+  }
+
+  saveQuestions = () => {
+    this.bookService.post('tests', this.questions.values).subscribe(resposne =>{
+
+    })
   }
 }

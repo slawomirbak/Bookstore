@@ -105,7 +105,6 @@ namespace BookstoreAPI.Controllers
                 return new BadRequestObjectResult(response);
             }
 
-
             return BadRequest();
         }
     }

@@ -11,6 +11,17 @@
     h3 {
       color: $primary;
     }
+    .question-lists{
+      text-align: left;
+      padding: 1rem;
+      .question-item {
+        border-bottom: 1px solid $primary;
+        margin-bottom: 1rem;
+        div{
+          padding-bottom: 1rem;
+        }
+      }
+    }
     .button-wrapper{
       display: flex;
       button {

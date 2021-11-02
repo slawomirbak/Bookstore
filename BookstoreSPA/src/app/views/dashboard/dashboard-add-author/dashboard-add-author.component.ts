@@ -31,12 +31,12 @@ export class DashboardAddAuthorComponent implements OnInit {
 
   authorFormSave(): void {
     console.log(this.currentAuthor.isEquil(this.authorForm.value))
-    if(this.currentAuthor.isEquil(this.authorForm.value)){
+    if (this.currentAuthor.isEquil(this.authorForm.value)){
       return;
     }
     this.savedAuthor$.next(this.authorForm.value);
 
-    if(this.currentAuthor.id === 0){
+    if (this.currentAuthor.id === 0){
       this.authorService.create(this.authorForm.value).subscribe((author) => this.currentAuthor = new Author(author));
     } else {
       this.authorService.put(this.currentAuthor.id.toString(), this.authorForm.value).subscribe((author) => this.currentAuthor = new Author(author))
@@ -44,14 +44,13 @@ export class DashboardAddAuthorComponent implements OnInit {
   }
 
   resetForm() {
-    console.log("reset form");
     this.currentAuthor = new Author(null);
     this.savedAuthor$.next(null);
     this.ngOnInit();
   }
 
   openUploadDialog() {
-    if(this.currentAuthor.id === 0){
+    if (this.currentAuthor.id === 0){
       return;
     }
     const dialogRef = this.dialog.open(UploadDialogComponent, {

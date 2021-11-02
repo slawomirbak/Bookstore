@@ -1,0 +1,19 @@
+:host{
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  .container {
+    height: 100%;
+    .form-wrapper{
+      display: flex;
+      flex-direction: column;
+      mat-radio-button{
+        margin-right: 1rem;
+      }
+    }
+    .actions{
+      justify-content: flex-end;
+    }
+  }
+}

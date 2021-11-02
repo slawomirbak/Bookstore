@@ -1,10 +1,34 @@
 <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
     <h1 mat-dialog-title>Create question</h1>
     <mat-dialog-content>
-      <form [formGroup]="qustionForm">
+      <form [formGroup]="qustionForm" class="form-wrapper">
         <mat-form-field>
-          <input matInput formControlName="content" />
+          <mat-label>Question</mat-label>
+          <textarea matInput formControlName="content" maxlength="500"></textarea>
         </mat-form-field>
+        <mat-form-field>
+          <mat-label>Answer A</mat-label>
+          <textarea matInput formControlName="answerA" maxlength="500"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Answer B</mat-label>
+          <textarea matInput formControlName="answerB" maxlength="500"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Answer C</mat-label>
+          <textarea matInput formControlName="answerC" maxlength="500"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Answer D</mat-label>
+          <textarea matInput formControlName="answerD" maxlength="500"></textarea>
+        </mat-form-field>
+        <mat-label>Good answer</mat-label>
+        <mat-radio-group formControlName="goodAnswer" matInput>
+          <mat-radio-button value="A">A</mat-radio-button>
+          <mat-radio-button value="B">B</mat-radio-button>
+          <mat-radio-button value="C">C</mat-radio-button>
+          <mat-radio-button value="D">D</mat-radio-button>
+          </mat-radio-group>
       </form>
 
     </mat-dialog-content>

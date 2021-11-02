@@ -6,7 +6,7 @@ import { Question } from 'src/app/core/models/Question';
 @Component({
   selector: 'app-tests-question',
   templateUrl: './tests-question.component.html',
-  styleUrls: ['./tests-question.component.sass']
+  styleUrls: ['./tests-question.component.scss']
 })
 export class TestsQuestionComponent implements OnInit {
 
@@ -18,7 +18,12 @@ export class TestsQuestionComponent implements OnInit {
 
   ngOnInit() {
     this.qustionForm = this.formBuilder.group({
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      goodAnswer: ['', Validators.required],
+      answerA: ['', Validators.required],
+      answerB: ['', Validators.required],
+      answerC: ['', Validators.required],
+      answerD: ['', Validators.required],
     });
   }
 

@@ -30,6 +30,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatBadgeModule} from '@angular/material/badge';
 import { TestsQuestionComponent } from './UI/tests-question/tests-question.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -59,6 +60,7 @@ const angularMaterialModules = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatBadgeModule,
+    MatRadioModule
 ];
 
 @NgModule({

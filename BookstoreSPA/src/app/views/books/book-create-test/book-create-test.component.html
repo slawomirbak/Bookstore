@@ -1,11 +1,18 @@
 <section *ngIf="book$ | async as book" class="outer-wrapper">
   <h3>Create test for book: {{book.title}}</h3>
   <section class="question-lists">
-
+    <div *ngFor="let question of questions; index as i" class="question-item">
+      <div>{{i+1}}. {{question.content}} <button mat-button color="warn" (click)="deleteQuestion(i)"><mat-icon>delete_forever</mat-icon></button></div>
+      <div>A: {{question.answerA}}</div>
+      <div>B: {{question.answerB}}</div>
+      <div>C: {{question.answerC}}</div>
+      <div>D: {{question.answerD}}</div>
+      <div>Good Answer: {{question.goodAnswer}}</div>
+    </div>
   </section>
   <section class="button-wrapper">
     <button mat-raised-button color="primary" (click)="addQuestion()">Add question</button>
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-raised-button color="primary" (click)="saveQuestions()">Save</button>
     <button mat-raised-button color="warn" [routerLink]="['/books/', book.id]">Cancel</button>
   </section>
 </section>

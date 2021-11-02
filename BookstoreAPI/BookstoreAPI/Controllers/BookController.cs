@@ -105,5 +105,14 @@ namespace BookstoreAPI.Controllers
 
             return BadRequest();
         }
+
+        [HttpPost("tests")]
+        public async Task<IActionResult> CreateTest()
+        {
+            //TODO: CreateTestDTO, AddTest, Think how to manage users and what this test should contain
+            //
+
+            return Ok();
+        }
     }
 }
