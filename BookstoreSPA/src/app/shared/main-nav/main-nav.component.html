@@ -55,7 +55,7 @@
         class="top-menu-items"
         [ngClass]="{'is-not-display': (isHandset$| async)}"
       >
-        <a mat-list-item [routerLink]="['/bookshelf']">My bookshelf</a>
+        <!-- <a mat-list-item [routerLink]="['/bookshelf']">My bookshelf</a> -->
         <a mat-list-item [routerLink]="['/booksearch']">Search book</a>
         <a mat-list-item [routerLink]="['/basket']">
           <span *ngIf="currentBasket$ | async as currentBasket" [matBadge]="currentBasket?.basketItems?.length" matBadgeOverlap="false" matBadgeColor="accent">Basket</span>

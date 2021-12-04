@@ -59,7 +59,7 @@ export class BookCommentsComponent implements OnInit {
   }
 
   onPage(event: PageEvent) {
-    console.log('changed page')
+    console.log('changed page');
   }
 
   ngOnInit() {

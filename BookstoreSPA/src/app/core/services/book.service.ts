@@ -16,7 +16,6 @@ export class BookService extends AbstractRepositoryService {
   currentBook$ = new BehaviorSubject(null);
 
   updateCurrentObj$ = (itemId) => {
-    console.log(itemId);
     return this.getOne(itemId).pipe(tap(data => {
       this.currentBook$.next(data);
     }));
