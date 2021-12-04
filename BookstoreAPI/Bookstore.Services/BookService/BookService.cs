@@ -113,5 +113,12 @@ namespace Bookstore.Services.BookService
             List<BookDto> booksDto = _mapper.Map<List<BookDto>>(books);
             return new ItemPlainResponse<List<BookDto>>(booksDto);
         }
+
+        public async Task<ItemPlainResponse<List<BookDto>>> Search(string query)
+        {
+            List<Book> books = await _unitOfWork.bookRepository.Search(query);
+            List<BookDto> booksDto = _mapper.Map<List<BookDto>>(books);
+            return new ItemPlainResponse<List<BookDto>>(booksDto);
+        }
     }
 }

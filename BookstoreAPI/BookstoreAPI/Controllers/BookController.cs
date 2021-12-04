@@ -84,11 +84,11 @@ namespace BookstoreAPI.Controllers
                 return BadRequest();
             }
 
-            var uploadReponse = await _uploadService.UploadFile(file);
+            var uploadPlainResponse = await _uploadService.UploadFile(file);
 
-            if (uploadReponse.IsSuccessful)
+            if (uploadPlainResponse.IsSuccessful)
             {
-                var fileName = uploadReponse.fileName;
+                var fileName = uploadPlainResponse.fileName;
                 var currentFileName = await _bookService.GetById(id);
                 if (!String.IsNullOrWhiteSpace(currentFileName.Data.Img))
                 {
@@ -106,13 +106,15 @@ namespace BookstoreAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("tests")]
-        public async Task<IActionResult> CreateTest()
+        [HttpGet("search/{query}")]
+        public async Task<IActionResult> Search(string query)
         {
-            //TODO: CreateTestDTO, AddTest, Think how to manage users and what this test should contain
-            //
-
-            return Ok();
+            var response = await _bookService.Search(query);
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+            return new BadRequestObjectResult(response);
         }
     }
 }

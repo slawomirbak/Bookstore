@@ -14,5 +14,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         Task AddBookAuthor(BookAuthor bookAuthor);
         void RemoveBookAuthor(BookAuthor bookAuthor);
         Task<List<Book>> GetList();
+        Task<List<Book>> Search(string query);
     }
 }
