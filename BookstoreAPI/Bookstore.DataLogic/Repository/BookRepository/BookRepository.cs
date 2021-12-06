@@ -44,15 +44,14 @@ namespace Bookstore.DataLogic.Repository.BookRepository
             return await _context.Books.Include(book => book.Author).ThenInclude(a=> a.Author).ToListAsync();
         }
 
-        public async Task<List<Book>> Search(string query)
+        public IQueryable<Book> Search(string query)
         {
-            return await _context.Books
+            return _context.Books
                 .Include(book => book.Author)
                 .ThenInclude(a => a.Author)
                 .Where(book => book.Title.ToLower().Contains(query.ToLower()) ||
                                book.Author.Any(author => author.Author.Name.ToLower().Contains(query.ToLower())) ||
-                               book.Author.Any(author => author.Author.Surname.ToLower().Contains(query.ToLower())))
-                .ToListAsync();
+                               book.Author.Any(author => author.Author.Surname.ToLower().Contains(query.ToLower())));
         }
     }
 }

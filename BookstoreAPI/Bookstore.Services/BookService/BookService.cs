@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Services.BookService
 {
@@ -114,11 +115,20 @@ namespace Bookstore.Services.BookService
             return new ItemPlainResponse<List<BookDto>>(booksDto);
         }
 
-        public async Task<ItemPlainResponse<List<BookDto>>> Search(string query)
+        public async Task<ItemsPagingResponse<List<BookDto>>> Search(string query, int page, int limit)
         {
-            List<Book> books = await _unitOfWork.bookRepository.Search(query);
-            List<BookDto> booksDto = _mapper.Map<List<BookDto>>(books);
-            return new ItemPlainResponse<List<BookDto>>(booksDto);
+            if (string.IsNullOrWhiteSpace(query) || query.Length < 3)
+            {
+                return new ItemsPagingResponse<List<BookDto>>(new List<BookDto>(), 0);
+            }
+
+            var offset = page * limit;
+            var books =  await _unitOfWork.bookRepository.Search(query).ToListAsync();
+            var currentBooksPage = books.Skip(offset).Take(limit);
+
+
+            List<BookDto> booksDto = _mapper.Map<List<BookDto>>(currentBooksPage);
+            return new ItemsPagingResponse<List<BookDto>>(booksDto, books.Count);
         }
     }
 }

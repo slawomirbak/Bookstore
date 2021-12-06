@@ -106,10 +106,10 @@ namespace BookstoreAPI.Controllers
             return BadRequest();
         }
 
-        [HttpGet("search/{query}")]
-        public async Task<IActionResult> Search(string query)
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery(Name="query")] string query, [FromQuery(Name = "page")] int page, [FromQuery(Name = "limit")] int limit)
         {
-            var response = await _bookService.Search(query);
+            var response = await _bookService.Search(query, page, limit);
             if (response.IsSuccessful)
             {
                 return new OkObjectResult(response);

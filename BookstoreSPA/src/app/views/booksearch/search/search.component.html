@@ -2,12 +2,12 @@
   <h4> Search book</h4>
   <mat-form-field appearance="outline">
     <mat-label>Book name or Author</mat-label>
-    <input matInput placeholder="Book name or Author" [ngModel]="search$ | async" (ngModelChange)="setSearch($event)">
+    <input matInput placeholder="Book name or Author (min 3 characters)" [ngModel]="search$ | async" (ngModelChange)="setSearch($event)">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
-<div class="search-result">
-  <div [ngModel]="serarchResult$ | async"></div>
+<div class="search-result" *ngIf="serarchResult$ | async as serarchResult">
+  <div *ngFor="let result of serarchResult">{{result.title}}</div>
 </div>
 
 

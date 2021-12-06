@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { imageRootUrl } from 'src/app/core/const/constUrl';
@@ -31,7 +32,8 @@ export class DashboardAddBookComponent implements OnInit {
     return <FormArray>this.bookForm.get('bookFormats');
   }
 
-  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService, private bookService: BookService,   public dialog: MatDialog,) { }
+  constructor(private _formBuilder: FormBuilder, private authorService: AuthorService,
+    private bookService: BookService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.bookForm = this._formBuilder.group({
@@ -90,11 +92,11 @@ export class DashboardAddBookComponent implements OnInit {
 
   filter(filter: string): Author[] {
     this.lastFilter = filter;
-    if(filter){
+    if (filter){
       return this.availableAuthors.filter(option => {
-        return option.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase())>= 0
-        || option.surname.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase())>= 0
-      })
+        return option.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) >= 0
+        || option.surname.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) >= 0;
+      });
     } else {
       return this.availableAuthors.slice();
     }
@@ -111,7 +113,6 @@ export class DashboardAddBookComponent implements OnInit {
       this.bookService.create(this.bookForm.value).subscribe((book) => this.currentBook = new Book(book));
     } else {
       this.currentBook.copyValue(this.bookForm.value);
-      console.log(this.currentBook)
       this.bookService.put(this.currentBook.id.toString(), this.currentBook).subscribe((book) => this.currentBook = new Book(book))
     }
   }
@@ -125,6 +126,10 @@ export class DashboardAddBookComponent implements OnInit {
   optionClicked(event: Event, author: Author) {
     event.stopPropagation();
     this.toggleSelection(author);
+  }
+
+  finished = () => {
+    this.router.navigate(['/dashboard']);
   }
 
   toggleSelection(author: Author){

@@ -126,9 +126,10 @@
         <img mat-card-image *ngIf="savedBook.img " [src]="imgRootUrl + savedBook.img" >
       </mat-card>
       <div>
-        <button mat-button matStepperPrevious >Back</button>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button (click)="openUploadDialog()">Upload image</button>
         <button mat-button (click)="stepper.reset()" (click)="resetForm()">Reset</button>
+        <button mat-button (click)="finished()">Finish</button>
       </div>
     </form>
   </mat-step>

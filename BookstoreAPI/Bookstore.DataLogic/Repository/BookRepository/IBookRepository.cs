@@ -1,6 +1,7 @@
 ﻿using Bookstore.DataLogic.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         Task AddBookAuthor(BookAuthor bookAuthor);
         void RemoveBookAuthor(BookAuthor bookAuthor);
         Task<List<Book>> GetList();
-        Task<List<Book>> Search(string query);
+        IQueryable<Book> Search(string query);
     }
 }

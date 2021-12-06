@@ -12,6 +12,6 @@ namespace Bookstore.Abstract.IServices
         Task<ItemPlainResponse<BookDto>> GetById(int id);
         Task<ItemPlainResponse<BookDto>> EditProperty(int itemId, string propertyName, string propertyValue);
         Task<ItemPlainResponse<List<BookDto>>> GetList();
-        Task<ItemPlainResponse<List<BookDto>>> Search(string search);
+        Task<ItemsPagingResponse<List<BookDto>>> Search(string search, int page, int limit);
     }
 }
