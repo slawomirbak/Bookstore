@@ -18,9 +18,14 @@ export class BookDetailsComponent implements OnInit {
 
     @Input() book: Book;
 
-    constructor(private bookService: BookService, private basketService: BasketService, private snackBarInfo: SnackBarInfo) {}
+    constructor(
+      private bookService: BookService,
+      private basketService: BasketService,
+      private snackBarInfo: SnackBarInfo,
+      ) {}
 
     ngOnInit() {
+      console.log(this.book);
     }
 
     onVersionSelected(bookFormat: BookFormat) {
@@ -35,5 +40,23 @@ export class BookDetailsComponent implements OnInit {
 
       const addEdToBasket = this.basketService.addToBasket(this.book, this.selectedBookFormat, 1);
       addEdToBasket ? this.snackBarInfo.formOk(`Book ${this.book.title} was added to basket`) : this.snackBarInfo.formError('Item was not added to basket');;
+    }
+
+    rateBook = (rateNumber) => {
+      console.log(rateNumber);
+
+      this.bookService.rateBook$(this.book.id, rateNumber).subscribe(
+        ok => {
+            this.snackBarInfo.formOk('User logged out sucessfully.');
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.snackBarInfo.formError('To vote you need to log in');
+          } else if (error.status === 400) {
+            this.snackBarInfo.formError('To vote you need buy book or complete one of the test');
+          } else {
+            this.snackBarInfo.formError('Something went wrong');
+          }
+      });
     }
 }

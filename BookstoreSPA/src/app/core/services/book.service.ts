@@ -20,4 +20,8 @@ export class BookService extends AbstractRepositoryService {
       this.currentBook$.next(data);
     }));
   }
+
+  rateBook$ = (itemId, rate) =>{
+    return this.getSimle(`rate/${itemId}`, {rate});
+  }
 }

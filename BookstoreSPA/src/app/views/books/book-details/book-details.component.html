@@ -2,14 +2,24 @@
     <img
         [src]="imgRootUrl + book.img"
     />
-    <!-- <div class="rating-wrapper">
-        <i class="material-icons"> star </i>
-        <i class="material-icons"> star </i>
-        <i class="material-icons"> star </i>
-        <i class="material-icons"> star </i>
-        <i class="material-icons"> star </i>
-        <span> 503</span>
-    </div> -->
+    <div class="rating-wrapper">
+      <div class="rate-star" (click)="rateBook(1)">
+        <i class="material-icons"> {{book.averageRating > 0.8 ? "star": book.averageRating > 0.4 ? "star_half": "star_border"}} </i>
+      </div>
+      <div class="rate-star" (click)="rateBook(2)">
+        <i class="material-icons"> {{book.averageRating > 1.8 ? "star": book.averageRating > 1.4 ? "star_half": "star_border"}} </i>
+      </div>
+      <div class="rate-star" (click)="rateBook(3)">
+        <i class="material-icons"> {{book.averageRating > 2.8 ? "star": book.averageRating > 2.4 ? "star_half": "star_border"}} </i>
+      </div>
+      <div class="rate-star" (click)="rateBook(4)">
+        <i class="material-icons"> {{book.averageRating > 3.8 ? "star": book.averageRating > 3.4 ? "star_half": "star_border"}} </i>
+      </div>
+      <div class="rate-star" (click)="rateBook(5)">
+        <i class="material-icons"> {{book.averageRating > 4.8 ? "star": book.averageRating > 4.4 ? "star_half": "star_border"}} </i>
+      </div>
+        <span>{{book.averageRating}} - ({{book.bookRatings.length}})</span>
+    </div>
 </section>
 <section class="details-wrappers" *ngIf="book">
     <div class="title-wrapper">

@@ -49,6 +49,25 @@ export class AbstractRepositoryService {
       );
   }
 
+  getSimle(path: string, filters = {}) {
+    return this.http
+      .get<IBackendPlainResponse>(
+        `${environment.apiBasePath}/${this.baseEndpoint}/${path}` + AbstractRepositoryService.serializeFilters(filters)
+      )
+      .pipe(
+        map((res: IBackendPlainResponse) => {
+          if (!res.isSuccessful) {
+            throw new Error(res.errorMessage);
+          }
+          if (res.data) {
+            return res.data;
+          }
+        }),
+        catchError(this.errorHandler)
+      );
+  }
+
+
   getList(filters = {}) {
     return this.http
       .get<IBackendPlainResponse>(
@@ -165,14 +184,6 @@ export class AbstractRepositoryService {
 
   private errorHandler(error: any) {
     console.error(error);
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else if (typeof error.error === 'string' ) {
-      errorMessage = error.error;
-    } else {
-      errorMessage = error.statusText;
-    }
-    return throwError(errorMessage);
+    return throwError(error);
   }
 }

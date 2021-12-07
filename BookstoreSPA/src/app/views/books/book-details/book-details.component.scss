@@ -17,6 +17,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      .rate-star {
+        cursor: pointer;
+      }
       i {
         font-size: 2rem;
         padding-right: 1rem;
