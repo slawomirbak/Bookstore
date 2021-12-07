@@ -1,3 +1,5 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
 .search {
   padding-top: 2rem;
   display: flex;
@@ -13,5 +15,19 @@
     .mat-form-field-wrapper {
       padding-bottom: 0;
     }
+  }
+}
+.wrapper{
+  max-width: 100%;
+  text-align: center;
+  padding: 10px;
+  h1 {
+    margin: 4rem auto;
+    color: $primary;
+  }
+  .wrapper-books {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around
   }
 }

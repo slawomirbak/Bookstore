@@ -1,0 +1,43 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+.book-wrapper {
+  margin-bottom: 1rem;
+  a {
+    color: $dark;
+    &:hover{
+      color: $primary;
+    }
+  }
+  .book-card {
+    max-width: 300px;
+    text-align: left;
+    mat-card-subtitle {
+      a {
+        color: $gray;
+      }
+    }
+    .book-card-description {
+      max-height: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .header-image {
+    background-size: cover;
+    img{
+      max-width: 45px;
+      border-radius: 50%;
+    }
+  }
+  mat-card-actions {
+    button {
+      text-align: right;
+    }
+    mat-icon {
+      color: $green;
+      font-size: 1.75rem;
+      vertical-align: middle;
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="book-wrapper" >
+  <mat-card class="book-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image">
+        <img [src]="imgRootUrl + book.author[0].authorAvatar"/>
+      </div>
+      <mat-card-title><a [routerLink]="['/books', book.id]">{{book.title}}</a></mat-card-title>
+      <mat-card-subtitle><a [routerLink]="['/author', book.author[0].id]">{{book.author[0].name}} {{book.author[0].surname}}</a></mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="imgRootUrl + book.img" alt="Photo">
+    <mat-card-content class="book-card-description">
+      <p>
+        {{book.shortDescription}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button [routerLink]="['/books', book.id]">View details</button>
+      <!-- <mat-icon aria-hidden="false" aria-label="Test completed">check_circle_outline</mat-icon> -->
+    </mat-card-actions>
+  </mat-card>
+</div>
+
