@@ -16,6 +16,11 @@
         color: $gray;
       }
     }
+    .book-card-description {
+      max-height: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .header-image {
     background-size: cover;

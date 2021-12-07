@@ -7,8 +7,8 @@
       <mat-card-title><a [routerLink]="['/books', book.id]">{{book.title}}</a></mat-card-title>
       <mat-card-subtitle><a [routerLink]="['/author', book.author[0].id]">{{book.author[0].name}} {{book.author[0].surname}}</a></mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="imgRootUrl + book.img" alt="Photo of a Shiba Inu">
-    <mat-card-content>
+    <img mat-card-image [src]="imgRootUrl + book.img" alt="Photo">
+    <mat-card-content class="book-card-description">
       <p>
         {{book.shortDescription}}
       </p>
