@@ -130,5 +130,10 @@ namespace Bookstore.Services.BookService
             List<BookDto> booksDto = _mapper.Map<List<BookDto>>(currentBooksPage);
             return new ItemsPagingResponse<List<BookDto>>(booksDto, books.Count);
         }
+
+        public async Task<ItemPlainResponse<List<BookDto>>> RateBook(int id, int rate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

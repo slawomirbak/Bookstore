@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Bookstore.Abstract.Contracts;
 using Bookstore.Abstract.IServices;
+using Bookstore.Abstract.Responses;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookstoreAPI.Controllers
@@ -14,11 +18,14 @@ namespace BookstoreAPI.Controllers
     {
         private readonly IBookService _bookService;
         private readonly IUploadService _uploadService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BooksController(IBookService bookService, IUploadService uploadService)
+        public BooksController(IBookService bookService, IUploadService uploadService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _bookService = bookService;
             _uploadService = uploadService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -29,6 +36,7 @@ namespace BookstoreAPI.Controllers
             {
                 return new OkObjectResult(response);
             }
+
             return new BadRequestObjectResult(response);
         }
 
@@ -42,8 +50,10 @@ namespace BookstoreAPI.Controllers
                 {
                     return new OkObjectResult(response);
                 }
+
                 return new BadRequestObjectResult(response);
             }
+
             return BadRequest();
         }
 
@@ -55,6 +65,7 @@ namespace BookstoreAPI.Controllers
             {
                 return new OkObjectResult(response);
             }
+
             return new BadRequestObjectResult(response);
 
         }
@@ -69,9 +80,11 @@ namespace BookstoreAPI.Controllers
                 {
                     return new OkObjectResult(response);
                 }
+
                 return new BadRequestObjectResult(response);
 
             }
+
             return BadRequest();
         }
 
@@ -94,12 +107,14 @@ namespace BookstoreAPI.Controllers
                 {
                     await _uploadService.DeleteImage(currentFileName.Data.Img);
                 }
+
                 var response = await _bookService.EditProperty(id, "Img", fileName);
 
                 if (response.IsSuccessful)
                 {
                     return new OkObjectResult(response);
                 }
+
                 return new BadRequestObjectResult(response);
             }
 
@@ -107,14 +122,54 @@ namespace BookstoreAPI.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Search([FromQuery(Name="query")] string query, [FromQuery(Name = "page")] int page, [FromQuery(Name = "limit")] int limit)
+        public async Task<IActionResult> Search([FromQuery(Name = "query")] string query,
+            [FromQuery(Name = "page")] int page, [FromQuery(Name = "limit")] int limit)
         {
             var response = await _bookService.Search(query, page, limit);
             if (response.IsSuccessful)
             {
                 return new OkObjectResult(response);
             }
+
             return new BadRequestObjectResult(response);
+        }
+
+        [HttpGet("rate/{id}")]
+        [Authorize]
+        public async Task<IActionResult> Rate(int id, [FromQuery(Name = "rate")] int rate)
+        {
+            if (string.IsNullOrWhiteSpace(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)
+                .Value))
+            {
+                var userNotFound = new BasePlainResponse()
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = "User not found"
+                };
+
+                return new BadRequestObjectResult(userNotFound);
+            }
+
+            var response = await _bookService.RateBook(id, rate);
+            if (response.IsSuccessful)
+            {
+                return new OkObjectResult(response);
+            }
+
+            return new BadRequestObjectResult(response);
+        }
+
+        [HttpPost("comment")]
+        public async Task<IActionResult> Comment()
+        {
+            // var response = await _bookService.Search(query, page, limit);
+            // if (response.IsSuccessful)
+            // {
+            //     return new OkObjectResult(response);
+            // }
+            // return new BadRequestObjectResult(response);
+
+            return null;
         }
     }
 }

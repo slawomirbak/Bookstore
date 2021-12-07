@@ -35,7 +35,6 @@ export class MainNavComponent {
         this.snackBarInfo.formOk('User logged out sucessfully.');
       },
       error => {
-        console.log(error)
         this.snackBarInfo.formError(error.statusText);
       }
     );

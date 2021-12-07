@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Bookstore.Abstract.Contracts;
 using Bookstore.Abstract.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -18,32 +15,30 @@ namespace BookstoreAPI.Controllers
         {
             _userService = userService;
         }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
             if (ModelState.IsValid)
             {
                 var errorResponse = await _userService.Add(userDto);
-                if (!errorResponse.IsSuccessful)
-                {
-                    return new BadRequestObjectResult(errorResponse.ErrorMessage);
-                }
+                if (!errorResponse.IsSuccessful) return new BadRequestObjectResult(errorResponse.ErrorMessage);
                 return new OkObjectResult(errorResponse);
             }
+
             return BadRequest();
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] CredentialDto credentials)
         {
             if (ModelState.IsValid)
             {
                 var response = await _userService.Login(credentials);
-                if (!response.IsSuccessful)
-                {
-                    return new BadRequestObjectResult(response.ErrorMessage);
-                }
+                if (!response.IsSuccessful) return new BadRequestObjectResult(response.ErrorMessage);
                 return new OkObjectResult(response);
             }
+
             return BadRequest();
         }
 
@@ -60,13 +55,10 @@ namespace BookstoreAPI.Controllers
             if (!string.IsNullOrEmpty(tokens.refreshToken))
             {
                 var response = await _userService.GetTokens(tokens.refreshToken);
-                if (!response.IsSuccessful)
-                {
-                    return new BadRequestObjectResult(response.ErrorMessage);
-                }
+                if (!response.IsSuccessful) return new BadRequestObjectResult(response.ErrorMessage);
                 return new OkObjectResult(response);
-
             }
+
             return BadRequest();
         }
 
@@ -76,13 +68,10 @@ namespace BookstoreAPI.Controllers
             if (!string.IsNullOrEmpty(tokens.refreshToken))
             {
                 var response = await _userService.Logout(tokens.refreshToken);
-                if (!response.IsSuccessful)
-                {
-                    return new BadRequestObjectResult(response.ErrorMessage);
-                }
+                if (!response.IsSuccessful) return new BadRequestObjectResult(response.ErrorMessage);
                 return new OkObjectResult(response);
-
             }
+
             return BadRequest();
         }
     }

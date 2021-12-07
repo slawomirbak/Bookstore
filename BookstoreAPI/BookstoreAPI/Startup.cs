@@ -30,7 +30,7 @@ namespace BookstoreAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "Bookstore" });
             });
 
-
+            services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddCors();
         }
