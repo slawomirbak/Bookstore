@@ -59,14 +59,14 @@ export class DashboardAddBookComponent implements OnInit {
     this.filteredAuhtors = this.bookForm.get('author').valueChanges.pipe(
       startWith<string | Author[]>(''),
       map(value => typeof value === 'string' ? value : this.lastFilter),
-      map(filter =>this.filter(filter))
-    )
+      map(filter => this.filter(filter))
+    );
 
     this.savedBook$ = this.bookService.currentBook$;
   }
 
   buildFormat(bookFormat = null): FormGroup {
-    if(!bookFormat){
+    if (!bookFormat){
       return this._formBuilder.group({
         quantity: 0,
         format:'SoftCover',
@@ -103,13 +103,13 @@ export class DashboardAddBookComponent implements OnInit {
   }
 
   bookFormSave(): void {
-    if(this.currentBook.isEquil(this.bookForm.value)){
+    if (this.currentBook.isEquil(this.bookForm.value)){
       return;
     }
 
     this.savedBook$.next(this.bookForm.value);
 
-    if(this.currentBook.id === 0){
+    if (this.currentBook.id === 0){
       this.bookService.create(this.bookForm.value).subscribe((book) => this.currentBook = new Book(book));
     } else {
       this.currentBook.copyValue(this.bookForm.value);

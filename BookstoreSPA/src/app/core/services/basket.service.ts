@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { find } from 'rxjs/operators';
@@ -5,13 +6,17 @@ import { Basket } from '../models/Basket';
 import { BasketItem } from '../models/BasketItem';
 import { Book, BookVersion } from '../models/Book';
 import { BookFormat } from '../models/BookFormat';
+import { AbstractRepositoryService } from './abstract.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasketService {
+export class BasketService extends AbstractRepositoryService {
+  baseEndpoint = 'api/books';
 
-  constructor() { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
   currentBasket$ = new BehaviorSubject(new Basket());
 
   addToBasket = (book: Book, bookFormat: BookFormat, amount: number): boolean => {
@@ -70,5 +75,13 @@ export class BasketService {
 
     basket.totalPrice = basket.basketItems.reduce((acc, item) => acc += item.totalPrice, 0);
     this.currentBasket$.next(basket);
+  }
+
+  payment = (basket: Basket) => {
+    return this.post('paymentOrder', basket);
+  }
+
+  clearBasket = () => {
+    this.currentBasket$ = new BehaviorSubject(new Basket());
   }
 }

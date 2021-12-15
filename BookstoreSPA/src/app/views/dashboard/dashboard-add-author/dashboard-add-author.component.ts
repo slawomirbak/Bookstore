@@ -14,10 +14,10 @@ import { UploadDialogComponent } from 'src/app/shared/UI/upload-dialog/upload-di
   styleUrls: ['./dashboard-add-author.component.scss']
 })
 export class DashboardAddAuthorComponent implements OnInit {
-  imgRootUrl:string = imageRootUrl.url;
+  imgRootUrl: string = imageRootUrl.url;
   isLinear = true;
-  authorForm : FormGroup;
-  currentAuthor : Author = new Author(null);
+  authorForm: FormGroup;
+  currentAuthor: Author = new Author(null);
   savedAuthor$: BehaviorSubject<Author>;
   constructor(private _formBuilder: FormBuilder, private authorService: AuthorService, private router: Router, public dialog: MatDialog) { }
 
@@ -31,7 +31,6 @@ export class DashboardAddAuthorComponent implements OnInit {
   }
 
   authorFormSave(): void {
-    console.log(this.currentAuthor.isEquil(this.authorForm.value))
     if (this.currentAuthor.isEquil(this.authorForm.value)){
       return;
     }

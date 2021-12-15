@@ -3,6 +3,8 @@ import { Basket } from 'src/app/core/models/Basket';
 import { BasketItem } from 'src/app/core/models/BasketItem';
 import { BehaviorSubject } from 'rxjs';
 import { BasketService } from 'src/app/core/services/basket.service';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basket-manager',
@@ -11,11 +13,19 @@ import { BasketService } from 'src/app/core/services/basket.service';
 })
 export class BasketManagerComponent implements OnInit {
 
-  constructor(private basketService: BasketService) { }
+  basketForm: FormGroup;
+
+  constructor(private _formBuilder: FormBuilder, private basketService: BasketService, private router: Router) { }
 
   currentBasket$: BehaviorSubject<Basket>;
 
   ngOnInit(): void {
+    this.basketForm = this._formBuilder.group({
+      delivery: ['', Validators.required],
+      payment: ['', Validators.required],
+      address: ['', Validators.required],
+    });
+
     this.currentBasket$ = this.basketService.currentBasket$;
   }
 
@@ -29,5 +39,16 @@ export class BasketManagerComponent implements OnInit {
 
   substractBasketItem(basketItem: BasketItem){
     this.basketService.substractBasketItem(basketItem);
+  }
+
+  buyBasket = () => {
+    if (this.basketForm.valid) {
+      const currentBasket = this.currentBasket$.value;
+      currentBasket.address = this.basketForm.value.address;
+      currentBasket.payment = this.basketForm.value.payment;
+      currentBasket.delivery = this.basketForm.value.delivery;
+
+      this.router.navigate(['/basket/book-payment']);
+    }
   }
 }

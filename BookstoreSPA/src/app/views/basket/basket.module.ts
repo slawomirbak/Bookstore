@@ -6,10 +6,11 @@ import { BasketManagerComponent } from './basket-manager/basket-manager.componen
 import { BasketItemComponent } from './basket-item/basket-item.component';
 import { BookFormatPipe } from 'src/app/core/pipes/bookFormat.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BasketPaymentComponent } from './basket-payment/basket-payment.component';
 
 
 @NgModule({
-  declarations: [BasketManagerComponent, BasketItemComponent, BookFormatPipe],
+  declarations: [BasketManagerComponent, BasketItemComponent, BookFormatPipe, BasketPaymentComponent],
   imports: [
     CommonModule,
     BasketRoutingModule,

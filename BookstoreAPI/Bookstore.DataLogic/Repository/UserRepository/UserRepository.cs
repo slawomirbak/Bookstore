@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace Bookstore.DataLogic.Repository.UserRepository
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
-        public async Task SaveRereshToken(RefreshToken refreshToke)
+        public async Task SaveRefreshToken(RefreshToken refreshToke)
         {
             await _context.RefreshTokens.AddAsync(refreshToke);
         }
@@ -47,6 +48,33 @@ namespace Bookstore.DataLogic.Repository.UserRepository
         public async Task Create(User user)
         {
             await _context.Users.AddAsync(user);
+        }
+
+        public async Task<User> CanVote(string email, int bookId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email.Trim());
+            var readBook = user.ReadBooks.Any(book => book.Id == bookId);
+
+            if (readBook)
+            {
+                return user;
+            }
+
+            return null;
+        }
+
+        public async Task ReadBook(string email, int bookId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email.Trim());
+
+            if (user.ReadBooks.Any(book => book.Id == bookId))
+            {
+                return;
+            }
+
+            var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == bookId);
+            user.ReadBooks.Add(book);
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -16,5 +16,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         void RemoveBookAuthor(BookAuthor bookAuthor);
         Task<List<Book>> GetList();
         IQueryable<Book> Search(string query);
+        Task Vote(int userId, int bookId, int rate);
     }
 }

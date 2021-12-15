@@ -136,7 +136,7 @@ namespace Bookstore.Services.UserService
 
             };
 
-            await _unitOfWork.userRepository.SaveRereshToken(refreshToken);
+            await _unitOfWork.userRepository.SaveRefreshToken(refreshToken);
             await _unitOfWork.Save();
 
             return refreshToken.Token;

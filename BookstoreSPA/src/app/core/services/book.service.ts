@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Basket } from '../models/Basket';
 import { AbstractRepositoryService } from './abstract.service';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class BookService extends AbstractRepositoryService {
     }));
   }
 
-  rateBook$ = (itemId, rate) =>{
+  rateBook$ = (itemId, rate) => {
     return this.getSimle(`rate/${itemId}`, {rate});
   }
 }

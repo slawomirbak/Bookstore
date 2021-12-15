@@ -53,5 +53,36 @@ namespace Bookstore.DataLogic.Repository.BookRepository
                                book.Author.Any(author => author.Author.Name.ToLower().Contains(query.ToLower())) ||
                                book.Author.Any(author => author.Author.Surname.ToLower().Contains(query.ToLower())));
         }
+
+
+
+
+        public async Task Vote(int userId, int bookId, int rate)
+        {
+            var book = await this.GetById(bookId);
+
+            var voted = book.BookRatings.FirstOrDefault(bookRating => bookRating.Book.Id == bookId);
+
+            if (voted != null)
+            {
+                voted.Rating = rate;
+                voted.CreateDate = DateTime.Now;
+            }
+            else
+            {
+                var bookRating = new BookRating()
+                {
+                    Book = book,
+                    CreateDate = DateTime.Now,
+                    Rating = rate,
+                    UserId = userId
+                };
+                book.BookRatings.Add(bookRating);
+            }
+
+            book.AverageRating = (float)book.BookRatings.Average(bookRating => bookRating.Rating);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

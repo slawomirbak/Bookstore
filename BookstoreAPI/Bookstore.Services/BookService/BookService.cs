@@ -131,9 +131,30 @@ namespace Bookstore.Services.BookService
             return new ItemsPagingResponse<List<BookDto>>(booksDto, books.Count);
         }
 
-        public async Task<ItemPlainResponse<List<BookDto>>> RateBook(int id, int rate)
+        public async Task<BasePlainResponse> RateBook(string email, int bookId, int rate)
         {
-            throw new NotImplementedException();
+            var user = await _unitOfWork.userRepository.CanVote(email, bookId);
+            
+            if (user == null)
+            {
+                return new BasePlainResponse
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = "User can't vote"
+                };
+
+            }
+            
+            await _unitOfWork.bookRepository.Vote(user.Id, bookId, rate);
+            return new BasePlainResponse
+            {
+                IsSuccessful = true
+            };
+        }
+
+        public async Task PaymentOrder(string email, int bookId)
+        {
+            await _unitOfWork.userRepository.ReadBook(email, bookId);
         }
     }
 }

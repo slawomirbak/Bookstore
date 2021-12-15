@@ -10,39 +10,48 @@
 </div>
 <div class="container">
     <h5>Delivery method</h5>
-    <form class="delivery-form">
+    <form class="delivery-form" [formGroup]="basketForm">
         <label>
-            <input type="radio" name="delivery" value="post" />
+            <input type="radio" formControlName="delivery" value="post" />
             <p>Post</p>
         </label>
         <label>
-            <input type="radio" name="delivery" value="courier" />
+            <input type="radio" formControlName="delivery" value="courier" />
             <p>Courier</p>
         </label>
         <label>
-            <input type="radio" name="delivery" value="parcelLocker" />
+            <input type="radio" formControlName="delivery" value="parcelLocker" />
             <p>Parcel Locker</p>
         </label>
-    </form>
-    <h5>Payment method</h5>
-    <form class="delivery-form">
+        <h5>Payment method</h5>
         <label>
-            <input type="radio" name="payment" value="transfer" />
+            <input type="radio" formControlName="payment" value="transfer" />
             <p>Transfer</p>
         </label>
         <label>
-            <input type="radio" name="payment" value="card" />
+            <input type="radio" formControlName="payment" value="card" />
             <p>Card</p>
         </label>
         <label>
-            <input type="radio" name="payment" value="blik" />
+            <input type="radio" formControlName="payment" value="blik" />
             <p>Blik</p>
         </label>
+        <h5>Address</h5>
+        <mat-form-field>
+            <input
+                matInput
+                placeholder="Address"
+                formControlName="address"
+                required
+            />
+          </mat-form-field>
     </form>
     <div *ngIf="currentBasket$ | async as basket">
         <div class="total-amount">
             Total amount: {{ basket.totalPrice | currency }}
-            <button mat-flat-button color="primary">Pay and Order</button>
+            <button mat-flat-button color="primary" (click)="buyBasket()">
+                Pay and Order
+            </button>
         </div>
     </div>
 </div>

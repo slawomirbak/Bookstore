@@ -134,12 +134,14 @@ namespace BookstoreAPI.Controllers
             return new BadRequestObjectResult(response);
         }
 
-        [HttpGet("rate/{id}")]
+        [HttpPost("paymentOrder")]
         [Authorize]
-        public async Task<IActionResult> Rate(int id, [FromQuery(Name = "rate")] int rate)
+        public async Task<IActionResult> PaymentOrder([FromBody] BasketDto basketDto)
         {
-            if (string.IsNullOrWhiteSpace(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)
-                .Value))
+            var email = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)
+                .Value;
+
+            if (string.IsNullOrWhiteSpace(email))
             {
                 var userNotFound = new BasePlainResponse()
                 {
@@ -150,7 +152,33 @@ namespace BookstoreAPI.Controllers
                 return new BadRequestObjectResult(userNotFound);
             }
 
-            var response = await _bookService.RateBook(id, rate);
+            foreach (var basketItem in basketDto.BasketItems)
+            {
+                await _bookService.PaymentOrder(email, basketItem.Book.Id);
+            }
+            
+            return new OkObjectResult(new BasePlainResponse());
+            
+        }
+
+        [HttpGet("rate/{id}")]
+        [Authorize]
+        public async Task<IActionResult> Rate(int id, [FromQuery(Name = "rate")] int rate)
+        {
+            var email = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)
+                .Value;
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                var userNotFound = new BasePlainResponse()
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = "User not found"
+                };
+
+                return new BadRequestObjectResult(userNotFound);
+            }
+
+            var response = await _bookService.RateBook(email,id, rate);
             if (response.IsSuccessful)
             {
                 return new OkObjectResult(response);
@@ -171,5 +199,8 @@ namespace BookstoreAPI.Controllers
 
             return null;
         }
+
+
+        
     }
 }
