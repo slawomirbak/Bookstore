@@ -15,7 +15,7 @@ namespace Bookstore.DataLogic.Entities
         public string Role { get; set; }
         public Address Address { get; set; }
         public DateTime CreatedDate { get; set; }
-        public ICollection<Book> ReadBooks { get; set; }
+        public ICollection<BookRead> BookRead { get; set; }
 
         public void PasswordHash(string password)
         {

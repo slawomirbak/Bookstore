@@ -19,6 +19,7 @@ namespace Bookstore.DataLogic
         public DbSet<BookFormat> BookFormats { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<BookRating> BookRatings { get; set; }
+        public DbSet<BookRead> BookReads { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<BookAuthor> BookAuthor { get; set; }
@@ -38,6 +39,9 @@ namespace Bookstore.DataLogic
 
             modelBuilder.Entity<Book>()
                 .HasMany(b => b.Author);
+
+            modelBuilder.Entity<BookRead>()
+                .HasKey(br => new { br.BookId, br.UserId });
 
 
             modelBuilder.Entity<BookAuthor>()

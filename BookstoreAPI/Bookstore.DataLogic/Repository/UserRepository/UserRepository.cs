@@ -52,8 +52,10 @@ namespace Bookstore.DataLogic.Repository.UserRepository
 
         public async Task<User> CanVote(string email, int bookId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email.Trim());
-            var readBook = user.ReadBooks.Any(book => book.Id == bookId);
+            var user = await _context.Users.Include(user => user.BookRead)
+                .ThenInclude(bookRead => bookRead.Book)
+                .FirstOrDefaultAsync(u => u.Email == email.Trim());
+            var readBook = user.BookRead.Any(book => book.BookId == bookId);
 
             if (readBook)
             {
@@ -65,15 +67,17 @@ namespace Bookstore.DataLogic.Repository.UserRepository
 
         public async Task ReadBook(string email, int bookId)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email.Trim());
+            var user = await _context.Users.Include(user => user.BookRead)
+                .ThenInclude(bookRead => bookRead.Book)
+                .FirstOrDefaultAsync(u => u.Email == email.Trim());
 
-            if (user.ReadBooks.Any(book => book.Id == bookId))
+            if (user.BookRead.Any(book => book.BookId == bookId))
             {
                 return;
             }
 
             var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == bookId);
-            user.ReadBooks.Add(book);
+            user.BookRead.Add(new BookRead { Book = book, User = user});
             await _context.SaveChangesAsync();
         }
     }

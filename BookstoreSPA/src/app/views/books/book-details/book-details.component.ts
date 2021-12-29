@@ -47,7 +47,7 @@ export class BookDetailsComponent implements OnInit {
 
       this.bookService.rateBook$(this.book.id, rateNumber).subscribe(
         ok => {
-            this.snackBarInfo.formOk('User logged out sucessfully.');
+            this.snackBarInfo.formOk('Vote successfully completed');
         },
         (error) => {
           if (error.status === 401) {

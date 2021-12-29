@@ -26,7 +26,11 @@ namespace Bookstore.DataLogic.Repository.BookRepository
 
         public async Task<Book> GetById(int id)
         {
-            return await _context.Books.Include(b => b.Author).ThenInclude(x => x.Author).Include(b => b.BookFormats).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Books
+                .Include(b => b.Author).ThenInclude(x => x.Author)
+                .Include(b => b.BookFormats)
+                .Include(b => b.BookRatings)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task AddBookAuthor(BookAuthor bookAuthor)
@@ -54,12 +58,10 @@ namespace Bookstore.DataLogic.Repository.BookRepository
                                book.Author.Any(author => author.Author.Surname.ToLower().Contains(query.ToLower())));
         }
 
-
-
-
         public async Task Vote(int userId, int bookId, int rate)
         {
             var book = await this.GetById(bookId);
+
 
             var voted = book.BookRatings.FirstOrDefault(bookRating => bookRating.Book.Id == bookId);
 

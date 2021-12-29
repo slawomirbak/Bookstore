@@ -19,7 +19,7 @@ namespace Bookstore.DataLogic.Entities
         public string Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
         public ICollection<BookAuthor> Author { get; set; }
-
+        public ICollection<BookRead> BookRead { get; set; }
         public ICollection<BookFormat> BookFormats { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<BookRating> BookRatings { get; set; }
