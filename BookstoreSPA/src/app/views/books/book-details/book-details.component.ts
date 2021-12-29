@@ -25,7 +25,6 @@ export class BookDetailsComponent implements OnInit {
       ) {}
 
     ngOnInit() {
-      console.log(this.book);
     }
 
     onVersionSelected(bookFormat: BookFormat) {
@@ -43,11 +42,10 @@ export class BookDetailsComponent implements OnInit {
     }
 
     rateBook = (rateNumber) => {
-      console.log(rateNumber);
-
       this.bookService.rateBook$(this.book.id, rateNumber).subscribe(
         ok => {
             this.snackBarInfo.formOk('Vote successfully completed');
+            window.location.reload();
         },
         (error) => {
           if (error.status === 401) {

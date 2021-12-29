@@ -13,17 +13,18 @@ export class UserService  extends AbstractRepositoryService {
   baseEndpoint = 'api/user';
   constructor(http: HttpClient) {
     super(http);
-   }
+  }
 
-   private readonly JWT_TOKEN = 'JWT_TOKEN';
-   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-   private loggedUser$ = new BehaviorSubject(this.getRefreshToken());
-   private userSubject$ = new BehaviorSubject(null);
-   user$ = this.userSubject$.asObservable();
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  private readonly USER = "USER";
+  private loggedUser$ = new BehaviorSubject(this.getLogedUser());
+  user$ = this.loggedUser$.asObservable();
 
-
-   isLoggedIn$ = this.loggedUser$.pipe(
-    map(userName => !!userName)
+  isLoggedIn$ = this.loggedUser$.pipe(
+    map(user => {
+      return !!user
+    })
   );
 
   login(credentials: ILoginCredentials): Observable<boolean> {
@@ -55,25 +56,25 @@ export class UserService  extends AbstractRepositoryService {
   }
 
   private doLoginUser(username: string, tokens: IToken) {
-    this.loggedUser$.next(username);
-    this.userSubject$.next(tokens.user);
+    this.loggedUser$.next(tokens.user);
     this.storeTokens(tokens);
   }
 
   private doLogoutUser() {
     this.loggedUser$.next(null);
-    this.userSubject$.next(null);
     this.removeTokens();
   }
 
   private storeTokens(tokens: IToken) {
     localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
+    localStorage.setItem(this.USER, JSON.stringify(tokens.user));
   }
 
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+    localStorage.removeItem(this.USER);
   }
 
   private storeJwtToken(jwt: string) {
@@ -82,5 +83,9 @@ export class UserService  extends AbstractRepositoryService {
 
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
+  }
+
+  private getLogedUser() {
+    return JSON?.parse(localStorage?.getItem(this.USER));
   }
 }
