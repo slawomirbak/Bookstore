@@ -82,6 +82,6 @@ export class BasketService extends AbstractRepositoryService {
   }
 
   clearBasket = () => {
-    this.currentBasket$ = new BehaviorSubject(new Basket());
+    this.currentBasket$.next(new Basket());
   }
 }

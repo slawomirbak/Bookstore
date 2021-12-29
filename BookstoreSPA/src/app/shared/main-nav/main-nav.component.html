@@ -59,7 +59,7 @@
         <a mat-list-item [routerLink]="['/booksearch']">Search book</a>
         <a mat-list-item [routerLink]="['/basket']">
           <span *ngIf="currentBasket$ | async as currentBasket" >
-            <span *ngIf="currentBasket?.basketItems?.length; else elseBlock" [matBadge]="currentBasket?.basketItems?.length" matBadgeOverlap="false" matBadgeColor="accent">Basket</span>
+            <span *ngIf="currentBasket.basketItems.length; else elseBlock" [matBadge]="currentBasket?.basketItems?.length" matBadgeOverlap="false" matBadgeColor="accent">Basket</span>
             <ng-template #elseBlock>Basket</ng-template>
           </span>
         </a>
