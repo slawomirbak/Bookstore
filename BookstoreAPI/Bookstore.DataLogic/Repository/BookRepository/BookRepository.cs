@@ -30,6 +30,7 @@ namespace Bookstore.DataLogic.Repository.BookRepository
                 .Include(b => b.Author).ThenInclude(x => x.Author)
                 .Include(b => b.BookFormats)
                 .Include(b => b.BookRatings)
+                .Include(b => b.BookRead).ThenInclude(br => br.User)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

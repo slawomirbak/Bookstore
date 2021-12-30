@@ -17,13 +17,13 @@ export class UserService  extends AbstractRepositoryService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private readonly USER = "USER";
+  private readonly USER = 'USER';
   private loggedUser$ = new BehaviorSubject(this.getLogedUser());
   user$ = this.loggedUser$.asObservable();
 
   isLoggedIn$ = this.loggedUser$.pipe(
     map(user => {
-      return !!user
+      return !!user;
     })
   );
 

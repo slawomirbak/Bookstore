@@ -22,6 +22,10 @@
       color: $main-white;
     }
   }
+  .disabled {
+    background-color: $grey;
+  }
+
 }
 .test-wrapper{
   margin: 64px 0;
@@ -42,3 +46,4 @@
     }
   }
 }
+

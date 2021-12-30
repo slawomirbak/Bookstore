@@ -65,6 +65,7 @@ namespace Bookstore.Services.UserService
                     refreshToken = await GenerateRefreshToken(user, jwtToke),
                     user = new UserInfoDto
                     {
+                        Id = user.Id,
                         Role = user.Role
                     }
                 };

@@ -24,6 +24,9 @@ namespace Bookstore.Services.Mapper
             CreateMap<BookDto, Book>()
                 .ForMember(b => b.Author, opt => opt.MapFrom(x => x.Author.Select(a => new BookAuthor {})));
 
+            CreateMap<BookRead, BookReadDto>()
+                .ForMember(bookRead => bookRead.UserId, opt => opt.MapFrom(user => user.UserId));
+
 
             CreateMap<Question, QuestionDto>();
             CreateMap<QuestionDto, Question>();

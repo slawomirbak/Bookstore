@@ -1,7 +1,7 @@
 <div class="title-container">
   <h2>Sprawdź swoją wiedzę</h2>
-  <button mat-raised-button [routerLink]="['/books/tests/create', book.id]">
-    <span>Stwórz test</span>
+  <button mat-raised-button [routerLink]="['/books/tests/create', book.id]"  [ngClass]="{ disabled: !canCrateTest }" [disabled]="!canCrateTest">
+    <span>Crate test</span>
   </button>
 </div>
 <div class="test-wrapper">

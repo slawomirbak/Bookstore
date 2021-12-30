@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Book } from 'src/app/core/models/Book';
 import { BookTest } from 'src/app/core/models/BookTest';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-book-knowladge',
@@ -10,8 +11,9 @@ import { BookTest } from 'src/app/core/models/BookTest';
 export class BookKnowladgeComponent implements OnInit {
 
   @Input() book: Book;
+  canCrateTest = false;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   bookTests: BookTest[] = [
     {
@@ -29,6 +31,10 @@ export class BookKnowladgeComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.userService.user$.subscribe(user => {
+      if (this.book.bookRead.length > 0) {
+        this.canCrateTest =  !!this.book.bookRead.find(bookRead => bookRead?.userId === user?.id);
+      }
+    });
   }
-
 }

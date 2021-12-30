@@ -1,5 +1,6 @@
 <section *ngIf="book$ | async as book" class="outer-wrapper">
   <h3>Create test for book: {{book.title}}</h3>
+  <h4>Test has to contain 10 questions</h4>
   <section class="question-lists">
     <div *ngFor="let question of questions; index as i" class="question-item">
       <div>{{i+1}}. {{question.content}} <button mat-button color="warn" (click)="deleteQuestion(i)"><mat-icon>delete_forever</mat-icon></button></div>

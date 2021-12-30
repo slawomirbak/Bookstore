@@ -20,6 +20,7 @@ namespace Bookstore.Abstract.Contracts
         public string Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
         public ICollection<AuthorDto> Author { get; set; }
+        public ICollection<BookReadDto> BookRead { get; set; }
         public ICollection<BookFormatDto> BookFormats { get; set; }
         public ICollection<CommentDto> Comments { get; set; }
         public ICollection<BookRatingDto> BookRatings { get; set; }
