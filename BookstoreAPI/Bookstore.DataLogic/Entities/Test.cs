@@ -6,11 +6,13 @@ namespace Bookstore.DataLogic.Entities
 {
     public class Test : BaseEntity
     {
+        public string Name { get; set; }
         public DateTime CreateDate { get; set; }
         public int Likes { get; set; }
         public int Dislike { get; set; }
         public ICollection<Question> Questions { get;set;}
         public int NumberOfQuestions { get; set; }
         public Book Book { get; set; }
+        public User User { get; set; }
     }
 }

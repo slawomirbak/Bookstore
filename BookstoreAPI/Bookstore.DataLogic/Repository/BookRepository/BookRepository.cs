@@ -1,7 +1,6 @@
 ﻿using Bookstore.DataLogic.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -62,8 +61,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         public async Task Vote(int userId, int bookId, int rate)
         {
             var book = await this.GetById(bookId);
-
-
             var voted = book.BookRatings.FirstOrDefault(bookRating => bookRating.Book.Id == bookId);
 
             if (voted != null)
@@ -86,6 +83,21 @@ namespace Bookstore.DataLogic.Repository.BookRepository
             book.AverageRating = (float)book.BookRatings.Average(bookRating => bookRating.Rating);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task CreateTest(Test test)
+        {
+            await _context.Tests.AddAsync(test);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Test>> GetTests(int bookId)
+        {
+            return await _context.Tests
+                 .Include(test => test.Questions)
+                 .Include(test => test.User)
+                 .Include(test => test.Book)
+                 .Where(test => test.Book.Id == bookId).ToListAsync();
         }
     }
 }

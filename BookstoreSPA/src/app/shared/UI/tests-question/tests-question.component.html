@@ -4,26 +4,26 @@
       <form [formGroup]="qustionForm" class="form-wrapper">
         <mat-form-field>
           <mat-label>Question</mat-label>
-          <textarea matInput formControlName="content" maxlength="500"></textarea>
+          <textarea matInput formControlName="sentence" maxlength="500"></textarea>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Answer A</mat-label>
-          <textarea matInput formControlName="answerA" maxlength="500"></textarea>
+          <textarea matInput formControlName="a" maxlength="500"></textarea>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Answer B</mat-label>
-          <textarea matInput formControlName="answerB" maxlength="500"></textarea>
+          <textarea matInput formControlName="b" maxlength="500"></textarea>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Answer C</mat-label>
-          <textarea matInput formControlName="answerC" maxlength="500"></textarea>
+          <textarea matInput formControlName="c" maxlength="500"></textarea>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Answer D</mat-label>
-          <textarea matInput formControlName="answerD" maxlength="500"></textarea>
+          <textarea matInput formControlName="d" maxlength="500"></textarea>
         </mat-form-field>
         <mat-label>Good answer</mat-label>
-        <mat-radio-group formControlName="goodAnswer" matInput>
+        <mat-radio-group formControlName="answer" matInput>
           <mat-radio-button value="A">A</mat-radio-button>
           <mat-radio-button value="B">B</mat-radio-button>
           <mat-radio-button value="C">C</mat-radio-button>

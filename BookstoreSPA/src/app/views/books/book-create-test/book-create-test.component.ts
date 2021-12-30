@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Question } from 'src/app/core/models/Question';
+import { IQuestion } from 'src/app/core/models/IQuestion';
 import { BookService } from 'src/app/core/services/book.service';
+import { KnowledgeService } from 'src/app/core/services/knowledge.service';
+import { SnackBarInfo } from 'src/app/core/services/snackbar-info.service';
 import { TestsQuestionComponent } from 'src/app/shared/UI/tests-question/tests-question.component';
 
 @Component({
@@ -12,18 +15,31 @@ import { TestsQuestionComponent } from 'src/app/shared/UI/tests-question/tests-q
 })
 export class BookCreateTestComponent implements OnInit {
   book$ = this.bookService.getOne(+this.route.snapshot.paramMap.get('id'));
-  questions: Question[] = [];
+  questions: IQuestion[] = [];
+  canSave: false;
+  testForm: FormGroup;
 
-  constructor(private bookService: BookService, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(
+    private snackBarInfo: SnackBarInfo,
+    private _formBuilder: FormBuilder,
+    private bookService: BookService,
+    private knowledgeService: KnowledgeService,
+    private route: ActivatedRoute, private dialog: MatDialog) { }
+
   ngOnInit() {
+    this.testForm = this._formBuilder.group({
+      name: ['', Validators.required]
+    });
+
     this.questions.push({
-      answerA: "Answer A",
-      answerB: "Answer B",
-      answerC: "Answer C",
-      answerD: "Answer D",
-      content: "This is a really good question!",
-      goodAnswer: "B",
-    })
+      id: 0,
+      a: "Answer A",
+      b: "Answer B",
+      c: "Answer C",
+      d: "Answer D",
+      sentence: "This is a really good question!",
+      answer: "B",
+    });
   }
 
   addQuestion = () => {
@@ -33,8 +49,8 @@ export class BookCreateTestComponent implements OnInit {
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe((question: Question) => {
-      if (!!question){
+    dialogRef.afterClosed().subscribe((question: IQuestion) => {
+      if (!!question) {
         this.questions.push(question);
       }
     });
@@ -45,7 +61,24 @@ export class BookCreateTestComponent implements OnInit {
   }
 
   saveQuestions = () => {
-    this.bookService.post('tests', this.questions.values).subscribe(resposne =>{
-    });
+    if (!this.testForm.value.name) {
+      this.snackBarInfo.formError('Please enter title');
+      return;
+    }
+
+    const test = {
+      numberOfQuestions: this.questions.length,
+      questions: this.questions,
+      name: this.testForm.value.name
+    };
+
+    this.knowledgeService.post(`new/${+this.route.snapshot.paramMap.get('id')}`, test)
+      .subscribe(
+        ok => {
+          this.snackBarInfo.formOk('Test was created successfully.');
+        },
+        error => {
+          this.snackBarInfo.formError(error.statusText);
+        });
   }
 }

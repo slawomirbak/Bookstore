@@ -1,13 +1,18 @@
 <div class="title-container">
   <h2>Sprawdź swoją wiedzę</h2>
-  <button mat-raised-button [routerLink]="['/books/tests/create', book.id]"  [ngClass]="{ disabled: !canCrateTest }" [disabled]="!canCrateTest">
+  <button mat-raised-button [routerLink]="['/books/tests/create', book.id]" [disabled]="!canCrateTest">
     <span>Crate test</span>
   </button>
 </div>
 <div class="test-wrapper">
   <div *ngFor="let bookTest of bookTests">
     <button mat-raised-button color="primary">
-      {{bookTest.author}}
+      <p>
+        {{bookTest.name}}
+      </p>
+      <p>
+        ({{bookTest.author}})
+      </p>
       <div class="rating-wrapper">
         <span class="likes">
           <mat-icon aria-hidden="false" aria-label="Example home icon">thumb_up</mat-icon>

@@ -5,6 +5,7 @@ using Bookstore.DataLogic;
 using Bookstore.DataLogic.Repository.UnitOfWork;
 using Bookstore.Services.AuthorSerice;
 using Bookstore.Services.BookService;
+using Bookstore.Services.KnowledgeService;
 using Bookstore.Services.Mapper;
 using Bookstore.Services.UploadFileService;
 using Bookstore.Services.UserService;
@@ -29,6 +30,7 @@ namespace Bookstore.Resolver
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IUploadService, UploadService>();
+            services.AddScoped<IKnowledgeService, KnowledgeService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
         public static void AddDatabase(IServiceCollection services, IConfiguration configuration)

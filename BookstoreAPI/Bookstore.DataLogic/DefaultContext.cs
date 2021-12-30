@@ -34,6 +34,10 @@ namespace Bookstore.DataLogic
                 .IsRequired()
                 .HasMaxLength(60);
 
+            modelBuilder.Entity<User>()
+                .HasMany(b => b.Tests)
+                .WithOne(c => c.User);
+
             modelBuilder.Entity<RefreshToken>()
                 .HasOne(rt => rt.User);
 

@@ -16,7 +16,7 @@ namespace Bookstore.DataLogic.Entities
         public Address Address { get; set; }
         public DateTime CreatedDate { get; set; }
         public ICollection<BookRead> BookRead { get; set; }
-
+        public ICollection<Test> Tests { get; set; }
         public void PasswordHash(string password)
         {
             using (var hmac = new HMACSHA512())
@@ -25,7 +25,6 @@ namespace Bookstore.DataLogic.Entities
                 Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }
-
         public bool VerifyPassword(string password)
         {
             using (var hmac = new HMACSHA512(PasswordSalt))

@@ -11,6 +11,10 @@
     h3 {
       color: $primary;
     }
+    .test-title {
+      text-align: start;
+      padding: 1rem;
+    }
     .question-lists{
       text-align: left;
       padding: 1rem;
@@ -26,6 +30,9 @@
       display: flex;
       button {
         margin: 1rem;
+      }
+      .disabled {
+        background-color: $grey;
       }
     }
   }

@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { find } from 'rxjs/operators';
 import { Basket } from '../models/Basket';
 import { BasketItem } from '../models/BasketItem';
-import { Book, BookVersion } from '../models/Book';
+import { Book } from '../models/Book';
 import { BookFormat } from '../models/BookFormat';
 import { AbstractRepositoryService } from './abstract.service';
 

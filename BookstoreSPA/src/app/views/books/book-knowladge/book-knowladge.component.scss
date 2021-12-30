@@ -17,15 +17,7 @@
   button {
     margin-left: 1rem;
     padding: 1rem  2rem;
-    background-color: $primary;
-    span{
-      color: $main-white;
-    }
   }
-  .disabled {
-    background-color: $grey;
-  }
-
 }
 .test-wrapper{
   margin: 64px 0;
@@ -35,8 +27,13 @@
   div{
     margin-right: 2rem;
   }
-  button{
+  button {
+    max-width: 350px;
     padding: 1rem 2rem;
+    p {
+      display: block;
+      overflow: hidden;
+    }
     .likes{
       margin-right: 2rem;
       color: $green;
