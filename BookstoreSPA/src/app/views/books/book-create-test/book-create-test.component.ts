@@ -27,7 +27,7 @@ export class BookCreateTestComponent implements OnInit {
   }
 
   addQuestion = () => {
-    const dialogRef =this.dialog.open(TestsQuestionComponent, {
+    const dialogRef = this.dialog.open(TestsQuestionComponent, {
       width: '50%',
       height: '50%',
       data: {}
@@ -46,7 +46,6 @@ export class BookCreateTestComponent implements OnInit {
 
   saveQuestions = () => {
     this.bookService.post('tests', this.questions.values).subscribe(resposne =>{
-
-    })
+    });
   }
 }
