@@ -25,8 +25,6 @@ namespace Bookstore.Services.KnowledgeService
 
             test.Book = book;
             test.User = user;
-            test.Likes = 0;
-            test.Dislike = 0;
             test.CreateDate = DateTime.Now;
             await _unitOfWork.bookRepository.CreateTest(test);
 

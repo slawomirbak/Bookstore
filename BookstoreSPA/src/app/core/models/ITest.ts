@@ -1,3 +1,4 @@
+import { ILike } from './ILike';
 import { IQuestion } from './IQuestion';
 
 export interface ITest{
@@ -5,8 +6,7 @@ export interface ITest{
   name: string;
   author: string;
   createDate: Date;
-  likes: number;
-  dislike: number;
+  likes: ILike[];
   questions: IQuestion[];
   numberOfQuestions: number;
 }

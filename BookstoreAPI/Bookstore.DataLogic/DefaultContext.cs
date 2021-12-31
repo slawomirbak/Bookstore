@@ -22,6 +22,7 @@ namespace Bookstore.DataLogic
         public DbSet<BookRead> BookReads { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<BookAuthor> BookAuthor { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +38,10 @@ namespace Bookstore.DataLogic
             modelBuilder.Entity<User>()
                 .HasMany(b => b.Tests)
                 .WithOne(c => c.User);
+
+            modelBuilder.Entity<User>()
+              .HasMany(b => b.Likes)
+              .WithOne(c => c.User);
 
             modelBuilder.Entity<RefreshToken>()
                 .HasOne(rt => rt.User);
@@ -70,7 +75,14 @@ namespace Bookstore.DataLogic
 
             modelBuilder.Entity<Test>()
                 .HasMany(t => t.Questions)
-                .WithOne(q => q.Test);   
+                .WithOne(q => q.Test);
+
+            modelBuilder.Entity<Test>()
+               .HasMany(t => t.Likes)
+               .WithOne(q => q.Test);
+
+            modelBuilder.Entity<Like>()
+                .HasKey(l => new { l.TestId, l.UserId });
 
         }
     }

@@ -47,14 +47,18 @@ namespace Bookstore.Services.Mapper
             CreateMap<Test, TestDto>()
              .ForMember(testDto => testDto.Author, opt => opt.MapFrom(test => $"{test.User.FirstName} {test.User.LastName}"));
             CreateMap<TestDto, Test>()
-              .ForMember(test => test.Book, opt => opt.Ignore())
-              .ForMember(test => test.User, opt => opt.Ignore());
-
+                .ForMember(test => test.Book, opt => opt.Ignore())
+                .ForMember(test => test.User, opt => opt.Ignore());
 
             CreateMap<Question, QuestionDto>()
-              .ForMember(test => test.Answer, opt => opt.Ignore());
+                .ForMember(test => test.Answer, opt => opt.Ignore());
             CreateMap<QuestionDto, Question>()
                 .ForMember(question => question.Test, opt => opt.Ignore());
+
+            CreateMap<Like, LikeDto>();
+            CreateMap<LikeDto, Like>()
+                .ForMember(like => like.User, opt => opt.Ignore())
+                .ForMember(like => like.Test, opt => opt.Ignore());
         }
     }
 }

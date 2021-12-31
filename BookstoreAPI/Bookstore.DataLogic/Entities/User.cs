@@ -17,6 +17,7 @@ namespace Bookstore.DataLogic.Entities
         public DateTime CreatedDate { get; set; }
         public ICollection<BookRead> BookRead { get; set; }
         public ICollection<Test> Tests { get; set; }
+        public ICollection<Like> Likes { get; set; }
         public void PasswordHash(string password)
         {
             using (var hmac = new HMACSHA512())
