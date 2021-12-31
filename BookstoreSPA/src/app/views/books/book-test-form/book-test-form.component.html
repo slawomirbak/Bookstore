@@ -1,0 +1,14 @@
+<section class="wrapper" *ngIf="test$ | async as test">
+  <h1>{{test?.name}}</h1>
+  <h4>Created by: {{test?.author}} ({{test?.createDate}})</h4>
+  <section *ngFor="let question of test.questions">
+    tutaj pytanie iodpowiedzi w pentli
+    <h3>{{question.sentence}}</h3>
+  </section>
+  <section>
+    tutaj buttony
+  </section>
+  <section>
+    tutaj lajki i dislajki
+  </section>
+</section>

@@ -99,5 +99,14 @@ namespace Bookstore.DataLogic.Repository.BookRepository
                  .Include(test => test.Book)
                  .Where(test => test.Book.Id == bookId).ToListAsync();
         }
+
+        public async Task<Test> GetTest(int testId)
+        {
+            return await _context.Tests
+                .Include(test => test.Questions)
+                .Include(test => test.User)
+                .Include(test => test.Book)
+                .FirstOrDefaultAsync(test => test.Id == testId);
+        }
     }
 }

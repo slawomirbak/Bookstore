@@ -6,7 +6,7 @@
 </div>
 <div class="test-wrapper">
   <div *ngFor="let bookTest of bookTests">
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" [routerLink]="['/books/tests/',bookTest.id]">
       <p>
         {{bookTest.name}}
       </p>

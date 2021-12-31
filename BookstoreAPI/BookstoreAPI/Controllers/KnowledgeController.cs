@@ -50,7 +50,16 @@ namespace BookstoreAPI.Controllers
         public async Task<IActionResult> GetList( int bookId)
         {
 
-            var response = await _knowledgeService.GetTests( bookId);
+            var response = await _knowledgeService.GetTests(bookId);
+
+            return new OkObjectResult(response);
+        }
+
+        [HttpGet("test/{testId}")]
+        public async Task<IActionResult> GetTest(int testId)
+        {
+
+            var response = await _knowledgeService.GetTest(testId);
 
             return new OkObjectResult(response);
         }

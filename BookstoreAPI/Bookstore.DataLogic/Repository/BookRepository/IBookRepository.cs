@@ -17,5 +17,6 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         Task Vote(int userId, int bookId, int rate);
         Task CreateTest(Test test);
         Task<List<Test>> GetTests(int bookId);
+        Task<Test> GetTest(int testId);
     }
 }

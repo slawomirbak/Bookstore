@@ -33,6 +33,14 @@ namespace Bookstore.Services.KnowledgeService
             return new BasePlainResponse();
         }
 
+        public async Task<ItemPlainResponse<TestDto>> GetTest(int testId)
+        {
+            var test = await _unitOfWork.bookRepository.GetTest(testId);
+
+            var testDto = _mapper.Map<TestDto>(test);
+            return new ItemPlainResponse<TestDto>(testDto);
+        }
+
         public async Task<ItemsPagingResponse<List<TestDto>>> GetTests(int bookId) {
             var tests = await _unitOfWork.bookRepository.GetTests(bookId);
 
