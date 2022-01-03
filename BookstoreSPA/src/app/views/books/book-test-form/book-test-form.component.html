@@ -1,14 +1,35 @@
-<section class="wrapper" *ngIf="test$ | async as test">
-  <h1>{{test?.name}}</h1>
-  <h4>Created by: {{test?.author}} ({{test?.createDate}})</h4>
-  <section *ngFor="let question of test.questions">
-    tutaj pytanie iodpowiedzi w pentli
-    <h3>{{question.sentence}}</h3>
+<section class="wrapper" *ngIf="test" class="section-wrapper">
+  <h2 class>{{test?.name}}</h2>
+  <span class="created">Created by: {{test?.author}} ({{test?.createDate}})</span>
+  <section class="questions-wrapper">
+    <form [formGroup]="qustionsForm" class="form-wrapper">
+      <section formArrayName="questions" *ngFor="let question of questions?.controls; let i = index" class="question">
+        <div [formGroupName]="i">
+             <h4>{{i+1}}.{{test?.questions[i]?.sentence}}</h4>
+             <mat-radio-group formControlName="answer" matInput>
+              <mat-radio-button value="A">{{test?.questions[i]?.a}}</mat-radio-button>
+              <mat-radio-button value="B">{{test?.questions[i]?.b}}</mat-radio-button>
+              <mat-radio-button value="C">{{test?.questions[i]?.c}}</mat-radio-button>
+              <mat-radio-button value="D">{{test?.questions[i]?.d}}</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="hasError(i,'required')">Field is required</mat-error>
+        </div>
+      </section>
+  </form>
   </section>
-  <section>
-    tutaj buttony
+  <section class="buttons">
+    <button mat-raised-button (click)="checkTest()" color="primary">Check test</button>
   </section>
-  <section>
-    tutaj lajki i dislajki
+  <section class="footer">
+    <div class="rating-wrapper">
+      <span class="likes">
+        <mat-icon aria-hidden="false" aria-label="Like" (click)="likeTest(true)">thumb_up</mat-icon>
+      </span>
+      <p>({{likes}})</p>
+      <span class="dislike">
+        <mat-icon aria-hidden="false" aria-label="Dislike" (click)="likeTest(false)">thumb_down</mat-icon>
+      </span>
+      <p>({{disLike}})</p>
+    </div>
   </section>
 </section>

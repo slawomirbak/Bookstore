@@ -1,0 +1,54 @@
+@import 'src/styles/settings.scss';
+@import 'src/styles/utilities.scss';
+
+
+.section-wrapper {
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: $primary;
+  }
+  .created{
+    margin-left: 2rem;
+  }
+  .questions-wrapper{
+    margin: 2rem;
+    .question {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $primary;
+      h4 {
+        padding-bottom: 10px;
+      }
+      mat-radio-button {
+        display: block;
+        padding-bottom: 10px;
+      }
+    }
+  }
+  .buttons{
+    margin-left: 2rem;
+  }
+  .footer {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    .likes{
+      color: $green;
+      height: 40px;
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+    .dislike{
+      color: $red;
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+    p {
+      margin-right: 2rem;
+      display: inline-block;
+      color: $dark;
+      vertical-align: top;
+    }
+  }
+}
