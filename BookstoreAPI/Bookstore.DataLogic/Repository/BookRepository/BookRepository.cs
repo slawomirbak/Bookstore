@@ -97,6 +97,7 @@ namespace Bookstore.DataLogic.Repository.BookRepository
                  .Include(test => test.Questions)
                  .Include(test => test.User)
                  .Include(test => test.Book)
+                 .Include(test => test.Likes)
                  .Where(test => test.Book.Id == bookId).ToListAsync();
         }
 

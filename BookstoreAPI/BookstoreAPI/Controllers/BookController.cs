@@ -184,18 +184,5 @@ namespace BookstoreAPI.Controllers
 
             return new BadRequestObjectResult(response);
         }
-
-        [HttpPost("comment")]
-        public async Task<IActionResult> Comment()
-        {
-            // var response = await _bookService.Search(query, page, limit);
-            // if (response.IsSuccessful)
-            // {
-            //     return new OkObjectResult(response);
-            // }
-            // return new BadRequestObjectResult(response);
-
-            return null;
-        }
     }
 }

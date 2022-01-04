@@ -10,3 +10,9 @@ export interface ITest{
   questions: IQuestion[];
   numberOfQuestions: number;
 }
+
+
+export interface ITestDisplay extends ITest {
+  thumbUp: number;
+  thumbDown: number;
+}
