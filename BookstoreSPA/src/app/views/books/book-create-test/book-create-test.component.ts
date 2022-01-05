@@ -30,16 +30,6 @@ export class BookCreateTestComponent implements OnInit {
     this.testForm = this._formBuilder.group({
       name: ['', Validators.required]
     });
-
-    this.questions.push({
-      id: 0,
-      a: "Answer A",
-      b: "Answer B",
-      c: "Answer C",
-      d: "Answer D",
-      sentence: "This is a really good question!",
-      answer: "B",
-    });
   }
 
   addQuestion = () => {
