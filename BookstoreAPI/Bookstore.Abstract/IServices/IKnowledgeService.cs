@@ -11,6 +11,6 @@ namespace Bookstore.Abstract.IServices
         Task<ItemsPagingResponse<List<TestDto>>> GetTests(int bookId);
         Task<ItemPlainResponse<TestDto>> GetTest(int testId);
         Task<BasePlainResponse> LikeTest(LikeDto like, string userEmail);
-        Task<ItemPlainResponse<TestResultDto>> CheckTest(TestDto testDto);
+        Task<ItemPlainResponse<TestResultDto>> CheckTest(TestDto testDto, string userEmail);
     }
 }

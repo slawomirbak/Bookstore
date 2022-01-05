@@ -82,7 +82,7 @@ namespace Bookstore.Services.KnowledgeService
             return new BasePlainResponse();
         }
 
-        public async Task<ItemPlainResponse<TestResultDto>> CheckTest(TestDto testDto)
+        public async Task<ItemPlainResponse<TestResultDto>> CheckTest(TestDto testDto, string userEmail)
         {
             var test = await _unitOfWork.bookRepository.GetTest(testDto.Id);
 
@@ -116,7 +116,7 @@ namespace Bookstore.Services.KnowledgeService
 
             if (testResult.Passed)
             {
-                await _unitOfWork.userRepository.ReadBook(test.User.Email, test.Book.Id);
+                await _unitOfWork.userRepository.ReadBook(userEmail, test.Book.Id);
             }
 
             return new ItemPlainResponse<TestResultDto>(testResult);

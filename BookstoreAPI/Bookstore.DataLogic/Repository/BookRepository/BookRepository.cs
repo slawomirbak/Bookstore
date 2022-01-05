@@ -61,7 +61,7 @@ namespace Bookstore.DataLogic.Repository.BookRepository
         public async Task Vote(int userId, int bookId, int rate)
         {
             var book = await this.GetById(bookId);
-            var voted = book.BookRatings.FirstOrDefault(bookRating => bookRating.Book.Id == bookId);
+            var voted = book.BookRatings.FirstOrDefault(bookRating => bookRating.Book.Id == bookId && bookRating.UserId == userId);
 
             if (voted != null)
             {

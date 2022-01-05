@@ -108,7 +108,7 @@ namespace BookstoreAPI.Controllers
                 return new BadRequestObjectResult(userNotFound);
             }
 
-            var response = await _knowledgeService.CheckTest(testDto);
+            var response = await _knowledgeService.CheckTest(testDto, userEmail);
 
             return new OkObjectResult(response);
         }
