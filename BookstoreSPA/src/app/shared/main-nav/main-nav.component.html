@@ -7,11 +7,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list *ngIf="isLoggedIn$ | async">
-      <a mat-list-item [routerLink]="['/bookshelf']">
-        <mat-icon>stars</mat-icon>
-        My bookshelf
-      </a>
+    <mat-nav-list>
       <a mat-list-item [routerLink]="['/booksearch']">
         <mat-icon>search</mat-icon>
         Search book
@@ -24,7 +20,7 @@
         <mat-icon>dashboard</mat-icon>
         Dashboard
       </a>
-      <a mat-list-item (click)="logout()" [routerLink]="['/home']">
+      <a mat-list-item *ngIf="isLoggedIn$ | async" (click)="logout()" [routerLink]="['/home']">
         <mat-icon>home</mat-icon>
         Logout
       </a>
@@ -51,7 +47,7 @@
         Bookstore
       </a>
       <span class="spacer"></span>
-      <div *ngIf="isLoggedIn$ | async"
+      <div
         class="top-menu-items"
         [ngClass]="{'is-not-display': (isHandset$| async)}"
       >
@@ -64,7 +60,7 @@
           </span>
         </a>
         <a mat-list-item [routerLink]="['/dashboard']" *ngIf="(isAdmin$ | async) && (isAdmin$| async).role ==='admin'">Dashboard</a>
-        <a mat-list-item (click)="logout()" [routerLink]="['/home']">Logout</a>
+        <a mat-list-item *ngIf="isLoggedIn$ | async" (click)="logout()" [routerLink]="['/home']">Logout</a>
       </div>
       <div *ngIf="!(isLoggedIn$ | async)"
         class="top-menu-items"
