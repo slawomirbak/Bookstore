@@ -132,7 +132,7 @@ export class DashboardAddBookComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  toggleSelection(author: Author){
+  toggleSelection(author: Author) {
     author.selected = !author.selected;
     if(author.selected) {
       this.selectedAuthors.push(author);
@@ -141,13 +141,13 @@ export class DashboardAddBookComponent implements OnInit {
       this.selectedAuthors.splice(i, 1);
     }
 
-    this.bookForm.get("author").patchValue(this.selectedAuthors);
+    this.bookForm.get('author').patchValue(this.selectedAuthors);
   }
 
   displayFn(value: Author[] | string): string | undefined{
     let dispalayValue: string;
     if (Array.isArray(value)) {
-      value.forEach((author: Author, index) =>{
+      value.forEach((author: Author, index) => {
         if(index === 0) {
           dispalayValue = author.name + ' ' +  author.surname;
         } else {
@@ -161,7 +161,7 @@ export class DashboardAddBookComponent implements OnInit {
   }
 
   openUploadDialog() {
-    if(this.currentBook.id === 0){
+    if (this.currentBook.id === 0) {
       return;
     }
     const dialogRef = this.dialog.open(UploadDialogComponent, {

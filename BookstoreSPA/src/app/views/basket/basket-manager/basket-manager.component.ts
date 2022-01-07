@@ -42,6 +42,8 @@ export class BasketManagerComponent implements OnInit {
   }
 
   buyBasket = () => {
+    this.basketForm.markAllAsTouched();
+
     if (this.basketForm.valid) {
       const currentBasket = this.currentBasket$.value;
       currentBasket.address = this.basketForm.value.address;
@@ -50,5 +52,9 @@ export class BasketManagerComponent implements OnInit {
 
       this.router.navigate(['/basket/book-payment']);
     }
+  }
+
+  hasError(controlName: string, errorName: string ): boolean {
+    return this.basketForm.controls[controlName].hasError(errorName);
   }
 }

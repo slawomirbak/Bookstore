@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IQuestion } from 'src/app/core/models/IQuestion';
 import { BookService } from 'src/app/core/services/book.service';
 import { KnowledgeService } from 'src/app/core/services/knowledge.service';
@@ -16,13 +16,15 @@ import { TestsQuestionComponent } from 'src/app/shared/UI/tests-question/tests-q
 export class BookCreateTestComponent implements OnInit {
   book$ = this.bookService.getOne(+this.route.snapshot.paramMap.get('id'));
   questions: IQuestion[] = [];
-  canSave: false;
+  canSave = false;
   testForm: FormGroup;
+  sending = false;
 
   constructor(
     private snackBarInfo: SnackBarInfo,
     private _formBuilder: FormBuilder,
     private bookService: BookService,
+    private router: Router,
     private knowledgeService: KnowledgeService,
     private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -55,6 +57,7 @@ export class BookCreateTestComponent implements OnInit {
       this.snackBarInfo.formError('Please enter title');
       return;
     }
+    this.sending = true;
 
     const test = {
       numberOfQuestions: this.questions.length,
@@ -66,9 +69,12 @@ export class BookCreateTestComponent implements OnInit {
       .subscribe(
         ok => {
           this.snackBarInfo.formOk('Test was created successfully.');
+          this.sending = false;
+          this.router.navigate(['/books', +this.route.snapshot.paramMap.get('id')]);
         },
         error => {
           this.snackBarInfo.formError(error.statusText);
+          this.sending = false;
         });
   }
 }

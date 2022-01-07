@@ -44,6 +44,7 @@
                 formControlName="address"
                 required
             />
+            <mat-error *ngIf="hasError('address','required')">Field is required</mat-error>
         </mat-form-field>
     </form>
     <div *ngIf="currentBasket$ | async as basket">
