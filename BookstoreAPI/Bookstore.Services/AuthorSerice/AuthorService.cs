@@ -4,9 +4,7 @@ using Bookstore.Abstract.IService;
 using Bookstore.Abstract.Responses;
 using Bookstore.DataLogic.Entities;
 using Bookstore.DataLogic.Repository.UnitOfWork;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Bookstore.Services.AuthorSerice
@@ -27,6 +25,7 @@ namespace Bookstore.Services.AuthorSerice
         {
             Author author = await _unitOfWork.authorRepository.GetById(itemId);
             author.GetType().GetProperty(propertyName).SetValue(author, propertyValue);
+
             return await Edit(author);
         }
 
@@ -36,6 +35,7 @@ namespace Bookstore.Services.AuthorSerice
             Author author = _mapper.Map<Author>(authorDto);
             await _unitOfWork.authorRepository.Create(author);
             await _unitOfWork.Save();
+
             return new ItemPlainResponse<AuthorDto>(_mapper.Map<AuthorDto>(author));
         }
 
@@ -44,6 +44,7 @@ namespace Bookstore.Services.AuthorSerice
             Author author = _mapper.Map<Author>(authorDto);
             _unitOfWork.authorRepository.Edit(author);
             await _unitOfWork.Save();
+
             return new ItemPlainResponse<AuthorDto>(_mapper.Map<AuthorDto>(author));
         }
 
@@ -51,6 +52,7 @@ namespace Bookstore.Services.AuthorSerice
         {
             _unitOfWork.authorRepository.Edit(author);
             await _unitOfWork.Save();
+
             return new ItemPlainResponse<AuthorDto>(_mapper.Map<AuthorDto>(author));
         }
 
@@ -61,7 +63,6 @@ namespace Bookstore.Services.AuthorSerice
             var reposne = new ItemPlainResponse<List<AuthorDto>>(authorListDto);
 
             return reposne;
-
         }
     }
 }

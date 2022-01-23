@@ -22,7 +22,11 @@ namespace BookstoreAPI.Controllers
             if (ModelState.IsValid)
             {
                 var errorResponse = await _userService.Add(userDto);
-                if (!errorResponse.IsSuccessful) return new BadRequestObjectResult(errorResponse.ErrorMessage);
+                if (!errorResponse.IsSuccessful)
+                {
+                    return new BadRequestObjectResult(errorResponse.ErrorMessage);
+                }
+
                 return new OkObjectResult(errorResponse);
             }
 

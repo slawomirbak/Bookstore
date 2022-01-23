@@ -22,7 +22,6 @@ export class TokenInterceptor implements HttpInterceptor {
     }
     return next.handle(req).pipe(
       catchError(error => {
-        // return throwError(error);
         if (error instanceof HttpErrorResponse && error.status === 401) {
           return this.handle401Error(req, next);
         } else {
