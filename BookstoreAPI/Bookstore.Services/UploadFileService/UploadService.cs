@@ -19,12 +19,15 @@ namespace Bookstore.Services.UploadFileService
         public UploadService(IConfiguration configuration)
         {
             _configuration = configuration
-;        }
+;       }
+
         public async Task<UploadPlainResponse> UploadFile(IFormFile file)
         {
             var fileName = Guid.NewGuid() + file.FileName;
 
-            var client = new AmazonS3Client(_configuration.GetSection("AmazonS3:accessKey").Value, _configuration.GetSection("AmazonS3:accessSecret").Value, Amazon.RegionEndpoint.EUCentral1);
+            var client = new AmazonS3Client(_configuration.GetSection("AmazonS3:accessKey").Value,
+                _configuration.GetSection("AmazonS3:accessSecret").Value, Amazon.RegionEndpoint.EUCentral1);
+
             byte[] fileBytes = new Byte[file.Length];
             file.OpenReadStream().Read(fileBytes, 0, Int32.Parse(file.Length.ToString()));
 
@@ -59,7 +62,8 @@ namespace Bookstore.Services.UploadFileService
 
         public async Task DeleteImage(string imageName)
         {
-            var client = new AmazonS3Client(_configuration.GetSection("AmazonS3:accessKey").Value, _configuration.GetSection("AmazonS3:accessSecret").Value, Amazon.RegionEndpoint.EUCentral1);
+            var client = new AmazonS3Client(_configuration.GetSection("AmazonS3:accessKey").Value,
+                _configuration.GetSection("AmazonS3:accessSecret").Value, Amazon.RegionEndpoint.EUCentral1);
 
             var request = new DeleteObjectRequest
             {

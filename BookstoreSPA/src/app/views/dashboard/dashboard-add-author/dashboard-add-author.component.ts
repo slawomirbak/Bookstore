@@ -55,7 +55,7 @@ export class DashboardAddAuthorComponent implements OnInit {
   }
 
   openUploadDialog() {
-    if (this.currentAuthor.id === 0){
+    if (this.currentAuthor.id === 0) {
       return;
     }
     const dialogRef = this.dialog.open(UploadDialogComponent, {

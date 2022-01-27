@@ -103,17 +103,17 @@ export class DashboardAddBookComponent implements OnInit {
   }
 
   bookFormSave(): void {
-    if (this.currentBook.isEquil(this.bookForm.value)){
+    if (this.currentBook.isEquil(this.bookForm.value)) {
       return;
     }
 
     this.savedBook$.next(this.bookForm.value);
 
-    if (this.currentBook.id === 0){
+    if (this.currentBook.id === 0) {
       this.bookService.create(this.bookForm.value).subscribe((book) => this.currentBook = new Book(book));
     } else {
       this.currentBook.copyValue(this.bookForm.value);
-      this.bookService.put(this.currentBook.id.toString(), this.currentBook).subscribe((book) => this.currentBook = new Book(book))
+      this.bookService.put(this.currentBook.id.toString(), this.currentBook).subscribe((book) => this.currentBook = new Book(book));
     }
   }
 
